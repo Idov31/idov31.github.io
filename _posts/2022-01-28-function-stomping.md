@@ -90,7 +90,7 @@ Because many anti viruses failed to identify this shellcode injection technique 
 
 ## Acknowledgements
 <ul>
-    <li><a href="https://github.com/countercept/ModuleStomping">ModulesStomping</a> for the insperation of this POC.</li>
-    <li><a href="https://www.cyberark.com/resources/threat-research-blog/masking-malicious-memory-artifacts-part-iii-bypassing-defensive-scanners">CyberArk's article</a> for the validation of the further information about WCX permission.</li>
-    <li><a href="https://github.com/hasherezade/hollows_hunter">HollowsHunter</a> for the validation that it is undetectable (at the moment).</li>
+    <li><a href="https://github.com/countercept/ModuleStomping">ModulesStomping</a> for inspiration of this POC.</li>
+    <li><a href="https://www.cyberark.com/resources/threat-research-blog/masking-malicious-memory-artifacts-part-iii-bypassing-defensive-scanners">CyberArk's article</a> for validation of the further information about WCX permission.</li>
+    <li><a href="https://github.com/hasherezade/hollows_hunter">HollowsHunter</a> for validation that it is undetectable (at the moment).</li>
 </ul>
