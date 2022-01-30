@@ -54,7 +54,7 @@ If you are wondering why Kernel32.dll and not another DLL, the reason is that Ke
 And now all that's left is to write the POC.<br /><br />
 
 ## POC Development - Final stages
-The final step is similar to any other injection method but with one significant change: The VirtualAllocEx must be with the base address of our function. Usually, in injections we give set the address parameter to NULL and get back the address that is mapped for us, but since we want to overwrite an existing function we need to give the base address.
+The final step is similar to any other injection method but with one significant change: We need to use VirtualProtectEx with the base address of our function. Usually, in injections we give set the address parameter to NULL and get back the address that is mapped for us, but since we want to overwrite an existing function we need to give the base address.
 After WriteProcessMemory is executed, the function is successfully stomped!<br /><br />
 ```cpp
 // Changing the protection to PAGE_READWRITE for the shellcode.
