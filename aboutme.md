@@ -5,16 +5,9 @@ subtitle: A little bit about me
 ---
 
 My name is Ido Veltzman, I'm 21 years old, programming for 7+ years and in the cybersecurity field for 4+ years.
-I love to find new ways to break a software and that what you'll see mostly in this blog post.
-My top languages are:
-- C++
-- C
-- C#
-- Python
-- Java
-- Golang
-- Rust
-- PowerShell
-- Nim
+My main interests are reverse engineering and offensive development. I'm always looking for new challenges and new things to learn.
+For further information about me or the projects I'm doing you can visit my [Github]("https://github.com/idov31"), if you want to contant me you can do it via [Twitter]("https://twitter.com/idov31") or via [mail]("mailto:idov31@protonmail.com") (I'm more active in Twitter).
 
-The thing I like the most is reverse enginering and I am currently learning how to search for vulnerabilities.
+###
+
+Enjoy the blog and have fun!
