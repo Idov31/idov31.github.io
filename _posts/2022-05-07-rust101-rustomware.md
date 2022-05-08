@@ -9,7 +9,7 @@ tags: [rust, windows, linux, malware-dev]
 
 ## Introduction
 
-When I first heard about Rust, my first reaction was "Why?". The language looked to me as a "wannabe" to C and I didn't understand why it is so popular. I started to read more and more about this language and began to like it. To challenge myself, I decided to write [FunctionStomping](https://github.com/idov31/FunctionStomping) in rust. Later on, I made few contributions to the amazing repository [OffensiveRust](https://github.com/trickster0/OffensiveRust) and writting nowadays a unique C2 framework written (mostly) in rust. If you are familiar with Rust, you can skip to Part 2 below. The whole code for this blog post is avaliable in my Github profile :).
+When I first heard about Rust, my first reaction was "Why?". The language looked to me as a "wannabe" to C and I didn't understand why it is so popular. I started to read more and more about this language and began to like it. To challenge myself, I decided to write [FunctionStomping](https://github.com/idov31/FunctionStomping) in rust. Later on, I made few contributions to the amazing repository [OffensiveRust](https://github.com/trickster0/OffensiveRust) and writting nowadays a unique C2 framework written (mostly) in rust. If you are familiar with Rust, you can skip to Part 2 below. The whole code for this blog post is avaliable in my [Github](https://github.com/idov31/rustsomware) :).
 
 ## Rust's capabilities
 
@@ -88,7 +88,7 @@ Now we have a program that finds files in a folder. Notice that we used the unwr
 
 ## Part 3 - Encrypting / Decrypting the files
 
-To encrypt the files, we will the [AES]("https://en.wikipedia.com/wiki/Advanced_Encryption_Standard") cipher with hardcoded key and IV. All that is left for us to do is to create a function that is responsible to encrypt the file and change its extension to .rustsomware. First things first, to be able to do encryption / decryption methods we will need to have a crate to help with that. Since the libaes crate isn't a default crate, we need to import it to our project and this can be done by modifying the Cargo.toml file by adding:
+To encrypt the files, we will the [AES](https://en.wikipedia.com/wiki/Advanced_Encryption_Standard) cipher with hardcoded key and IV. All that is left for us to do is to create a function that is responsible to encrypt the file and change its extension to .rustsomware. First things first, to be able to do encryption / decryption methods we will need to have a crate to help with that. Since the libaes crate isn't a default crate, we need to import it to our project and this can be done by modifying the Cargo.toml file by adding:
 
 ```toml
 [Dependencies]
@@ -131,7 +131,7 @@ fn encrypt_decrypt(file_name: &str, action: &str) -> bool {
 }
 ```
 
-You can use the key and IV from above or [generate yourself]("https://www.allkeysgenerator.com/Random/Security-Encryption-Key-Generator.aspx"). The code above is a simple example of how to use aes128 with Rust, pretty simple right?
+You can use the key and IV from above or [generate yourself](https://www.allkeysgenerator.com/Random/Security-Encryption-Key-Generator.aspx). The code above is a simple example of how to use aes128 with Rust, pretty simple right?
 
 As you saw, Rust have a simple interface with the file system that allows to rename and do io operations easily. Because this is a simple example the function returns boolean type but it is recommended to return the error to the calling function for further handling.
 
@@ -155,7 +155,7 @@ Result:
 
 ## Conclusion
 
-In this blog post, you got a taste from Rust's power and had fun with it by creating a simple program. I think that in the future we will see more and more infosec tools that are written in Rust. The whole code is avaliable in my [Github]("https://github.com/idov31"), for any question feel free to ask me on [Twitter]("https://twitter.com/idov31").
+In this blog post, you got a taste from Rust's power and had fun with it by creating a simple program. I think that in the future we will see more and more infosec tools that are written in Rust. The whole code is avaliable in my [Github](https://github.com/idov31), for any question feel free to ask me on [Twitter](https://twitter.com/idov31).
 
 ## Discalimer
 
