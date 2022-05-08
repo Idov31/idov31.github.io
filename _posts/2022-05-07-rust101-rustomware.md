@@ -9,7 +9,7 @@ tags: [rust, windows, linux, malware-dev]
 
 ## Introduction
 
-When I first heard about Rust, my first reaction was "Why?". The language looked to me as a "wannabe" to C and I didn't understand why it is so popular. I started to read more and more about this language and began to like it. To challenge myself, I decided to write [FunctionStomping](https://github.com/idov31/FunctionStomping) in rust. Later on, I made few contributions to the amazing repository [OffensiveRust](https://github.com/trickster0/OffensiveRust) and writting nowadays a unique C2 framework written (mostly) in rust. If you are familiar with Rust, you can skip to Part 2 below. The whole code for this blog post is avaliable in my [Github](https://github.com/idov31/rustsomware) :).
+When I first heard about Rust, my first reaction was "Why?". The language looked to me as a "wannabe" to C and I didn't understand why it is so popular. I started to read more and more about this language and began to like it. To challenge myself, I decided to write [FunctionStomping](https://github.com/idov31/FunctionStomping) in rust. Later on, I made few contributions to the amazing repository [OffensiveRust](https://github.com/trickster0/OffensiveRust) and writting nowadays a unique C2 framework written (mostly) in rust. If you are familiar with Rust, you can skip to Part 2 below. The whole code for this blog post is avaliable in my [Github](https://github.com/idov31/rustomware) :).
 
 ## Rust's capabilities
 
