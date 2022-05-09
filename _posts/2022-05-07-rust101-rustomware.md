@@ -9,7 +9,9 @@ tags: [rust, windows, linux, malware-dev]
 
 ## Introduction
 
-When I first heard about Rust, my first reaction was "Why?". The language looked to me as a "wannabe" to C and I didn't understand why it is so popular. I started to read more and more about this language and began to like it. To challenge myself, I decided to write [FunctionStomping](https://github.com/idov31/FunctionStomping) in Rust. Later on, I ran into trickster0's amazing repository [OffensiveRust](https://github.com/trickster0/OffensiveRust) and that gave me more motivation to learn Rust. Nowadays a unique C2 framework written (mostly) in Rust. If you are familiar with Rust, you can skip to Part 2 below. The whole code for this blog post is avaliable in my [Github](https://github.com/idov31/rustomware) :).
+When I first heard about Rust, my first reaction was "Why?". The language looked to me as a "wannabe" to C and I didn't understand why it is so popular. I started to read more and more about this language and began to like it. To challenge myself, I decided to write [FunctionStomping](https://github.com/idov31/FunctionStomping) in Rust. Later on, I ran into trickster0's amazing repository [OffensiveRust](https://github.com/trickster0/OffensiveRust) and that gave me more motivation to learn Rust. Nowadays I'm creating a unique C2 framework written (mostly) in Rust. If you are familiar with Rust, you can skip to Part 2 below.
+
+The whole code for this blog post is avaliable in my [Github](https://github.com/idov31/rustomware) :).
 
 ## Rust's capabilities
 
@@ -131,7 +133,7 @@ fn encrypt_decrypt(file_name: &str, action: &str) -> bool {
 }
 ```
 
-You can use the key and IV from above or [generate yourself](https://www.allkeysgenerator.com/Random/Security-Encryption-Key-Generator.aspx). The code above is a simple example of how to use aes128 with Rust, pretty simple right?
+You can use the key and IV from above or [generate yourself](https://www.allkeysgenerator.com/Random/Security-Encryption-Key-Generator.aspx). The code above is a simple example of how to use AES128 with Rust, pretty simple right?
 
 As you saw, Rust have a simple interface with the file system that allows to rename and do io operations easily. Because this is a simple example the function returns boolean type but it is recommended to return the error to the calling function for further handling.
 
