@@ -1,0 +1,23 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.hover\:glow:hover {
+    transition: all 0.3s ease-in-out;
+    box-shadow: 0 0 10px #800080, 0 0 20px #800080, 0 0 30px #800080, 0 0 40px #800080;
+}
+
+@media only screen and (max-width: 600px) {
+    .responsive-image {
+        width: 30px !important;
+        height: 30px !important;
+    }
+}
+@media only screen and (max-width: 600px) {
+    .responsive-image-container {
+        width: 30px !important;
+        height: 30px !important;
+    }
+}
