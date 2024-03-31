@@ -8,21 +8,21 @@ export default function Home() {
             <div className="flex pb-6 border-b-4 border-dotted border-txtLink">
                 <div className="flex flex-col">
                     <div className="flex flex-col">
-                        <h1 className="text-5xl lg:text-6xl text-txtHeader">Lord Of The Ring0 - Part 5 | Saruman&apos;s
-                            Manipulation</h1>
+                        <h1 className="text-5xl lg:text-6xl text-txtHeader">Lord Of The Ring0 - Part 6 | Conclusion</h1>
                         <p className="text-txtSubHeader text-xl pt-8 lg:w-4/5">In the last blog post, we learned about
-                            the different types of kernel callbacks and created our registry protector driver. In this
-                            blog post, I’ll explain two common hooking methods (IRP Hooking and SSDT Hooking) and two
-                            different injection techniques from the kernel to the user mode for both shellcode and DLL
-                            (APC and CreateThread) with code snippets and examples from Nidhogg...</p>
+                            two common hooking methods (IRP Hooking and SSDT Hooking) and two different injection
+                            techniques from the kernel to the user mode for both shellcode and DLL (APC and
+                            CreateThread) with code snippets and examples from Nidhogg. In this blog post , we will
+                            write a  simple driver that is capable of bypassing AMSI to demonstrate patching usermode
+                            memory from the k...</p>
                     </div>
                     <div className="pt-8">
-                        <a href="/posts/lord-of-the-ring0-p5" target="_blank" rel="noopener noreferrer">
+                        <a href="/posts/lord-of-the-ring0-p6" target="_blank" rel="noopener noreferrer">
                             <button className="bg-bgHomeLine p-4">Click here to read the blog post</button>
                         </a>
                     </div>
                 </div>
-                <Image src="/post-images/lotr05.png" alt="Latest post image" width={1080} height={405}
+                <Image src="/post-images/lotr06.png" alt="Latest post image" width={1080} height={405}
                        className="pt-8 hidden lg:block"/>
             </div>
             <div className="p-10 flex flex-col justify-center items-center">

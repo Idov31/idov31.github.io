@@ -19,7 +19,22 @@ export default function Posts() {
     const [currentPage, setCurrentPage] = useState(1);
     const [currentPosts, setCurrentPosts] = useState<BlogPostType[]>([]);
 
-    const blogPosts = useMemo(() =>[
+    const blogPosts = useMemo(() => [
+        {
+            href: "/posts/lord-of-the-ring0-p6",
+            headerContent: "Lord Of The Ring0 - Part 6 | Conclusion",
+            subHeaderContent: "Ido Veltzman | 31.03.2024",
+            imagePath: "/post-images/lotr06.png",
+            imageAlt: "lotr06",
+            imageWidth: 135,
+            imageHeight: 51,
+            postContent: "In the last blog post, we learned about two common hooking methods (IRP Hooking and SSDT " +
+                "Hooking) and two different injection techniques from the kernel to the user mode for both shellcode " +
+                "and DLL (APC and CreateThread) with code snippets and examples from Nidhogg. In this blog post" +
+                ", we will write a simple driver that is capable of bypassing AMSI to demonstrate patching usermode " +
+                "memory from the k...",
+            sub: false
+        },
         {
             href: "/posts/lord-of-the-ring0-p5",
             headerContent: "Lord Of The Ring0 - Part 5 | Saruman's Manipulation",
@@ -31,8 +46,7 @@ export default function Posts() {
             postContent: "In the last blog post, we learned about the different types of kernel callbacks and " +
                 "created our registry protector driver. In this blog post, I’ll explain two common hooking methods " +
                 "(IRP Hooking and SSDT Hooking) and two different injection techniques from the kernel to the user " +
-                "mode for both shellcode and DLL (APC and CreateThread) w...",
-            sub: false
+                "mode for both shellcode and DLL (APC and CreateThread) w..."
         },
         {
             href: "/posts/lord-of-the-ring0-p4",
