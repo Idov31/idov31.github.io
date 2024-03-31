@@ -384,11 +384,10 @@ return functionAddress;`;
 \tIoCompleteRequest(Irp, IO_NO_INCREMENT);
 \treturn STATUS_SUCCESS;
 }`;
+    let patcherUmP1 = "int main() {\nDWORD bytesWritten;\nstd::vector<byte> patch = \{ 0xB8, 0x57, 0x00, " +
+        "0x07, 0x80, 0xC3 \};";
 
-    let patcherUm = `int main() {
-    DWORD bytesWritten;
-    std::vector<byte> patch = { 0xB8, 0x57, 0x00, 0x07, 0x80, 0xC3 };
-    HANDLE hDrv = CreateFile(DRIVER_NAME, GENERIC_WRITE | GENERIC_READ, 0, nullptr, OPEN_EXISTING, 0, nullptr);
+    let patcherUm = patcherUmP1 + `
     
     if (hDrv == INVALID_HANDLE_VALUE)
 \t\t    return 0;
