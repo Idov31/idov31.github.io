@@ -114,7 +114,15 @@ export default function LordOfTheRing0P2() {
 
     KdPrint(("DriverEntry completed successfully\\n"));
     return status;
-    }`;
+    }
+    
+void ProtectorUnload(PDRIVER_OBJECT DriverObject) {
+    ObUnRegisterCallbacks(regHandle);
+
+    UNICODE_STRING symName = RTL_CONSTANT_STRING(L"\\\\??\\\\Protector");
+    IoDeleteSymbolicLink(&symName);
+    IoDeleteDevice(DriverObject->DeviceObject);
+}`;
 
     const protectorCreateClose = `NTSTATUS ProtectorCreateClose(PDEVICE_OBJECT, PIRP Irp) {
         Irp->IoStatus.Status = STATUS_SUCCESS;
@@ -169,6 +177,7 @@ export default function LordOfTheRing0P2() {
 
     const userModePart = `#include <iostream>
 #include <Windows.h>
+#define IOCTL_PROTECT_PID CTL_CODE(0x8000, 0x800, METHOD_BUFFERED, FILE_ANY_ACCESS)
 
 int main(int argc, const char* argv[]) {
     DWORD bytes;
@@ -186,7 +195,7 @@ int main(int argc, const char* argv[]) {
         return 1;
     }
 
-    success = DeviceIoControl(device, IOCTL_PROTECT_PID, &pid, sizeof(pid), nullptr, 0, &bytes, nullptr);
+    BOOL success = DeviceIoControl(device, IOCTL_PROTECT_PID, &pid, sizeof(pid), nullptr, 0, &bytes, nullptr);
     CloseHandle(device);
 
     if (!success) {
