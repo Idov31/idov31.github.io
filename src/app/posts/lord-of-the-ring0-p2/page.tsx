@@ -182,7 +182,7 @@ void ProtectorUnload(PDRIVER_OBJECT DriverObject) {
 int main(int argc, const char* argv[]) {
     DWORD bytes;
 
-    if (argc != 1) {
+    if (argc != 2) {
         std::cout << "Usage: " << argv[0] << " <pid>" << std::endl;
         return 1;
     }
