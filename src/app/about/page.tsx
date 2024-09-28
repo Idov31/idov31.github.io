@@ -62,6 +62,14 @@ export default function Home() {
                         not limited to callbacks, IRP hooks, communication with user mode from kernel mode and more.
                     </li>
                     <li className="mb-4">
+                        <StyledLink href="https://www.youtube.com/watch?v=edI6tpBO-pY"
+                                    content="Ido Veltzman: Kernel Games: The Ballad of Offense & Defense [2024]"/>
+                        : A talk in
+                        Poland, X33fCon, about creating stealthy rootkits to help red teams remain persistent, evade
+                        EDRs, and connect them to your existing C2 environment. Additionally, this will help elevate
+                        blue teams to detect the complex threat mentioned above.
+                    </li>
+                    <li className="mb-4">
                         <StyledLink href="https://www.youtube.com/watch?v=CVJmGfElqw0"
                                     content="(Lady|)Lord Of The Ring [2023]"/>
                         : A talk in the largest public security conference in
