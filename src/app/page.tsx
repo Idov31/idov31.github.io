@@ -39,17 +39,17 @@ export default function Home() {
                                     description="Nidhogg is a multi-functional rootkit to showcase the variety of operations
                                     that can be done from kernel space."/>
 
+                        <ProjectBox imagePath="/projects-images/novahypervisor.png"
+                                    projectLink="https://github.com/Idov31/NovaHypervisor" projectName="NovaHypervisor"
+                                    description="NovaHypervisor is a defensive x64 Intel host based hypervisor. 
+                                    The goal of this project is to protect against kernel based attacks."/>
+                    </div>
+
+                    <div className="lg:flex lg:flex-row">
                         <ProjectBox imagePath="/projects-images/cronos.png"
                                     projectLink="https://github.com/Idov31/Cronos" projectName="Cronos"
                                     description="Cronos is a sleep obfuscation technique leveraging waitable timers to evade
                                     memory scanners (PE-Sieve, Moneta, etc.)"/>
-                    </div>
-
-                    <div className="lg:flex lg:flex-row">
-                        <ProjectBox imagePath="/projects-images/venom.png"
-                                    projectLink="https://github.com/Idov31/Venom" projectName="Venom"
-                                    description="Venom is a library that performing evasive communication using stolen
-                                    browser socket."/>
 
                         <ProjectBox imagePath="/projects-images/sandman.png"
                                     projectLink="https://github.com/Idov31/Sandman" projectName="Sandman"
