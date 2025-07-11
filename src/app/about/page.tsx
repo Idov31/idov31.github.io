@@ -6,21 +6,21 @@ export default function Home() {
         <div className="flex flex-col h-full w-fit bg-bgInsideDiv rounded-xl p-8">
             <h1 className="text-5xl text-txtHeader font-bold">About Me</h1>
             <article className="mt-4">
-                My name is Ido Veltzman, I am an experienced security researcher, who has worked in various
-                cyber-security roles close to six years. My main expertise are:
+                I am an experienced security researcher who has worked in various cybersecurity roles. My main expertise are:
 
                 <ul className="list-disc pl-10 pt-8">
                     <li className="mb-4">Reverse Engineering</li>
                     <li className="mb-4">OS Internals</li>
-                    <li className="mb-4">Kernel Development</li>
+                    <li className="mb-4">Security Research</li>
+                    <li className="mb-4">Vulnerability Research</li>
                     <li className="mb-4">Malware Development</li>
                     <li className="mb-4">Exploit Development</li>
-                    <li className="mb-4">Security Research</li>
+                    <li className="mb-4">Kernel Development</li>
                 </ul>
                 <p className="pt-4">In my free time, I am working on projects in the areas of evasion, persistence and
                     injection methods
-                    for both kernel mode and user mode and releasing them under <a href="https://github.com/idov31">my
-                        GitHub account</a>.</p>
+                    for UEFI, kernel, and user mode. Based on these, I publish educational papers and present talks to give back to the cybersecurity community.</p>
+                    <p className="pt-4">You can view my public work under my <StyledLink href="https://github.com/idov31" content="Github account" textSize="text-md" />.</p>
             </article>
             <h2 className="text-4xl text-txtSubHeader font-bold mt-8">Notable Projects & Publications</h2>
             <article>
@@ -41,6 +41,11 @@ export default function Home() {
                         <StyledLink href="https://github.com/Idov31/Cronos" content="Cronos"/>
                         : Cronos is a PoC for a sleep obfuscation technique leveraging waitable timers to evade memory
                         scanners (PE-Sieve, Moneta, etc.)
+                    </li>
+                    <li className="mb-4">
+                        <StyledLink href="https://github.com/Idov31/NovaHypervisor" content="NovaHypervisor"/>
+                        : NovaHypervisor is a defensive x64 Intel host based hypervisor.
+                        The goal of this project is to protect against kernel based attacks.
                     </li>
                     <li className="mb-4">
                         <StyledLink href="https://github.com/Idov31/Venom" content="Venom"/>
