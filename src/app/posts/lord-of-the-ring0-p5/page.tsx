@@ -237,7 +237,7 @@ export default function LordOfTheRing0P5() {
             <div className="pt-4">
                 <article>
                     <SecondaryHeader text="Prologue"/>
-                    <div className="pt-4">
+                    <div className="drop-caps pt-4">
                         In the <StyledLink href="/posts/lord-of-the-ring0-p4" content="last blog post"
                                            textSize="text-md"/>, we learned about the different types of kernel
                         callbacks and created our registry protector driver.

@@ -13,7 +13,7 @@ export default function ListUdpConnections() {
             <div className="pt-4">
                 <article>
                     <SecondaryHeader text="UdpInspector - Getting active UDP connections without sniffing"/>
-                    <div className="pt-4">
+                    <div className="drop-caps pt-4">
                         Many times I&apos;ve wondered how comes that there are no tools to get active UDP connections.
                         Of course, you can always sniff with Wireshark or any other tool of your choosing but, why
                         netstat doesn&apos;t have it built in? That is the point that I went on a quest to investigate the

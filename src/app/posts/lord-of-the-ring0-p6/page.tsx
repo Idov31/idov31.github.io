@@ -591,7 +591,7 @@ E8 2A 04 00 00          call    EtwProviderEnabled
             <div className="pt-4">
                 <article>
                     <SecondaryHeader text="Prologue"/>
-                    <div className="pt-4">
+                    <div className="drop-caps pt-4">
                         In the <StyledLink href="/posts/lord-of-the-ring0-p5" content="last blog post"
                                            textSize="text-md"/>, we learned about two common hooking methods (
                         <InlineCode text="IRP Hooking"/> and <InlineCode text="SSDT Hooking"/>) and two different

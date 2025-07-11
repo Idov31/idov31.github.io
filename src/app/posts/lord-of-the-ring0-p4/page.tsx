@@ -194,7 +194,7 @@ export default function LordOfTheRing0P4() {
             <div className="pt-4">
                 <article>
                     <SecondaryHeader text="Prologue"/>
-                    <div className="pt-4">
+                    <div className="drop-caps pt-4">
                         In the <StyledLink href="/posts/lord-of-the-ring0-p3" content="last blog post"
                                            textSize="text-md"/>, we learned some debugging concepts, understood what is
                         IOCTL how to handle it

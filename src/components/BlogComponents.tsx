@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import {CodeBlock, dracula} from "react-code-blocks";
 import StyledLink, {ImageLink} from "@/components/StyledLink";
 
@@ -8,7 +8,9 @@ interface SecondaryHeaderProps {
 
 interface CodeProps {
     text: string;
+    message?: string;
     language?: string;
+    isMessageToggled?: boolean;
 }
 
 interface InlineCodeProps {
@@ -53,17 +55,42 @@ export function ThirdHeader({text}: SecondaryHeaderProps) {
     );
 }
 
-export function Code({text, language = "cpp"}: CodeProps) {
-    return (
-        <div className="pt-4 pb-4 text-sm lg:text-md">
-            <CodeBlock
-                text={text}
-                language={language}
-                showLineNumbers={true}
-                theme={dracula}
-            />
-        </div>
-    );
+export function Code({text, message = "NaN", language = "cpp", isMessageToggled = false}: CodeProps) {
+    const [isOpen, setIsOpen] = useState(false);
+
+    const toggleOpen = () => {
+        setIsOpen(!isOpen);
+    };
+
+    if (isMessageToggled) {
+        return (
+            <div className="pt-4 pb-4 text-sm lg:text-md">
+                <button className="bg-bgSemiTransparent text-txtHeader w-full py-4 text-left pl-3.5"
+                        onClick={toggleOpen}>
+                    {isOpen ? `${message} [Drop]` : `${message} [Expand]`}
+                </button>
+                {isOpen && (
+                    <CodeBlock
+                        text={text}
+                        language={language}
+                        showLineNumbers={true}
+                        theme={dracula}
+                    />
+                )}
+            </div>
+        );
+    } else {
+        return (
+            <div className="pt-4 pb-4 text-sm lg:text-md">
+                <CodeBlock
+                    text={text}
+                    language={language}
+                    showLineNumbers={true}
+                    theme={dracula}
+                />
+            </div>
+        );
+    }
 }
 
 export function InlineCode({text}: InlineCodeProps) {

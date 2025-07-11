@@ -12,7 +12,7 @@ export default function CronosSleepObfuscation() {
             <div className="pt-4">
                 <article>
                     <SecondaryHeader text="Prologue"/>
-                    <div className="pt-4">
+                    <div className="drop-caps pt-4">
                         Cronos is a new sleep obfuscation technique co-authored by
                         <StyledLink href="https://github.com/idov31" content=" idov31" textSize="text-md"/> and
                         <StyledLink href="https://github.com/janoglezcampos" content=" yxel" textSize="text-md"/>.

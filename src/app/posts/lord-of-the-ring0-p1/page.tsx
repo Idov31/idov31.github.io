@@ -48,7 +48,7 @@ sc start DriverName`;
             <div className="pt-4">
                 <article>
                     <SecondaryHeader text="Prologue"/>
-                    <div className="pt-4">
+                    <div className="drop-caps pt-4">
                         This blog post series isn&apos;t a thing I normally do, this will be more like a journey that I
                         document during the development of my project <StyledLink
                         href="https://github.com/idov31/Nidhogg" content="Nidhogg" textSize="text-md"/>. In this series

@@ -53,7 +53,7 @@ export default function LordOfTheRing0P3() {
             <div className="pt-4">
                 <article>
                     <SecondaryHeader text="Prologue"/>
-                    <div className="pt-4">
+                    <div className="drop-caps pt-4">
                         In the <StyledLink href="/posts/lord-of-the-ring0-p2" content="last blog post"
                                            textSize="text-md"/> we understood what it is a callback routine, how to get
                         basic information from user mode and for the finale created a driver that can block access to a

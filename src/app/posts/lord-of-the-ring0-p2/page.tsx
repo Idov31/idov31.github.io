@@ -214,7 +214,7 @@ int main(int argc, const char* argv[]) {
             <div className="pt-4">
                 <article>
                     <SecondaryHeader text="Prologue"/>
-                    <div className="pt-4">
+                    <div className="drop-caps pt-4">
                         In the <StyledLink href="/posts/lord-of-the-ring0-p1"
                                            content="last blog post" textSize="text-md"/>, we had
                         an introduction to kernel development and what are the difficulties when trying to load a driver

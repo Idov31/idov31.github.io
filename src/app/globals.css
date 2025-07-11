@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Lato&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Cinzel&family=Uncial+Antiqua&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -7,6 +8,15 @@
 .hover\:glow:hover {
     transition: all 0.3s ease-in-out;
     box-shadow: 0 0 10px #800080, 0 0 20px #800080, 0 0 30px #800080, 0 0 40px #800080;
+}
+
+.drop-caps::first-letter {
+    float: left;
+    font-size: 2em;
+    line-height: 1;
+    padding-right: 0.1em;
+    font-family: 'Cinzel', serif;
+    color: #CEAEFC;
 }
 
 @media only screen and (max-width: 600px) {

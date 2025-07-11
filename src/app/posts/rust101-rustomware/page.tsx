@@ -91,7 +91,7 @@ fs::write(readme_path, ransom_message).unwrap();`;
             <div className="pt-4">
                 <article>
                     <SecondaryHeader text="Introduction"/>
-                    <div className="pt-4">
+                    <div className="drop-caps pt-4">
                         When I first heard about Rust, my first reaction was &quot;Why?&quot;. The language looked to me as a
                         &quot;wannabe&quot; to C and I didn&apos;t understand why it is so popular. I started to read more and more
                         about this language and began to like it. To challenge myself, I decided to write <StyledLink

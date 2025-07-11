@@ -42,7 +42,7 @@ if (!WriteProcessMemory(procHandle, functionBase, shellcode, sizeof(shellcode), 
             <div className="pt-4">
                 <article>
                     <SecondaryHeader text="Introduction"/>
-                    <div className="pt-4">
+                    <div className="drop-caps pt-4">
                         When I first heard about <InlineCode text="ModuleStomping"/> I was charmed since it wasn&apos;t like
                         any other known
                         injection method.

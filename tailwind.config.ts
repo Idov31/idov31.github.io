@@ -18,7 +18,8 @@ const config: Config = {
                 bgHomeLine: "#1F2544",
                 bgRegular: "#121526",
                 bgLink: "#2D63D8",
-                bgInsideDiv: "rgba(45, 50, 80, 0.40)"
+                bgInsideDiv: "rgba(45, 50, 80, 0.40)",
+                bgSemiTransparent: "rgba(68, 71, 90, 0.75)"
             },
             fontSize: {
                 'md': '17px',
