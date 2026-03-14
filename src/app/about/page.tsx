@@ -61,7 +61,7 @@ export default function Home() {
                 <br/>
                 <ul className="list-disc pl-10">
                     <li className="mb-4">
-                        <StyledLink href="https://github.com/Idov31/Nidhogg" content="Lord Of The Ring0 Series"/>
+                        <StyledLink href="https://idov31.github.io/posts/lord-of-the-ring0-p1" content="Lord Of The Ring0 Series"/>
                         : Lord Of The Ring0 is an introductory series to Windows kernel development
                         that covers the basics of Windows kernel development in a security oriented manner including but
                         not limited to callbacks, IRP hooks, communication with user mode from kernel mode and more.
