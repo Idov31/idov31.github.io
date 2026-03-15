@@ -5,16 +5,98 @@
 @tailwind components;
 @tailwind utilities;
 
+/* ─── Theme Variables — Light (default) ────────── */
+:root {
+    /* Channel-format vars (supports Tailwind opacity modifiers like /30) */
+    --txt-link-rgb: 3 105 161;          /* sky-700 */
+    --bg-bar-rgb: 245 243 255;          /* purple-50 */
+    --accent-purple-rgb: 124 58 237;    /* purple-600 — same in both themes */
+
+    /* Solid color vars */
+    --txt-header: #3B0764;              /* purple-950 */
+    --txt-subheader: #6D28D9;           /* purple-700 */
+    --txt-regular: #1E1B4B;             /* indigo-950 */
+    --txt-muted: #6B7280;              /* gray-500 */
+    --txt-inline-code: #9D174D;        /* pink-800 */
+
+    --bg-regular: #FFFFFF;
+    --bg-surface: #F5F3FF;              /* purple-50 */
+    --bg-inside-div: rgba(245, 243, 255, 0.85);
+    --bg-semi-transparent: rgba(237, 233, 254, 0.85);
+
+    --border-subtle: rgba(109, 40, 217, 0.15);
+    --border-mid: rgba(109, 40, 217, 0.3);
+
+    /* Custom-class vars */
+    --body-gradient: rgba(109, 40, 217, 0.04);
+    --nav-glass-bg: rgba(255, 255, 255, 0.92);
+    --nav-glass-border: rgba(109, 40, 217, 0.12);
+    --card-bg: rgba(255, 255, 255, 0.85);
+    --card-border: rgba(109, 40, 217, 0.12);
+    --card-hover-border: rgba(109, 40, 217, 0.35);
+    --card-hover-shadow: rgba(0, 0, 0, 0.06), rgba(109, 40, 217, 0.08);
+    --scrollbar-track: #FFFFFF;
+    --scrollbar-thumb: rgba(109, 40, 217, 0.25);
+    --scrollbar-thumb-hover: rgba(109, 40, 217, 0.5);
+    --badge-purple-bg: rgba(109, 40, 217, 0.08);
+    --badge-purple-border: rgba(109, 40, 217, 0.2);
+    --badge-purple-color: #5B21B6;
+    --divider-color: rgba(109, 40, 217, 0.35);
+    --selection-bg: rgba(109, 40, 217, 0.15);
+    --drop-cap-color: #5B21B6;
+    --nav-hover-bg: rgba(0, 0, 0, 0.05);
+}
+
+/* ─── Theme Variables — Dark ────────────────────── */
+.dark {
+    --txt-link-rgb: 56 189 248;         /* sky-400 */
+    --bg-bar-rgb: 13 17 23;             /* #0D1117 */
+    --accent-purple-rgb: 124 58 237;    /* purple-600 — same as light */
+
+    --txt-header: #C4B5FD;
+    --txt-subheader: #A78BFA;
+    --txt-regular: #E2E8F0;
+    --txt-muted: #94A3B8;
+    --txt-inline-code: #F9A8D4;
+
+    --bg-regular: #0D1117;
+    --bg-surface: #161B2E;
+    --bg-inside-div: rgba(22, 27, 46, 0.85);
+    --bg-semi-transparent: rgba(30, 35, 60, 0.85);
+
+    --border-subtle: rgba(139, 92, 246, 0.15);
+    --border-mid: rgba(139, 92, 246, 0.3);
+
+    --body-gradient: rgba(124, 58, 237, 0.08);
+    --nav-glass-bg: rgba(13, 17, 23, 0.85);
+    --nav-glass-border: rgba(139, 92, 246, 0.15);
+    --card-bg: rgba(22, 27, 46, 0.85);
+    --card-border: rgba(139, 92, 246, 0.12);
+    --card-hover-border: rgba(139, 92, 246, 0.35);
+    --card-hover-shadow: rgba(0, 0, 0, 0.4), rgba(124, 58, 237, 0.12);
+    --scrollbar-track: #0D1117;
+    --scrollbar-thumb: rgba(124, 58, 237, 0.4);
+    --scrollbar-thumb-hover: rgba(124, 58, 237, 0.7);
+    --badge-purple-bg: rgba(124, 58, 237, 0.15);
+    --badge-purple-border: rgba(139, 92, 246, 0.3);
+    --badge-purple-color: #C4B5FD;
+    --divider-color: rgba(124, 58, 237, 0.5);
+    --selection-bg: rgba(124, 58, 237, 0.3);
+    --drop-cap-color: #C4B5FD;
+    --nav-hover-bg: rgba(255, 255, 255, 0.06);
+}
+
 /* ─── Base ─────────────────────────────────────── */
 html {
     scroll-behavior: smooth;
 }
 
 body {
-    background-color: #0D1117;
+    background-color: var(--bg-regular);
     background-image:
-        radial-gradient(ellipse 80% 50% at 50% -20%, rgba(124, 58, 237, 0.08) 0%, transparent 100%);
+        radial-gradient(ellipse 80% 50% at 50% -20%, var(--body-gradient) 0%, transparent 100%);
     background-attachment: fixed;
+    transition: background-color 0.2s ease, color 0.2s ease;
 }
 
 /* ─── Glow effects ──────────────────────────────── */
@@ -35,27 +117,27 @@ body {
     line-height: 1;
     padding-right: 0.1em;
     font-family: 'Cinzel', serif;
-    color: #C4B5FD;
+    color: var(--drop-cap-color);
 }
 
 /* ─── Navigation glassmorphism ──────────────────── */
 .nav-glass {
-    background: rgba(13, 17, 23, 0.85);
+    background: var(--nav-glass-bg);
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
-    border-bottom: 1px solid rgba(139, 92, 246, 0.15);
+    border-bottom: 1px solid var(--nav-glass-border);
 }
 
 /* ─── Card styles ───────────────────────────────── */
 .card-surface {
-    background: rgba(22, 27, 46, 0.85);
-    border: 1px solid rgba(139, 92, 246, 0.12);
-    transition: border-color 0.25s ease, box-shadow 0.25s ease;
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    transition: border-color 0.25s ease, box-shadow 0.25s ease, background-color 0.2s ease;
 }
 
 .card-surface:hover {
-    border-color: rgba(139, 92, 246, 0.35);
-    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.4), 0 0 16px rgba(124, 58, 237, 0.12);
+    border-color: var(--card-hover-border);
+    box-shadow: 0 4px 24px var(--card-hover-shadow);
 }
 
 /* ─── Scrollbar ─────────────────────────────────── */
@@ -64,16 +146,16 @@ body {
 }
 
 ::-webkit-scrollbar-track {
-    background: #0D1117;
+    background: var(--scrollbar-track);
 }
 
 ::-webkit-scrollbar-thumb {
-    background: rgba(124, 58, 237, 0.4);
+    background: var(--scrollbar-thumb);
     border-radius: 3px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-    background: rgba(124, 58, 237, 0.7);
+    background: var(--scrollbar-thumb-hover);
 }
 
 /* ─── Responsive images ─────────────────────────── */
@@ -93,7 +175,7 @@ body {
 .code-block-wrapper {
     border-radius: 8px;
     overflow: hidden;
-    border: 1px solid rgba(139, 92, 246, 0.15);
+    border: 1px solid var(--code-block-border);
 }
 
 /* ─── Post content prose ────────────────────────── */
@@ -115,27 +197,49 @@ body {
 }
 
 .badge-purple {
-    background: rgba(124, 58, 237, 0.15);
-    border: 1px solid rgba(139, 92, 246, 0.3);
-    color: #C4B5FD;
+    background: var(--badge-purple-bg);
+    border: 1px solid var(--badge-purple-border);
+    color: var(--badge-purple-color);
 }
 
 /* ─── Divider ───────────────────────────────────── */
 .divider-glow {
     border: none;
     height: 1px;
-    background: linear-gradient(90deg, transparent, rgba(124, 58, 237, 0.5), transparent);
+    background: linear-gradient(90deg, transparent, var(--divider-color), transparent);
     margin: 1.5rem 0;
 }
 
 /* ─── Selection ─────────────────────────────────── */
 ::selection {
-    background: rgba(124, 58, 237, 0.3);
-    color: #E2E8F0;
+    background: var(--selection-bg);
+    color: var(--txt-regular);
 }
 
 /* ─── Focus ring ────────────────────────────────── */
 *:focus-visible {
     outline: 2px solid rgba(124, 58, 237, 0.6);
     outline-offset: 2px;
+}
+
+/* ─── Theme toggle button ───────────────────────── */
+.theme-toggle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    border-radius: 8px;
+    border: 1px solid var(--card-border);
+    background: var(--card-bg);
+    color: var(--txt-muted);
+    transition: color 0.2s ease, border-color 0.2s ease, background-color 0.2s ease;
+    cursor: pointer;
+    flex-shrink: 0;
+}
+
+.theme-toggle:hover {
+    color: var(--badge-purple-color);
+    border-color: var(--border-mid);
+    background: var(--badge-purple-bg);
 }

@@ -6,30 +6,36 @@ const config: Config = {
         "./src/components/**/*.{js,ts,jsx,tsx,mdx}",
         "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
     ],
+    darkMode: 'class',
     theme: {
         extend: {
             colors: {
-                txtHeader: "#C4B5FD",
-                txtSubHeader: "#A78BFA",
-                txtRegular: "#E2E8F0",
-                txtMuted: "#94A3B8",
-                txtLink: "#38BDF8",
-                txtInlineCode: "#F9A8D4",
-                bgBar: "#0D1117",
-                bgNavBorder: "rgba(139, 92, 246, 0.2)",
+                // Text colors — themed via CSS variables
+                txtHeader: "var(--txt-header)",
+                txtSubHeader: "var(--txt-subheader)",
+                txtRegular: "var(--txt-regular)",
+                txtMuted: "var(--txt-muted)",
+                // Channel-format vars so opacity modifiers (e.g. /30) work correctly
+                txtLink: "rgb(var(--txt-link-rgb) / <alpha-value>)",
+                txtInlineCode: "var(--txt-inline-code)",
+                // Background colors — themed via CSS variables
+                bgBar: "rgb(var(--bg-bar-rgb) / <alpha-value>)",
+                bgRegular: "var(--bg-regular)",
+                bgSurface: "var(--bg-surface)",
+                bgInsideDiv: "var(--bg-inside-div)",
+                bgSemiTransparent: "var(--bg-semi-transparent)",
                 bgHomeLine: "#1A1F3A",
-                bgRegular: "#0D1117",
-                bgSurface: "#161B2E",
-                bgCard: "rgba(22, 27, 46, 0.8)",
                 bgLink: "#1D4ED8",
-                bgInsideDiv: "rgba(22, 27, 46, 0.85)",
-                bgSemiTransparent: "rgba(30, 35, 60, 0.85)",
+                bgCard: "var(--bg-inside-div)",
                 bgCodeBlock: "#1E1E2E",
-                accentPurple: "#7C3AED",
+                // Accent — same in both themes, channel format for opacity modifiers
+                accentPurple: "rgb(var(--accent-purple-rgb) / <alpha-value>)",
                 accentBlue: "#0EA5E9",
                 accentGlow: "rgba(124, 58, 237, 0.4)",
-                borderSubtle: "rgba(139, 92, 246, 0.15)",
-                borderMid: "rgba(139, 92, 246, 0.3)",
+                // Border colors — themed via CSS variables
+                borderSubtle: "var(--border-subtle)",
+                borderMid: "var(--border-mid)",
+                bgNavBorder: "rgba(139, 92, 246, 0.2)",
             },
             fontSize: {
                 'md': '17px',
