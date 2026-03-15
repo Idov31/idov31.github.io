@@ -4,14 +4,16 @@ import SecondaryHeader, {BlogPrologue, BulletList, InlineCode} from "@/component
 import React from "react";
 import StyledLink from "@/components/StyledLink";
 import BlogImageFigure from "@/components/BlogImageFigure";
+import TableOfContents from "@/components/TableOfContents";
 
 export default function ListUdpConnections() {
     return (
-        <div className="bg-bgInsideDiv p-6 rounded-xl h-full">
+        <div className="card-surface rounded-xl p-6 lg:p-8 animate-fade-in post-content">
             <BlogPrologue title="UdpInspector - Getting active UDP connections without sniffing"
                           date="19.08.2021" projectLink="https://github.com/Idov31/UdpInspector"/>
             <div className="pt-4">
                 <article>
+                    <TableOfContents/>
                     <SecondaryHeader text="UdpInspector - Getting active UDP connections without sniffing"/>
                     <div className="drop-caps pt-4">
                         Many times I&apos;ve wondered how comes that there are no tools to get active UDP connections.

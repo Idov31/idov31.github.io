@@ -2,15 +2,17 @@
 
 import StyledLink from "@/components/StyledLink";
 import SecondaryHeader, {BlogPrologue, InlineCode, NumberedList} from "@/components/BlogComponents";
+import TableOfContents from "@/components/TableOfContents";
 import React from "react";
 
 export default function CronosSleepObfuscation() {
     return (
-        <div className="bg-bgInsideDiv p-6 rounded-xl h-full">
+        <div className="card-surface rounded-xl p-6 lg:p-8 animate-fade-in post-content">
             <BlogPrologue title="timeout /t 31 && start evil.exe"
                           date="06.11.2022" projectLink="https://github.com/Idov31/Cronos" />
             <div className="pt-4">
                 <article>
+                    <TableOfContents/>
                     <SecondaryHeader text="Prologue"/>
                     <div className="drop-caps pt-4">
                         Cronos is a new sleep obfuscation technique co-authored by

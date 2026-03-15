@@ -9,18 +9,31 @@ interface ProjectBoxProps {
 
 export default function ProjectBox({imagePath, projectLink, projectName, description}: ProjectBoxProps) {
     return (
-        <div className="flex flex-col items-center justify-center bg-bgHomeLine w-full rounded-3xl mt-6
-                hover:glow lg:mr-7">
-            <a href={projectLink}>
-                <div className="flex flex-col items-center justify-center bg-bgHomeLine w-full h-full rounded-3xl
-                mx-auto p-5">
-                    <Image src={imagePath} alt={projectName} width={203} height={77} />
-                    <div className="flex flex-col justify-center items-center">
-                        <p className="text-txtHeader font-bold text-3xl pb-4">{projectName}</p>
-                        <p className="pb-4 text-xl text-txtSubHeader text-center pr-2 pl-2">{description}</p>
-                    </div>
+        <a
+            href={projectLink}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="block card-surface rounded-xl p-5 hover:glow transition-all duration-300 group"
+        >
+            <div className="flex flex-col h-full">
+                <div className="flex items-center gap-3 mb-3">
+                    <Image
+                        src={imagePath}
+                        alt={projectName}
+                        width={40}
+                        height={40}
+                        className="rounded-lg object-contain"
+                    />
+                    <h3 className="text-txtHeader font-semibold text-lg group-hover:text-txtSubHeader transition-colors">
+                        {projectName}
+                    </h3>
                 </div>
-            </a>
-        </div>
+                <p className="text-txtMuted text-sm leading-relaxed flex-1">{description}</p>
+                <span className="inline-flex items-center gap-1 mt-3 text-txtLink text-xs font-medium
+                                 group-hover:gap-2 transition-all duration-200">
+                    View on GitHub <span>→</span>
+                </span>
+            </div>
+        </a>
     );
 }

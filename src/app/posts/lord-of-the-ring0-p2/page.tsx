@@ -3,6 +3,7 @@
 import SecondaryHeader, {BlogPrologue, BulletList, Code, InlineCode} from "@/components/BlogComponents";
 import React from "react";
 import StyledLink from "@/components/StyledLink";
+import TableOfContents from "@/components/TableOfContents";
 
 export default function LordOfTheRing0P2() {
     const myDeviceObject = `NTSTATUS MyDeviceControl(
@@ -208,11 +209,12 @@ int main(int argc, const char* argv[]) {
 }`;
 
     return (
-        <div className="bg-bgInsideDiv p-6 rounded-xl h-full">
+        <div className="card-surface rounded-xl p-6 lg:p-8 animate-fade-in post-content">
             <BlogPrologue title="Lord Of The Ring0 - Part 2 | A tale of routines, IOCTLs and IRPs"
                           date="04.08.2022" projectLink="https://github.com/Idov31/Nidhogg"/>
             <div className="pt-4">
                 <article>
+                    <TableOfContents/>
                     <SecondaryHeader text="Prologue"/>
                     <div className="drop-caps pt-4">
                         In the <StyledLink href="/posts/lord-of-the-ring0-p1"

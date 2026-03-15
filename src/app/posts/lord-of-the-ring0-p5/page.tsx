@@ -3,6 +3,7 @@
 import React from "react";
 import StyledLink from "@/components/StyledLink";
 import SecondaryHeader, {BlogPrologue, BulletList, Code, InlineCode, ThirdHeader} from "@/components/BlogComponents";
+import TableOfContents from "@/components/TableOfContents";
 
 export default function LordOfTheRing0P5() {
     let ntfsHookCode = `NTSTATUS FileUtils::InstallNtfsHook(int irpMjFunction) {
@@ -231,11 +232,12 @@ export default function LordOfTheRing0P5() {
 }`
 
     return (
-        <div className="bg-bgInsideDiv p-6 rounded-xl h-full">
+        <div className="card-surface rounded-xl p-6 lg:p-8 animate-fade-in post-content">
             <BlogPrologue title="Lord Of The Ring0 - Part 5 | Saruman's Manipulation"
                           date="19.07.2023" projectLink="https://github.com/Idov31/Nidhogg"/>
             <div className="pt-4">
                 <article>
+                    <TableOfContents/>
                     <SecondaryHeader text="Prologue"/>
                     <div className="drop-caps pt-4">
                         In the <StyledLink href="/posts/lord-of-the-ring0-p4" content="last blog post"

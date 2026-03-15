@@ -1,96 +1,277 @@
 "use client";
 
-import React, {useState} from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import Script from 'next/script';
 import Image from 'next/image';
+import Link from 'next/link';
+import HeaderSearch from '@/components/HeaderSearch';
 import "./globals.css";
-import {StyledBarLink} from "@/components/StyledLink";
 
-export default function Layout({children,}: Readonly<{ children: React.ReactNode; }>) {
-    const [isOpen, setIsOpen] = useState(false);
+function SunIcon() {
+    return (
+        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor"
+             strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+            <circle cx="12" cy="12" r="5"/>
+            <line x1="12" y1="1" x2="12" y2="3"/>
+            <line x1="12" y1="21" x2="12" y2="23"/>
+            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/>
+            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
+            <line x1="1" y1="12" x2="3" y2="12"/>
+            <line x1="21" y1="12" x2="23" y2="12"/>
+            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/>
+            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+        </svg>
+    );
+}
+
+function MoonIcon() {
+    return (
+        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor"
+             strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+        </svg>
+    );
+}
+
+function SearchIcon() {
+    return (
+        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor"
+             strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+            <circle cx="11" cy="11" r="8"/>
+            <path d="m21 21-4.35-4.35"/>
+        </svg>
+    );
+}
+
+export default function Layout({children}: Readonly<{ children: React.ReactNode }>) {
+    const [isMenuOpen, setIsMenuOpen] = useState(false);
+    const [isDark, setIsDark] = useState(true);
+    const [isSearchOpen, setIsSearchOpen] = useState(false);
+    const searchContainerRef = useRef<HTMLDivElement>(null);
+
+    // Sync state with the class applied by the anti-FOUC script
+    useEffect(() => {
+        const saved = localStorage.getItem('theme');
+        setIsDark(saved !== 'light');
+    }, []);
+
+    useEffect(() => {
+        if (!isSearchOpen) {
+            return;
+        }
+
+        const handlePointerDown = (event: MouseEvent) => {
+            if (!searchContainerRef.current?.contains(event.target as Node)) {
+                setIsSearchOpen(false);
+            }
+        };
+
+        document.addEventListener('mousedown', handlePointerDown);
+        return () => document.removeEventListener('mousedown', handlePointerDown);
+    }, [isSearchOpen]);
+
+    const toggleTheme = () => {
+        const next = !isDark;
+        setIsDark(next);
+        if (next) {
+            document.documentElement.classList.add('dark');
+            localStorage.setItem('theme', 'dark');
+        } else {
+            document.documentElement.classList.remove('dark');
+            localStorage.setItem('theme', 'light');
+        }
+    };
+
+    const navLinks = [
+        {href: "/posts", label: "Posts"},
+        {href: "/about", label: "About"},
+    ];
+
+    const socialLinks = [
+        {href: "https://x.com/idov31", src: "/x.svg", alt: "X (Twitter)", size: 20},
+        {href: "https://t.me/idov31", src: "/telegram.svg", alt: "Telegram", size: 24},
+        {href: "https://github.com/idov31", src: "/github.svg", alt: "GitHub", size: 24},
+        {href: "mailto:idov3110@gmail.com", src: "/mail.svg", alt: "Email", size: 24},
+    ];
 
     return (
-        <html>
+        <html lang="en" className="dark" suppressHydrationWarning>
         <head>
+            {/* Anti-FOUC: apply theme class before first paint */}
+            <script dangerouslySetInnerHTML={{__html: `
+                (function(){
+                    var t=localStorage.getItem('theme');
+                    if(t==='light'){document.documentElement.classList.remove('dark');}
+                    else{document.documentElement.classList.add('dark');}
+                })();
+            `}}/>
             <Script src="https://www.googletagmanager.com/gtag/js?id=G-MVJWHHE6LG" strategy="afterInteractive"/>
             <Script id="gtag-config" strategy="afterInteractive">
                 {`
                 window.dataLayer = window.dataLayer || [];
                 function gtag(){dataLayer.push(arguments);}
                 gtag('js', new Date());
-            
                 gtag('config', 'G-MVJWHHE6LG');
                 `}
             </Script>
             <title>Ido Veltzman :: Security Research</title>
             <link rel="icon" href="/favicon.ico" sizes="any"/>
         </head>
-        <body className="bg-bgRegular min-h-screen">
-        <div className="flex flex-col font-lato bg-bgRegular text-txtRegular text-md min-h-screen">
-            <div className="flex flex-row w-full bg-bgBar p-1 text-txtSubHeader items-center">
-                <div className={`mt-2 w-full flex flex-row pl-8 ${isOpen ? 'hidden' : 'block'}`}>
-                    <Image src="/logo.svg" alt="Logo" width={40} height={40} className="mr-4 rounded-xl"/>
-                    <div className="mt-2 w-full flex flex-row">
-                        <StyledBarLink href="/" content="Ido Veltzman :: Security Research"/>
+        <body className="bg-bgRegular font-lato text-txtRegular min-h-screen flex flex-col">
+            {/* ── Navigation ─────────────────────────── */}
+            <header className="nav-glass sticky top-0 z-50">
+                <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <div className="flex items-center justify-between h-16">
+                        {/* Logo */}
+                        <Link href="/" className="flex items-center gap-3 group" onClick={() => {
+                            setIsMenuOpen(false);
+                            setIsSearchOpen(false);
+                        }}>
+                            <div className="relative">
+                                <Image
+                                    src="/logo.svg"
+                                    alt="Logo"
+                                    width={36}
+                                    height={36}
+                                    className="rounded-lg ring-1 ring-borderSubtle group-hover:ring-accentPurple transition-all duration-300"
+                                />
+                            </div>
+                            <span className="text-txtHeader font-semibold text-lg hidden sm:block tracking-wide">
+                                Ido Veltzman
+                            </span>
+                        </Link>
+
+                        <div className="flex items-center gap-2">
+                            <div ref={searchContainerRef} className="relative hidden md:block">
+                                {isSearchOpen && (
+                                    <div className="absolute right-0 top-full z-[60] mt-3 w-[min(38rem,calc(100vw-2rem))]">
+                                        <HeaderSearch
+                                            autoFocus
+                                            showAllPostsWhenEmpty
+                                            onResultClick={() => setIsSearchOpen(false)}
+                                        />
+                                    </div>
+                                )}
+                                <button
+                                    type="button"
+                                    onClick={() => setIsSearchOpen((current) => !current)}
+                                    className="theme-toggle"
+                                    aria-label="Search posts"
+                                    aria-expanded={isSearchOpen}
+                                    title="Search posts"
+                                >
+                                    <SearchIcon/>
+                                </button>
+                            </div>
+
+                            {/* Desktop nav links */}
+                            <nav className="hidden md:flex items-center gap-1">
+                                {navLinks.map(link => (
+                                    <Link
+                                        key={link.href}
+                                        href={link.href}
+                                        onClick={() => setIsSearchOpen(false)}
+                                        className="px-4 py-2 rounded-lg text-txtMuted hover:text-txtRegular hover:bg-[var(--nav-hover-bg)]
+                                                   transition-all duration-200 text-sm font-medium"
+                                    >
+                                        {link.label}
+                                    </Link>
+                                ))}
+                            </nav>
+
+                            {/* Theme toggle — always visible */}
+                            <button
+                                onClick={toggleTheme}
+                                className="theme-toggle"
+                                aria-label={isDark ? "Switch to light mode" : "Switch to dark mode"}
+                                title={isDark ? "Switch to light mode" : "Switch to dark mode"}
+                            >
+                                {isDark ? <SunIcon/> : <MoonIcon/>}
+                            </button>
+
+                            {/* Mobile burger */}
+                            <button
+                                onClick={() => setIsMenuOpen(!isMenuOpen)}
+                                aria-label="Toggle menu"
+                                aria-expanded={isMenuOpen}
+                                className="md:hidden p-2 rounded-lg text-txtMuted hover:text-txtRegular hover:bg-[var(--nav-hover-bg)] transition-colors"
+                            >
+                                <span className="sr-only">Menu</span>
+                                <div className="w-5 flex flex-col gap-1.5">
+                                    <span className={`block h-0.5 bg-current transition-all duration-300 ${isMenuOpen ? 'rotate-45 translate-y-2' : ''}`}/>
+                                    <span className={`block h-0.5 bg-current transition-all duration-300 ${isMenuOpen ? 'opacity-0' : ''}`}/>
+                                    <span className={`block h-0.5 bg-current transition-all duration-300 ${isMenuOpen ? '-rotate-45 -translate-y-2' : ''}`}/>
+                                </div>
+                            </button>
+                        </div>
                     </div>
                 </div>
-                <div className={`${isOpen ? "flex flex-col items-center justify-center h-64" : ""}`}>
-                    <button onClick={() => setIsOpen(!isOpen)} className="md:hidden">
-                        <Image src="/kosherburger.svg" alt="Menu" width={50} height={50}/>
-                    </button>
-                    <div className={`${isOpen ? 'flex flex-col w-screen h-screen z-10' : 'hidden'}
-                                md:flex md:flex-row items-center justify-center`}>
-                        <div className={`mt-2 w-full flex flex-row ${isOpen ? "justify-center" : "justify-end pr-8"}`}>
-                            <StyledBarLink href="/posts" content="Posts" isBurger={isOpen}/>
-                        </div>
-                        <div className={`mt-2 w-full flex flex-row ${isOpen ? "justify-center" : "justify-end pr-8"}`}>
-                            <StyledBarLink href="/about" content="About" isBurger={isOpen}/>
+
+                {/* Mobile menu */}
+                {isMenuOpen && (
+                    <div className="md:hidden border-t border-borderSubtle bg-bgBar/95 backdrop-blur-md">
+                        <div className="max-w-6xl mx-auto px-4 py-3">
+                            <div className="pb-3">
+                                <HeaderSearch onResultClick={() => setIsMenuOpen(false)}/>
+                            </div>
+                            <nav className="flex flex-col gap-1">
+                                {navLinks.map(link => (
+                                    <Link
+                                        key={link.href}
+                                        href={link.href}
+                                        onClick={() => setIsMenuOpen(false)}
+                                        className="px-4 py-3 rounded-lg text-txtMuted hover:text-txtRegular hover:bg-[var(--nav-hover-bg)]
+                                                   transition-colors text-base font-medium"
+                                    >
+                                        {link.label}
+                                    </Link>
+                                ))}
+                            </nav>
                         </div>
                     </div>
-                </div>
-            </div>
-            <div className="p-5 lg:p-8">
+                )}
+            </header>
+
+            {/* ── Main content ───────────────────────── */}
+            <main className="flex-1 max-w-6xl mx-auto w-full px-4 sm:px-6 lg:px-8 py-8 lg:py-12">
                 {children}
-            </div>
-        </div>
-        <div className="flex flex-row bg-bgBar text-txtSubHeader items-center">
-            <div className="mt-2 w-full flex flex-row pl-2 lg:pl-8">
-                <Image src="/logo.svg" alt="Logo" width={50} height={50} className="mr-4 rounded-xl"/>
-                <p className="mt-2">© {new Date().getFullYear()} Ido Veltzman - All Rights Reserved</p>
-            </div>
-            <div className="flex flex-col items-center">
-                <div className="mt-2 flex flex-row justify-center pl-5 pt-2 lg:pr-8 lg:pl-0 lg:pt-1">
-                    <div className="lg:flex lg:flex-row">
-                        <a href="https://x.com/idov31" className="mb-2 mr-6 pt-1">
-                            <div className="responsive-image-container">
-                                <Image src="/x.svg" alt="X" width={25} height={25} className="responsive-image"/>
-                            </div>
-                        </a>
-                        <a href="https://t.me/idov31" className="mb-2 mr-6">
-                            <div className="responsive-image-container">
-                                <Image src="/telegram.svg" alt="Telegram" width={35} height={35}
-                                       className="responsive-image"/>
-                            </div>
-                        </a>
-                    </div>
-                    <div className="lg:flex lg:flex-row">
-                        <a href="https://github.com/idov31" className="mb-2 mr-6">
-                            <div className="responsive-image-container">
-                                <Image src="/github.svg" alt="Github" width={35} height={35}
-                                       className="responsive-image"/>
-                            </div>
-                        </a>
-                        <a href="mailto:idov3110@gmail.com" className="mb-2 mr-6">
-                            <div className="responsive-image-container">
-                                <Image src="/mail.svg" alt="Mail" width={40} height={40}
-                                       className="responsive-image"/>
-                            </div>
-                        </a>
+            </main>
+
+            {/* ── Footer ─────────────────────────────── */}
+            <footer className="border-t border-borderSubtle bg-bgBar mt-auto">
+                <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+                    <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
+                        <div className="flex items-center gap-3">
+                            <Image src="/logo.svg" alt="Logo" width={28} height={28} className="rounded-md opacity-70"/>
+                            <p className="text-txtMuted text-sm">
+                                © {new Date().getFullYear()} Ido Veltzman · All Rights Reserved
+                            </p>
+                        </div>
+                        <div className="flex items-center gap-4">
+                            {socialLinks.map(link => (
+                                <a
+                                    key={link.href}
+                                    href={link.href}
+                                    aria-label={link.alt}
+                                    className="text-txtMuted hover:text-txtRegular transition-colors duration-200 opacity-70 hover:opacity-100"
+                                >
+                                    <div className="responsive-image-container">
+                                        <Image
+                                            src={link.src}
+                                            alt={link.alt}
+                                            width={link.size}
+                                            height={link.size}
+                                            className="responsive-image"
+                                        />
+                                    </div>
+                                </a>
+                            ))}
+                        </div>
                     </div>
                 </div>
-            </div>
-        </div>
+            </footer>
         </body>
         </html>
     );
 }
+

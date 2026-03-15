@@ -10,10 +10,11 @@ import SecondaryHeader, {
 } from "@/components/BlogComponents";
 import BlogImageFigure from "@/components/BlogImageFigure";
 import RoadmapTimeline from "@/components/RoadmapTimeline";
+import TableOfContents from "@/components/TableOfContents";
 
 export default function HypervisorBasedDefense() {
     return (
-        <div className="bg-bgInsideDiv p-6 rounded-xl h-full">
+        <div className="card-surface rounded-xl p-6 lg:p-8 animate-fade-in post-content">
             <BlogPrologue
                 title="Hypervisor Based Defense"
                 date="14.03.2026"
@@ -21,58 +22,7 @@ export default function HypervisorBasedDefense() {
             />
             <div className="pt-4">
                 <article>
-                    <SecondaryHeader text="Table of Contents" />
-                    <nav className="pt-4 pb-2">
-                        <ul className="space-y-1">
-                            <li><StyledLink href="#prologue" content="Prologue" textSize="text-md" /></li>
-                            <li><StyledLink href="#why-virtualization" content="Why Virtualization" textSize="text-md" /></li>
-                            <li>
-                                <StyledLink href="#virtualization-crash-course" content="Virtualization Crash Course" textSize="text-md" />
-                                <ul className="pl-6 mt-1 space-y-1">
-                                    <li><StyledLink href="#types-of-hypervisors" content="Types of Hypervisors" textSize="text-md" /></li>
-                                    <li><StyledLink href="#virtualization-platforms" content="Virtualization Platforms" textSize="text-md" /></li>
-                                    <li>
-                                        <StyledLink href="#basics-of-virtualization" content="Basics of Virtualization" textSize="text-md" />
-                                        <ul className="pl-6 mt-1 space-y-1">
-                                            <li><StyledLink href="#hypervisor-role-and-architecture" content="Hypervisor Role and Architecture" textSize="text-md" /></li>
-                                            <li>
-                                                <StyledLink href="#state-management" content="State Management" textSize="text-md" />
-                                                <ul className="pl-6 mt-1 space-y-1">
-                                                    <li><StyledLink href="#virtual-machine-control-structure-(vmcs)" content="Virtual Machine Control Structure (VMCS)" textSize="text-md" /></li>
-                                                    <li><StyledLink href="#extended-page-table-(ept)" content="Extended Page Table (EPT)" textSize="text-md" /></li>
-                                                    <li><StyledLink href="#page-table-entries-(pte)" content="Page Table Entries (PTE)" textSize="text-md" /></li>
-                                                    <li><StyledLink href="#communication-between-hypervisor-and-guest" content="Communication Between Hypervisor and Guest" textSize="text-md" /></li>
-                                                </ul>
-                                            </li>
-                                            <li><StyledLink href="#nested-virtualization" content="Nested Virtualization" textSize="text-md" /></li>
-                                        </ul>
-                                    </li>
-                                </ul>
-                            </li>
-                            <li>
-                                <StyledLink href="#why-do-we-even-need-hypervisor-based-defense?" content="Why Do We Even Need Hypervisor-Based Defense?" textSize="text-md" />
-                                <ul className="pl-6 mt-1 space-y-1">
-                                    <li>
-                                        <StyledLink href="#what-is-hypervisor-based-defense?" content="What Is Hypervisor-Based Defense?" textSize="text-md" />
-                                        <ul className="pl-6 mt-1 space-y-1">
-                                            <li><StyledLink href="#virtualization-based-security-(vbs)" content="Virtualization-Based Security (VBS)" textSize="text-md" /></li>
-                                            <li><StyledLink href="#hypervisor-enforced-code-integrity-(hvci)" content="Hypervisor-Enforced Code Integrity (HVCI)" textSize="text-md" /></li>
-                                        </ul>
-                                    </li>
-                                </ul>
-                            </li>
-                            <li><StyledLink href="#motivation-behind-nova" content="Motivation Behind Nova" textSize="text-md" /></li>
-                            <li>
-                                <StyledLink href="#nova-architecture" content="Nova Architecture" textSize="text-md" />
-                                <ul className="pl-6 mt-1 space-y-1">
-                                    <li><StyledLink href="#ept-hooks" content="EPT Hooks" textSize="text-md" /></li>
-                                    <li><StyledLink href="#hypervisor-vs-kernel-level-threats" content="Hypervisor vs Kernel Level Threats" textSize="text-md" /></li>
-                                    <li><StyledLink href="#what-is-next?" content="What Is Next?" textSize="text-md" /></li>
-                                </ul>
-                            </li>
-                            <li><StyledLink href="#epilogue" content="Epilogue" textSize="text-md" /></li>
-                        </ul>
-                    </nav>
+                    <TableOfContents/>
 
                     <SecondaryHeader text="Prologue" />
                     <div className="drop-caps pt-4">
