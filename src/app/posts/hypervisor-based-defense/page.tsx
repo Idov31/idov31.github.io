@@ -139,8 +139,8 @@ export default function HypervisorBasedDefense() {
                         ]}
                     />
                     <div className="pt-2">
-                        In this post, I focus mostly on the Type 2 model because that is the
-                        environment I used while building and testing Nova.
+                        While Type 1 hypervisors are more commonly used for security purposes (as we will see later on in the VBS section), in this post, I focus mostly on the Type 2 model because that is the
+                         environment I used while building and testing Nova.
                     </div>
 
                     <ThirdHeader text="Virtualization Platforms" />
@@ -673,9 +673,31 @@ export default function HypervisorBasedDefense() {
                         surprisingly rich research space.
                     </div>
                     <div className="pt-2">
-                        Finally, I want to thank Matan Kotick, memN0ps, Connor McGarr, Sina
-                        Karvandi, Satoshi Tandasat, and many others whose work helped shape
-                        my understanding of this space.
+                        Finally, I want to thank <StyledLink
+                            href="https://www.linkedin.com/in/matan-kotick/"
+                            content="Matan Kotick"
+                            textSize="text-md"
+                        /> and <StyledLink
+                            href="https://github.com/memn0ps"
+                            content="memN0ps"
+                            textSize="text-md"
+                        /> for proof reading this article, <StyledLink
+                            href="https://github.com/SinaKarvandi"
+                            content="Sina Karvandi"
+                            textSize="text-md"
+                        />, <StyledLink
+                            href="https://x.com/33y0re"
+                            content="Connor McGarr"
+                            textSize="text-md"
+                        />, <StyledLink
+                            href="https://github.com/tandasat"
+                            content="Satoshi Tandasat"
+                            textSize="text-md"
+                        />, <StyledLink
+                            href="https://x.com/aionescu"
+                            content="Alex Ionescu"
+                            textSize="text-md"
+                        /> and many others whose work helped greatly in shaping my understanding of this space.
                     </div>
                 </article>
             </div>
