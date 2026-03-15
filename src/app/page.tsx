@@ -2,6 +2,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import React from "react";
 import ProjectBox from "@/components/ProjectBox";
+import {blogPosts} from "@/data/blogPosts";
 
 export default function Home() {
     const projects = [
@@ -43,6 +44,16 @@ export default function Home() {
         },
     ];
 
+    const latestPost = blogPosts.reduce((latest, post) => {
+        if (!latest) {
+            return post;
+        }
+
+        return new Date(post.subHeaderContent).getTime() > new Date(latest.subHeaderContent).getTime()
+            ? post
+            : latest;
+    }, blogPosts[0]);
+
     return (
         <div className="animate-fade-in">
             {/* ── Latest Post ────────────────────────── */}
@@ -54,17 +65,16 @@ export default function Home() {
                         View all →
                     </Link>
                 </div>
-                <Link href="/posts/lord-of-the-ring0-p6" className="block group">
+                <Link href={latestPost.href} className="block group">
                     <div className="card-surface rounded-2xl p-6 lg:p-8 flex flex-col lg:flex-row gap-6">
                         <div className="flex-1">
-                            <div className="badge badge-purple mb-3">31 Mar 2024</div>
+                            <div className="badge badge-purple mb-3">{latestPost.subHeaderContent}</div>
                             <h3 className="text-2xl lg:text-3xl font-bold text-txtHeader group-hover:text-txtSubHeader
                                            transition-colors duration-200 mb-3 leading-tight">
-                                Lord Of The Ring0 — Part 6 | Conclusion
+                                {latestPost.headerContent}
                             </h3>
                             <p className="text-txtMuted text-base leading-relaxed">
-                                In this post, we write a simple driver capable of bypassing AMSI to demonstrate
-                                patching usermode memory from the kernel — wrapping up the Lord Of The Ring0 series.
+                                {latestPost.postContent}
                             </p>
                             <span className="inline-flex items-center gap-1 mt-4 text-txtLink text-sm font-medium
                                              group-hover:gap-2 transition-all duration-200">
@@ -73,8 +83,8 @@ export default function Home() {
                         </div>
                         <div className="lg:w-72 flex-shrink-0 flex items-center justify-center">
                             <Image
-                                src="/post-images/lotr06.png"
-                                alt="Lord of the Ring0 Part 6"
+                                src={latestPost.imagePath}
+                                alt={latestPost.imageAlt}
                                 width={420}
                                 height={160}
                                 className="rounded-xl object-cover w-full"

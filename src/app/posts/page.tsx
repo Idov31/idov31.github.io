@@ -18,11 +18,8 @@ export default function Posts() {
         <div className="animate-fade-in">
             {/* Page header */}
             <div className="mb-8">
-                <div className="badge badge-purple mb-3">Blog</div>
-                <h1 className="text-4xl font-bold text-txtHeader">Posts</h1>
-                <p className="text-txtMuted mt-2">
-                    {blogPosts.length} articles on security research, kernel development, and more.
-                </p>
+                <div className="badge badge-purple mb-3">Articles</div>
+                <h1 className="text-4xl font-bold text-txtHeader">Articles</h1>
             </div>
 
             {/* Post list */}
