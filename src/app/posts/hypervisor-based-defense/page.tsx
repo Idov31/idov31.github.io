@@ -623,7 +623,7 @@ export default function HypervisorBasedDefense() {
                         tooling.
                     </div>
                     <div className="pt-4">
-                        To better understand how that works in practice, let's see the following scenario and how Nova helps to mitigate it:
+                        To better understand how that works in practice, let&apos;s see the following scenario and how Nova helps to mitigate it:
                     </div>
                     <BlogImageFigure
                         src="/post-images/hypervisor-based-defense/nova_example.png"
