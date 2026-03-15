@@ -6,7 +6,7 @@ import React from "react";
 
 export default function CronosSleepObfuscation() {
     return (
-        <div className="bg-bgInsideDiv p-6 rounded-xl h-full">
+        <div className="glass-card p-6 sm:p-8 lg:p-10 animate-fade-in prose-blog">
             <BlogPrologue title="timeout /t 31 && start evil.exe"
                           date="06.11.2022" projectLink="https://github.com/Idov31/Cronos" />
             <div className="pt-4">

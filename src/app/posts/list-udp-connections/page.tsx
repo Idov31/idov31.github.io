@@ -7,7 +7,7 @@ import BlogImageFigure from "@/components/BlogImageFigure";
 
 export default function ListUdpConnections() {
     return (
-        <div className="bg-bgInsideDiv p-6 rounded-xl h-full">
+        <div className="glass-card p-6 sm:p-8 lg:p-10 animate-fade-in prose-blog">
             <BlogPrologue title="UdpInspector - Getting active UDP connections without sniffing"
                           date="19.08.2021" projectLink="https://github.com/Idov31/UdpInspector"/>
             <div className="pt-4">

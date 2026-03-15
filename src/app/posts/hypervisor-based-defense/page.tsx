@@ -13,7 +13,7 @@ import RoadmapTimeline from "@/components/RoadmapTimeline";
 
 export default function HypervisorBasedDefense() {
     return (
-        <div className="bg-bgInsideDiv p-6 rounded-xl h-full">
+        <div className="glass-card p-6 sm:p-8 lg:p-10 animate-fade-in prose-blog">
             <BlogPrologue
                 title="Hypervisor Based Defense"
                 date="14.03.2026"

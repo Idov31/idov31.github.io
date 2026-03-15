@@ -1,15 +1,51 @@
-@import url('https://fonts.googleapis.com/css2?family=Lato&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Cinzel&family=Uncial+Antiqua&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Uncial+Antiqua&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&display=swap');
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
+/* ── Global resets ─────────────────────────────────────────── */
+* {
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+/* ── Scrollbar ─────────────────────────────────────────────── */
+::-webkit-scrollbar {
+    width: 6px;
+}
+::-webkit-scrollbar-track {
+    background: #0a0e1a;
+}
+::-webkit-scrollbar-thumb {
+    background: rgba(189, 147, 249, 0.4);
+    border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+    background: rgba(189, 147, 249, 0.7);
+}
+
+/* ── Link glow on hover ────────────────────────────────────── */
 .hover\:glow:hover {
     transition: all 0.3s ease-in-out;
     box-shadow: 0 0 10px #800080, 0 0 20px #800080, 0 0 30px #800080, 0 0 40px #800080;
 }
 
+/* ── Card hover lift ───────────────────────────────────────── */
+.card-hover {
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.card-hover:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 32px rgba(189, 147, 249, 0.2);
+}
+
+/* ── Drop caps for blog articles ───────────────────────────── */
 .drop-caps::first-letter {
     float: left;
     font-size: 2em;
@@ -19,15 +55,75 @@
     color: #CEAEFC;
 }
 
+/* ── Responsive social icons ───────────────────────────────── */
 @media only screen and (max-width: 600px) {
     .responsive-image {
-        width: 30px !important;
-        height: 30px !important;
+        width: 26px !important;
+        height: 26px !important;
+    }
+    .responsive-image-container {
+        width: 26px !important;
+        height: 26px !important;
     }
 }
-@media only screen and (max-width: 600px) {
-    .responsive-image-container {
-        width: 30px !important;
-        height: 30px !important;
-    }
+
+/* ── Terminal-style divider ────────────────────────────────── */
+.terminal-divider {
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(139, 233, 253, 0.4), transparent);
+}
+
+/* ── Glassmorphism card ────────────────────────────────────── */
+.glass-card {
+    background: rgba(15, 22, 41, 0.85);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(189, 147, 249, 0.15);
+    border-radius: 12px;
+}
+
+/* ── Nav active indicator ──────────────────────────────────── */
+.nav-active {
+    color: #BD93F9;
+    border-bottom: 2px solid #BD93F9;
+}
+
+/* ── Hero gradient text ────────────────────────────────────── */
+.gradient-text {
+    background: linear-gradient(135deg, #BD93F9 0%, #8BE9FD 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+/* ── Tag badge ─────────────────────────────────────────────── */
+.tag-badge {
+    display: inline-block;
+    padding: 2px 10px;
+    border-radius: 9999px;
+    font-size: 0.75rem;
+    font-family: 'JetBrains Mono', monospace;
+    letter-spacing: 0.05em;
+    background: rgba(189, 147, 249, 0.1);
+    border: 1px solid rgba(189, 147, 249, 0.3);
+    color: #CEAEFC;
+}
+
+/* ── Section label ─────────────────────────────────────────── */
+.section-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: #8BE9FD;
+}
+
+/* ── Prose styles for blog content ─────────────────────────── */
+.prose-blog p {
+    line-height: 1.8;
+    margin-bottom: 1rem;
+}
+.prose-blog h2,
+.prose-blog h3 {
+    font-family: 'Cinzel', serif;
 }

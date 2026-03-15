@@ -54,11 +54,14 @@ export default function Custom404() {
     }, [requestedUrl]);
 
     return (
-        <div className="flex flex-col items-center text-center justify-center">
-            <h1 className="text-txtHeader text-3xl text-center">{msg}</h1>
-            {msg === "404 - Page Not Found :(" && <div className="pt-12">
-                <Image src="/sadpepe.png" alt="sadpepe" width="200" height="200" />
-            </div>}
+        <div className="flex flex-col items-center text-center justify-center min-h-[50vh] animate-fade-in">
+            <h1 className="text-txtHeader font-cinzel text-3xl text-center">{msg}</h1>
+            {msg === "404 - Page Not Found :(" && (
+                <div className="pt-12">
+                    <Image src="/sadpepe.png" alt="sadpepe" width={200} height={200}/>
+                    <p className="text-txtMuted mt-4 text-sm">This page does not exist.</p>
+                </div>
+            )}
         </div>
     );
 }

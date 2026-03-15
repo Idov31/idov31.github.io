@@ -36,7 +36,7 @@ if (!WriteProcessMemory(procHandle, functionBase, shellcode, sizeof(shellcode), 
     return -1;
 }`;
     return (
-        <div className="bg-bgInsideDiv p-6 rounded-xl h-full">
+        <div className="glass-card p-6 sm:p-8 lg:p-10 animate-fade-in prose-blog">
             <BlogPrologue title="The Good, The Bad and The Stomped Function"
                           date="28.01.2022" projectLink="https://github.com/Idov31/FunctionStomping"/>
             <div className="pt-4">

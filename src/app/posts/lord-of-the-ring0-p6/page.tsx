@@ -585,7 +585,7 @@ E8 2A 04 00 00          call    EtwProviderEnabled
 }`;
 
     return (
-        <div className="bg-bgInsideDiv p-6 rounded-xl h-full">
+        <div className="glass-card p-6 sm:p-8 lg:p-10 animate-fade-in prose-blog">
             <BlogPrologue title="Lord Of The Ring0 - Part 6 | Conclusion"
                           date="31.03.2024" projectLink="https://github.com/Idov31/Nidhogg"/>
             <div className="pt-4">
