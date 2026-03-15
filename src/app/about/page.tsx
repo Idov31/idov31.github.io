@@ -1,113 +1,149 @@
 import StyledLink from "@/components/StyledLink";
 import React from "react";
 
-export default function Home() {
-    return (
-        <div className="flex flex-col h-full w-fit bg-bgInsideDiv rounded-xl p-8">
-            <h1 className="text-5xl text-txtHeader font-bold">About Me</h1>
-            <article className="mt-4">
-                I am an experienced security researcher who has worked in various cybersecurity roles. My main expertise are:
+const skills = [
+    "Reverse Engineering",
+    "OS Internals",
+    "Security Research",
+    "Vulnerability Research",
+    "Malware Development",
+    "Exploit Development",
+    "Kernel Development",
+];
 
-                <ul className="list-disc pl-10 pt-8">
-                    <li className="mb-4">Reverse Engineering</li>
-                    <li className="mb-4">OS Internals</li>
-                    <li className="mb-4">Security Research</li>
-                    <li className="mb-4">Vulnerability Research</li>
-                    <li className="mb-4">Malware Development</li>
-                    <li className="mb-4">Exploit Development</li>
-                    <li className="mb-4">Kernel Development</li>
+export default function About() {
+    return (
+        <div className="animate-fade-in max-w-3xl">
+            {/* ── Page header ────────────────────────── */}
+            <div className="mb-10">
+                <div className="badge badge-purple mb-3">About</div>
+                <h1 className="text-4xl font-bold text-txtHeader mb-4">Ido Veltzman</h1>
+                <p className="text-txtMuted text-lg leading-relaxed">
+                    I am an experienced security researcher who has worked in various cybersecurity roles.
+                    My work spans kernel development, offensive tooling, and OS internals — with a focus on
+                    building open-source educational tools and writing about what I learn.
+                </p>
+            </div>
+
+            {/* ── Skills ─────────────────────────────── */}
+            <section className="mb-10 card-surface rounded-xl p-6">
+                <h2 className="text-xl font-semibold text-txtSubHeader mb-4">Expertise</h2>
+                <div className="flex flex-wrap gap-2">
+                    {skills.map(skill => (
+                        <span key={skill} className="badge badge-purple">{skill}</span>
+                    ))}
+                </div>
+                <p className="text-txtMuted text-sm leading-relaxed mt-4">
+                    In my free time I work on projects in the areas of evasion, persistence, and injection methods
+                    for UEFI, kernel, and user mode. Based on these I publish educational papers and present talks
+                    to give back to the cybersecurity community.
+                </p>
+                <p className="text-sm mt-3">
+                    You can view my public work under my{" "}
+                    <StyledLink href="https://github.com/idov31" content="GitHub account" textSize="text-sm"/>.
+                </p>
+            </section>
+
+            {/* ── Projects ───────────────────────────── */}
+            <section className="mb-10">
+                <h2 className="text-xl font-semibold text-txtSubHeader mb-4">Notable Projects</h2>
+                <ul className="space-y-3">
+                    {[
+                        {href: "https://github.com/Idov31/Nidhogg", name: "Nidhogg", desc: "A multi-functional rootkit to showcase the variety of operations that can be done from kernel space."},
+                        {href: "https://github.com/Idov31/Jormungandr", name: "Jormungandr", desc: "A kernel implementation of a COFF loader, allowing kernel developers to load and execute their COFFs in the kernel."},
+                        {href: "https://github.com/Idov31/Cronos", name: "Cronos", desc: "A PoC for a sleep obfuscation technique leveraging waitable timers to evade memory scanners (PE-Sieve, Moneta, etc.)"},
+                        {href: "https://github.com/Idov31/NovaHypervisor", name: "NovaHypervisor", desc: "A defensive x64 Intel host-based hypervisor to protect against kernel-based attacks."},
+                        {href: "https://github.com/Idov31/Venom", name: "Venom", desc: "A library performing evasive communication using a stolen browser socket."},
+                        {href: "https://github.com/Idov31/Sandman", name: "Sandman", desc: "An NTP-based backdoor for operations in hardened networks."},
+                    ].map(item => (
+                        <li key={item.name} className="card-surface rounded-xl p-4 flex gap-3 group">
+                            <span className="text-accentPurple mt-0.5 flex-shrink-0">▸</span>
+                            <div>
+                                <StyledLink href={item.href} content={item.name} textSize="text-sm font-semibold"/>
+                                <p className="text-txtMuted text-sm mt-0.5">{item.desc}</p>
+                            </div>
+                        </li>
+                    ))}
                 </ul>
-                <p className="pt-4">In my free time, I am working on projects in the areas of evasion, persistence and
-                    injection methods
-                    for UEFI, kernel, and user mode. Based on these, I publish educational papers and present talks to give back to the cybersecurity community.</p>
-                    <p className="pt-4">You can view my public work under my <StyledLink href="https://github.com/idov31" content="Github account" textSize="text-md" />.</p>
-            </article>
-            <h2 className="text-4xl text-txtSubHeader font-bold mt-8">Notable Projects & Publications</h2>
-            <article>
-                <h3 className="text-2xl text-txtSubHeader">Projects</h3>
-                <br/>
-                <ul className="list-disc pl-10">
-                    <li className="mb-4">
-                        <StyledLink href="https://github.com/Idov31/Nidhogg" content="Nidhogg"/>
-                        : Nidhogg is a multi-functional rootkit to showcase the variety of operations that
-                        can be done from kernel space.
+            </section>
+
+            {/* ── Publications ───────────────────────── */}
+            <section className="mb-10">
+                <h2 className="text-xl font-semibold text-txtSubHeader mb-4">Notable Publications</h2>
+                <ul className="space-y-3">
+                    <li className="card-surface rounded-xl p-4 flex gap-3">
+                        <span className="text-accentPurple mt-0.5 flex-shrink-0">▸</span>
+                        <div>
+                            <StyledLink
+                                href="https://idov31.github.io/posts/lord-of-the-ring0-p1"
+                                content="Lord Of The Ring0 Series"
+                                textSize="text-sm font-semibold"
+                            />
+                            <p className="text-txtMuted text-sm mt-0.5">
+                                An introductory series to Windows kernel development covering callbacks, IRP hooks,
+                                kernel-to-user communication, and more.
+                            </p>
+                        </div>
                     </li>
-                    <li className="mb-4">
-                        <StyledLink href="https://github.com/Idov31/Jormungandr" content="Jormungandr"/>
-                        : Jormungandr is a kernel implementation of a COFF loader, allowing kernel
-                        developers to load and execute their COFFs in the kernel.
+                    <li className="card-surface rounded-xl p-4 flex gap-3">
+                        <span className="text-accentPurple mt-0.5 flex-shrink-0">▸</span>
+                        <div>
+                            <StyledLink
+                                href="https://www.youtube.com/watch?v=edI6tpBO-pY"
+                                content="Kernel Games: The Ballad of Offense & Defense [X33fCon 2024]"
+                                textSize="text-sm font-semibold"
+                            />
+                            <p className="text-txtMuted text-sm mt-0.5">
+                                A talk in Poland about creating stealthy rootkits to help red teams remain persistent,
+                                evade EDRs, and integrate with existing C2 environments.
+                            </p>
+                        </div>
                     </li>
-                    <li className="mb-4">
-                        <StyledLink href="https://github.com/Idov31/Cronos" content="Cronos"/>
-                        : Cronos is a PoC for a sleep obfuscation technique leveraging waitable timers to evade memory
-                        scanners (PE-Sieve, Moneta, etc.)
+                    <li className="card-surface rounded-xl p-4 flex gap-3">
+                        <span className="text-accentPurple mt-0.5 flex-shrink-0">▸</span>
+                        <div>
+                            <StyledLink
+                                href="https://www.youtube.com/watch?v=CVJmGfElqw0"
+                                content="(Lady|)Lord Of The Ring [BSidesTLV 2023]"
+                                textSize="text-sm font-semibold"
+                            />
+                            <p className="text-txtMuted text-sm mt-0.5">
+                                A talk at BSidesTLV covering the functionality of Nidhogg alongside an explanation of
+                                the Windows kernel world.
+                            </p>
+                        </div>
                     </li>
-                    <li className="mb-4">
-                        <StyledLink href="https://github.com/Idov31/NovaHypervisor" content="NovaHypervisor"/>
-                        : NovaHypervisor is a defensive x64 Intel host based hypervisor.
-                        The goal of this project is to protect against kernel based attacks.
-                    </li>
-                    <li className="mb-4">
-                        <StyledLink href="https://github.com/Idov31/Venom" content="Venom"/>
-                        : Venom is a library that performing evasive communication using stolen browser socket.
-                    </li>
-                    <li className="mb-4">
-                        <StyledLink href="https://github.com/Idov31/Sandman" content="Sandman"/>
-                        : Sandman is a NTP based backdoor for operations in hardened networks.
-                    </li>
-                </ul>
-                <br/>
-                <h3 className="text-2xl text-txtSubHeader">Notable Publications</h3>
-                <br/>
-                <ul className="list-disc pl-10">
-                    <li className="mb-4">
-                        <StyledLink href="https://idov31.github.io/posts/lord-of-the-ring0-p1" content="Lord Of The Ring0 Series"/>
-                        : Lord Of The Ring0 is an introductory series to Windows kernel development
-                        that covers the basics of Windows kernel development in a security oriented manner including but
-                        not limited to callbacks, IRP hooks, communication with user mode from kernel mode and more.
-                    </li>
-                    <li className="mb-4">
-                        <StyledLink href="https://www.youtube.com/watch?v=edI6tpBO-pY"
-                                    content="Ido Veltzman: Kernel Games: The Ballad of Offense & Defense [2024]"/>
-                        : A talk in
-                        Poland, X33fCon, about creating stealthy rootkits to help red teams remain persistent, evade
-                        EDRs, and connect them to your existing C2 environment. Additionally, this will help elevate
-                        blue teams to detect the complex threat mentioned above.
-                    </li>
-                    <li className="mb-4">
-                        <StyledLink href="https://www.youtube.com/watch?v=CVJmGfElqw0"
-                                    content="(Lady|)Lord Of The Ring [2023]"/>
-                        : A talk in the largest public security conference in
-                        Israel, BSidesTLV, that covers some of the functionality that Nidhogg has to offer alongside
-                        explanation about the Windows kernel world.
-                    </li>
-                    <li className="mb-4">
-                        <StyledLink href="https://www.digitalwhisper.co.il/"
-                                    content="DigitalWhisper Publications"/>
-                        : DigitalWhisper is one of the oldest active security zines in Israel that contains various of
-                        articles about security, software development and more. I have published several articles in the
-                        zine about my own
-                        <StyledLink
-                            href="https://www.digitalwhisper.co.il/files/Zines/0x78/DW120-6-HotKeyExploitation.pdf"
-                            content=" persistence method"/>,
-                        <StyledLink
-                            href="https://www.digitalwhisper.co.il/files/Zines/0x89/DW137-2-StompedFunctions.pdf"
-                            content=" injection method "/>
-                        and
-                        <StyledLink
-                            href="https://www.digitalwhisper.co.il/files/Zines/0x94/DW148-2-VenomPoisoningSockets.pdf"
-                            content=" communication in evasive way"/>.
+                    <li className="card-surface rounded-xl p-4 flex gap-3">
+                        <span className="text-accentPurple mt-0.5 flex-shrink-0">▸</span>
+                        <div>
+                            <StyledLink
+                                href="https://www.digitalwhisper.co.il/"
+                                content="DigitalWhisper Publications"
+                                textSize="text-sm font-semibold"
+                            />
+                            <p className="text-txtMuted text-sm mt-0.5">
+                                Articles in one of Israel&#39;s oldest active security zines, covering a{" "}
+                                <StyledLink href="https://www.digitalwhisper.co.il/files/Zines/0x78/DW120-6-HotKeyExploitation.pdf" content="persistence method" textSize="text-sm"/>,{" "}
+                                an <StyledLink href="https://www.digitalwhisper.co.il/files/Zines/0x89/DW137-2-StompedFunctions.pdf" content="injection method" textSize="text-sm"/>,
+                                and <StyledLink href="https://www.digitalwhisper.co.il/files/Zines/0x94/DW148-2-VenomPoisoningSockets.pdf" content="evasive communication" textSize="text-sm"/>.
+                            </p>
+                        </div>
                     </li>
                 </ul>
-            </article>
-            <p className="pt-4">
-                Feel free to contact me via <StyledLink href="https://x.com/idov31" content="X (Twitter)"
-                                                        textSize="text-md"/>,
-                <StyledLink href="https://t.me/idov31" content=" Telegram" textSize="text-md"/> or
-                <StyledLink href="mailto:idov3110@gmail.com" content=" mail"
-                            textSize="text-md"/> regarding
-                any of my projects or publications. Enjoy reading the blog and have fun!
-            </p>
+            </section>
+
+            {/* ── Contact ─────────────────────────────── */}
+            <section className="card-surface rounded-xl p-6">
+                <h2 className="text-xl font-semibold text-txtSubHeader mb-3">Get In Touch</h2>
+                <p className="text-txtMuted text-sm leading-relaxed">
+                    Feel free to reach out via{" "}
+                    <StyledLink href="https://x.com/idov31" content="X (Twitter)" textSize="text-sm"/>,{" "}
+                    <StyledLink href="https://t.me/idov31" content="Telegram" textSize="text-sm"/>, or{" "}
+                    <StyledLink href="mailto:idov3110@gmail.com" content="email" textSize="text-sm"/>{" "}
+                    regarding any of my projects or publications. Enjoy the blog!
+                </p>
+            </section>
         </div>
     );
 }
+

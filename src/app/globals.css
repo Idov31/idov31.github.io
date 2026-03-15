@@ -1,33 +1,141 @@
-@import url('https://fonts.googleapis.com/css2?family=Lato&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&family=JetBrains+Mono:wght@400;500&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Cinzel&family=Uncial+Antiqua&display=swap');
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-.hover\:glow:hover {
-    transition: all 0.3s ease-in-out;
-    box-shadow: 0 0 10px #800080, 0 0 20px #800080, 0 0 30px #800080, 0 0 40px #800080;
+/* ─── Base ─────────────────────────────────────── */
+html {
+    scroll-behavior: smooth;
 }
 
+body {
+    background-color: #0D1117;
+    background-image:
+        radial-gradient(ellipse 80% 50% at 50% -20%, rgba(124, 58, 237, 0.08) 0%, transparent 100%);
+    background-attachment: fixed;
+}
+
+/* ─── Glow effects ──────────────────────────────── */
+.hover\:glow:hover {
+    transition: all 0.3s ease-in-out;
+    box-shadow: 0 0 12px rgba(124, 58, 237, 0.5), 0 0 30px rgba(124, 58, 237, 0.25);
+}
+
+.hover\:glow-blue:hover {
+    transition: all 0.3s ease-in-out;
+    box-shadow: 0 0 12px rgba(14, 165, 233, 0.5), 0 0 30px rgba(14, 165, 233, 0.25);
+}
+
+/* ─── Drop cap ──────────────────────────────────── */
 .drop-caps::first-letter {
     float: left;
     font-size: 2em;
     line-height: 1;
     padding-right: 0.1em;
     font-family: 'Cinzel', serif;
-    color: #CEAEFC;
+    color: #C4B5FD;
 }
 
+/* ─── Navigation glassmorphism ──────────────────── */
+.nav-glass {
+    background: rgba(13, 17, 23, 0.85);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(139, 92, 246, 0.15);
+}
+
+/* ─── Card styles ───────────────────────────────── */
+.card-surface {
+    background: rgba(22, 27, 46, 0.85);
+    border: 1px solid rgba(139, 92, 246, 0.12);
+    transition: border-color 0.25s ease, box-shadow 0.25s ease;
+}
+
+.card-surface:hover {
+    border-color: rgba(139, 92, 246, 0.35);
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.4), 0 0 16px rgba(124, 58, 237, 0.12);
+}
+
+/* ─── Scrollbar ─────────────────────────────────── */
+::-webkit-scrollbar {
+    width: 6px;
+}
+
+::-webkit-scrollbar-track {
+    background: #0D1117;
+}
+
+::-webkit-scrollbar-thumb {
+    background: rgba(124, 58, 237, 0.4);
+    border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: rgba(124, 58, 237, 0.7);
+}
+
+/* ─── Responsive images ─────────────────────────── */
 @media only screen and (max-width: 600px) {
     .responsive-image {
-        width: 30px !important;
-        height: 30px !important;
+        width: 28px !important;
+        height: 28px !important;
+    }
+
+    .responsive-image-container {
+        width: 28px !important;
+        height: 28px !important;
     }
 }
-@media only screen and (max-width: 600px) {
-    .responsive-image-container {
-        width: 30px !important;
-        height: 30px !important;
-    }
+
+/* ─── Code blocks ───────────────────────────────── */
+.code-block-wrapper {
+    border-radius: 8px;
+    overflow: hidden;
+    border: 1px solid rgba(139, 92, 246, 0.15);
+}
+
+/* ─── Post content prose ────────────────────────── */
+.post-content p,
+.post-content li {
+    line-height: 1.8;
+}
+
+/* ─── Tag / badge ───────────────────────────────── */
+.badge {
+    display: inline-flex;
+    align-items: center;
+    padding: 2px 10px;
+    border-radius: 9999px;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+}
+
+.badge-purple {
+    background: rgba(124, 58, 237, 0.15);
+    border: 1px solid rgba(139, 92, 246, 0.3);
+    color: #C4B5FD;
+}
+
+/* ─── Divider ───────────────────────────────────── */
+.divider-glow {
+    border: none;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(124, 58, 237, 0.5), transparent);
+    margin: 1.5rem 0;
+}
+
+/* ─── Selection ─────────────────────────────────── */
+::selection {
+    background: rgba(124, 58, 237, 0.3);
+    color: #E2E8F0;
+}
+
+/* ─── Focus ring ────────────────────────────────── */
+*:focus-visible {
+    outline: 2px solid rgba(124, 58, 237, 0.6);
+    outline-offset: 2px;
 }

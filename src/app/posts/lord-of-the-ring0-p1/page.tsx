@@ -42,7 +42,7 @@ void MyUnload(PDRIVER_OBJECT DriverObject) {
 sc start DriverName`;
 
     return (
-        <div className="bg-bgInsideDiv p-6 rounded-xl h-full">
+        <div className="card-surface rounded-xl p-6 lg:p-8 animate-fade-in post-content">
             <BlogPrologue title="Lord Of The Ring0 - Part 1 | Introduction"
                           date="14.07.2022" projectLink="https://github.com/Idov31/Nidhogg"/>
             <div className="pt-4">

@@ -231,7 +231,7 @@ export default function LordOfTheRing0P5() {
 }`
 
     return (
-        <div className="bg-bgInsideDiv p-6 rounded-xl h-full">
+        <div className="card-surface rounded-xl p-6 lg:p-8 animate-fade-in post-content">
             <BlogPrologue title="Lord Of The Ring0 - Part 5 | Saruman's Manipulation"
                           date="19.07.2023" projectLink="https://github.com/Idov31/Nidhogg"/>
             <div className="pt-4">

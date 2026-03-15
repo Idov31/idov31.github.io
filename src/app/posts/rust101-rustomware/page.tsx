@@ -85,7 +85,7 @@ let readme_path = format!("{}/README_Rustsomware.txt", args[2].clone());
 fs::write(readme_path, ransom_message).unwrap();`;
 
     return (
-        <div className="bg-bgInsideDiv p-6 rounded-xl h-full">
+        <div className="card-surface rounded-xl p-6 lg:p-8 animate-fade-in post-content">
             <BlogPrologue title="Rust 101 - Let's write Rustomware"
                           date="07.05.2022" projectLink="https://github.com/Idov31/rustomware"/>
             <div className="pt-4">

@@ -208,7 +208,7 @@ int main(int argc, const char* argv[]) {
 }`;
 
     return (
-        <div className="bg-bgInsideDiv p-6 rounded-xl h-full">
+        <div className="card-surface rounded-xl p-6 lg:p-8 animate-fade-in post-content">
             <BlogPrologue title="Lord Of The Ring0 - Part 2 | A tale of routines, IOCTLs and IRPs"
                           date="04.08.2022" projectLink="https://github.com/Idov31/Nidhogg"/>
             <div className="pt-4">
