@@ -3,7 +3,7 @@
 import SecondaryHeader, {BlogPrologue, BulletList, InlineCode} from "@/components/BlogComponents";
 import React from "react";
 import StyledLink from "@/components/StyledLink";
-import Image from "next/image";
+import BlogImageFigure from "@/components/BlogImageFigure";
 
 export default function ListUdpConnections() {
     return (
@@ -38,8 +38,10 @@ export default function ListUdpConnections() {
                             href="https://docs.microsoft.com/en-us/windows/win32/api/udpmib/ns-udpmib-mib_udptable"
                             content="MIB_UDPTABLE" textSize="text-md"/>.
                         </div>
-                        <Image src="/post-images/list-udp-connections/udptable.png" alt="udptable" height="150"
-                               width="350"/>
+                        <BlogImageFigure
+                            src="/post-images/list-udp-connections/udptable.png"
+                            alt="udptable"
+                        />
 
                         <div className="pt-2">
                             Sadly and unsurprisingly it gave no useful information but remember this struct - It will be
@@ -55,15 +57,19 @@ export default function ListUdpConnections() {
                             When I opened netstat I searched for the interesting part - How it gets the UDP connections?
                             Maybe it uses a special function that would help me as well.
                         </div>
-                        <Image src="/post-images/list-udp-connections/netstat1.png" alt="netstat-udp-function"
-                               height="50" width="175"/>
+                        <BlogImageFigure
+                            src="/post-images/list-udp-connections/netstat1.png"
+                            alt="netstat-udp-function"
+                        />
 
                         <div className="pt-2">
                             After locating the area where it calls to get the UDP connections I saw that weird function:
                             <InlineCode text=" InternalGetUdpTableWithOwnerModule"/>.
                         </div>
-                        <Image src="/post-images/list-udp-connections/netstat2.png"
-                               alt="InternalGetUdpTableWithOwnerModule" height="150" width="350"/>
+                        <BlogImageFigure
+                            src="/post-images/list-udp-connections/netstat2.png"
+                            alt="InternalGetUdpTableWithOwnerModule"
+                        />
 
                         <div className="pt-2">
                             After a quick check on google, I saw that it won&apos;t help me, there isn&apos;t much documentation

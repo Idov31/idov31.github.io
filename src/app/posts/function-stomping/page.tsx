@@ -3,7 +3,7 @@
 import SecondaryHeader, {BlogPrologue, BulletList, Code, InlineCode} from "@/components/BlogComponents";
 import React from "react";
 import StyledLink from "@/components/StyledLink";
-import Image from "next/image";
+import BlogImageFigure from "@/components/BlogImageFigure";
 
 export default function FunctionStomping() {
     const getFunctionBase = ` // Getting the module name.
@@ -103,10 +103,10 @@ if (!WriteProcessMemory(procHandle, functionBase, shellcode, sizeof(shellcode), 
                         </div>
                         <div className="pt-2">
                             To summarize:
-                            <div className="flex items-center justify-center justify-items-center">
-                                <Image src="/post-images/function-stomping/shellcode_injection.png"
-                                       alt="shellcode_injection" width="150" height="50"/>
-                            </div>
+                            <BlogImageFigure
+                                src="/post-images/function-stomping/shellcode_injection.png"
+                                alt="shellcode_injection"
+                            />
                         </div>
                     </div>
 
@@ -117,10 +117,10 @@ if (!WriteProcessMemory(procHandle, functionBase, shellcode, sizeof(shellcode), 
                         I needed to do it remotely. For that, I used the <InlineCode text="EnumProcessModules "/>
                         function:
 
-                        <div className="flex items-center justify-center justify-items-center">
-                            <Image src="/post-images/function-stomping/enum_process_modules.png"
-                                   alt="enum_process_modules" width="300" height="100"/>
-                        </div>
+                        <BlogImageFigure
+                            src="/post-images/function-stomping/enum_process_modules.png"
+                            alt="enum_process_modules"
+                        />
 
                         <div className="pt-2">
                             It looks like a very straightforward function and now all I needed to do is to use the good
@@ -136,19 +136,19 @@ if (!WriteProcessMemory(procHandle, functionBase, shellcode, sizeof(shellcode), 
                             got and couldn’t figure out why I could not get the function pointer. At this point, I went
                             back to MSDN and read again the description, and one thing caught my eye:
                         </div>
-                        <div className="flex items-center justify-center justify-items-center">
-                            <Image src="/post-images/function-stomping/module_permissions.png" alt="module_permissions"
-                                   width="600" height="200"/>
-                        </div>
+                        <BlogImageFigure
+                            src="/post-images/function-stomping/module_permissions.png"
+                            alt="module_permissions"
+                        />
 
                         <div className="pt-2">
                             Well... That explains some things. I searched more about this permission and found this
                             explanation:
                         </div>
-                        <div className="flex items-center justify-center justify-items-center">
-                            <Image src="/post-images/function-stomping/load_library_as_datafile.png"
-                                   alt="load_library_as_datafile" width="600" height="200"/>
-                        </div>
+                        <BlogImageFigure
+                            src="/post-images/function-stomping/load_library_as_datafile.png"
+                            alt="load_library_as_datafile"
+                        />
 
                         <div className="pt-2">
                             That was very helpful to me because at this moment I knew why even when I have a valid
@@ -202,10 +202,10 @@ if (!WriteProcessMemory(procHandle, functionBase, shellcode, sizeof(shellcode), 
                             I researched further about the available page permissions and one caught my eye:
                             <InlineCode text=" PAGE_EXECUTE_WRITECOPY"/>.
                         </div>
-                        <div className="flex items-center justify-center justify-items-center pt-2">
-                            <Image src="/post-images/function-stomping/page_execute_write_copy.png"
-                                   alt="page_execute_write_copy" height="200" width="600"/>
-                        </div>
+                        <BlogImageFigure
+                            src="/post-images/function-stomping/page_execute_write_copy.png"
+                            alt="page_execute_write_copy"
+                        />
                         <div className="pt-2">
                             It looks like it gives read, write and execute permissions without actually using
                             <InlineCode text=" PAGE_EXECUTE_READWRITE"/>. I wanted to dig a little deeper into this and
@@ -215,10 +215,10 @@ if (!WriteProcessMemory(procHandle, functionBase, shellcode, sizeof(shellcode), 
                         <div className="pt-2">
                             To conclude, the UML of this method looks like that:
                         </div>
-                        <div className="flex items-center justify-center justify-items-center pt-2">
-                            <Image src="/post-images/function-stomping/function_stomping.png" alt="function_stomping"
-                                   height="50" width="150"/>
-                        </div>
+                        <BlogImageFigure
+                            src="/post-images/function-stomping/function_stomping.png"
+                            alt="function_stomping"
+                        />
                     </div>
 
                     <SecondaryHeader text="Detection"/>

@@ -3,7 +3,7 @@
 import SecondaryHeader, {BlogPrologue, BulletList, Code, InlineCode} from "@/components/BlogComponents";
 import React from "react";
 import StyledLink from "@/components/StyledLink";
-import Image from "next/image";
+import BlogImageFigure from "@/components/BlogImageFigure";
 
 export default function Rust101Rustomware() {
     const createRustProj = `cargo new rustomware
@@ -234,8 +234,11 @@ fs::write(readme_path, ransom_message).unwrap();`;
                             README file and recompile, no code editing is required.
                         </div>
                         <div className="pt-2">
-                            Result: <Image src="/post-images/rust101-rustomware/encrypted_files.png"
-                                           width="700" height="500" alt="result"/>
+                            Result:
+                            <BlogImageFigure
+                                src="/post-images/rust101-rustomware/encrypted_files.png"
+                                alt="result"
+                            />
                         </div>
                     </div>
 
