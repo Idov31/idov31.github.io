@@ -9,6 +9,7 @@ import SecondaryHeader, {
     ThirdHeader,
 } from "@/components/BlogComponents";
 import BlogImageFigure from "@/components/BlogImageFigure";
+import RoadmapTimeline from "@/components/RoadmapTimeline";
 
 export default function HypervisorBasedDefense() {
     return (
@@ -34,6 +35,10 @@ export default function HypervisorBasedDefense() {
                                         <StyledLink href="#basics-of-virtualization" content="Basics of Virtualization" textSize="text-md" />
                                         <ul className="pl-6 mt-1 space-y-1">
                                             <li><StyledLink href="#hypervisor-role-and-architecture" content="Hypervisor Role and Architecture" textSize="text-md" /></li>
+                                bugfixes: [
+                                    "Fix unstable EPT permission restoration after repeated exits",
+                                    "Resolve initialization edge cases on selected Windows 11 builds",
+                                ],
                                             <li>
                                                 <StyledLink href="#state-management" content="State Management" textSize="text-md" />
                                                 <ul className="pl-6 mt-1 space-y-1">
@@ -545,6 +550,12 @@ export default function HypervisorBasedDefense() {
                             },
                         ]}
                     />
+                    <BlogImageFigure
+                        src="/post-images/hypervisor-based-defense/nova_architecture.png"
+                        alt="Nova architecture overview"
+                        caption="Nova architecture overview"
+                    />
+                    
                     <div className="pt-2">
                         At a high level, Nova manages the guest while delegating lower-level
                         virtualization operations to the underlying hypervisor when needed.
@@ -553,12 +564,6 @@ export default function HypervisorBasedDefense() {
                         objects rather than just bytes that the guest kernel is free to
                         modify.
                     </div>
-
-                    <BlogImageFigure
-                        src="/post-images/hypervisor-based-defense/nova_architecture.png"
-                        alt="Nova architecture overview"
-                        caption="Nova architecture overview"
-                    />
 
                     <ThirdHeader text="EPT Hooks" />
                     <div className="pt-4">
@@ -624,38 +629,97 @@ export default function HypervisorBasedDefense() {
 
                     <ThirdHeader text="What Is Next?" />
                     <div className="pt-4">
-                        If you are familiar with hypervisors and VBS, you have probably
-                        already asked a few obvious questions:
+                        This is a high level overview of what Nova has and what I want to achieve with it.
+                        As you can tell, the project is still in its early stages and there is a lot more to implement, and the versions might shift a bit from the current plan.
                     </div>
-                    <BulletList
+                    <RoadmapTimeline
+                        title="Nova's Roadmap"
                         items={[
                             {
-                                content:
-                                    "Why not just use Kernel Data Protection (KDP)?",
+                                version: "v1.0 | Initial Release",
+                                description:
+                                    "Hypervisor that works on Windows 10 and 11 versions, with support for VMware and minimal support of Hyper-V.",
+                                features: [
+                                    "EPT hooks",
+                                    "Communication interface for third-party components",
+                                    "Logging via ETW",
+                                    "Event injection",  
+                                    "Supporting running under VMware",
+                                    "Basic support for running under Hyper-V"
+                                ],
+                                isCompleted: true,
                             },
                             {
-                                content:
-                                    "How does this behave when VBS is enabled?",
+                                version: "v1.0.1 | Hyper-V Fixes",
+                                description:
+                                    "Fixing Hyper-V compatibility issues and fully supporting Hyper-V environments (excluding with VBS enabled).",
+                                features: [
+                                    "Added handling of more VM-exit reasons that are relevant in Hyper-V environments",
+                                    "Added handling of synthetic MSR accesses"
+                                ],
+                                bugfixes: [
+                                    "Fixed Hyper-V support issues"
+                                ],
+                                isCurrentRelease: true
                             },
                             {
-                                content:
-                                    "How can something like this be made usable in production?",
+                                version: "v1.1 | Enhanced Interface",
+                                description:
+                                    "Make the interface more intuitive and easier to use for third-party defensive components, with a focus on improving the experience of writing EPT-based policies.",
+                                features: [
+                                    "Add an easy to use configuration system for EPT hooks",
+                                    "Better logging system",
+                                    "Automatically protect known sensitive structures such as ETW-related ones, callbacks lists",
+                                    "Add documentation and examples for writing EPT-based policies"
+                                ],
+                                bugfixes: [
+                                    "Add SAL annotations"
+                                ]
                             },
+                            {
+                                version: "v1.2 | Support More Platforms",
+                                description:
+                                    "Expand support to VirtualBox, QEMU and KVM environments.",
+                                features: [
+                                    "Support VirtualBox",
+                                    "Support QEMU",
+                                    "Support KVM",
+                                    "Add a CI pipeline to automatically test compatibility with all supported platforms"
+                                ]
+                            },
+                            {
+                                version: "v2.0 | AMD Support",
+                                description:
+                                    "Creating a version of Nova that works on AMD-V platforms, which requires an almost complete rework of the virtualization layer.",
+                                features: [
+                                    "Support AMD-V"
+                                ]
+                            },
+                            {
+                                version: "v2.1 | ARM Support",
+                                description:
+                                    "Creating a version of Nova that works on ARM platforms, which requires an almost complete rework of the virtualization layer.",
+                                features: [
+                                    "Support ARM"
+                                ]
+                            },
+                            {
+                                version: "v3.0 | VBS Compatibility",
+                                description:
+                                    "Reworking Nova&apos;s architecture to be compatible with VBS-enabled environments, which likely requires a significant redesign of the current implementation.",
+                                features: [
+                                    "Full compatibility with VBS-enabled environments",
+                                    "Redesign of Nova architecture to work alongside the Windows hypervisor",
+                                    "Add VBS-aware features",
+                                    "Maintain support for Intel, AMD and ARM platforms"
+                                ]
+                            }
                         ]}
                     />
                     <div className="pt-2">
-                        KDP is a great mechanism, but it is primarily focused on protecting
-                        selected kernel data structures. Nova is trying to generalize the
-                        idea toward third-party defensive components and make those policies
-                        more flexible.
-                    </div>
-                    <div className="pt-2">
-                        The harder problem is compatibility with VBS and Hyper-V-backed
-                        environments. Once Microsoft is already using the hypervisor for its
-                        own security model, third-party projects cannot assume they will be
-                        free to perform the same privileged memory operations. Supporting
-                        that world properly likely requires rethinking parts of Nova&apos;s
-                        architecture rather than just extending the current design.
+                        As you can tell, there is a lot more to be done. The current version, while it is stable and contains the core features it is far from being complete or where I want it to be.<br />
+                        From the challenges of supporting different hypervisor platforms, to the architectural changes to support AMD-V, ARM and VBS there is so much to be done. With that being said, I still
+                        believe that the current version is a solid foundation to build on and to learn from its code.
                     </div>
 
                     <SecondaryHeader text="Epilogue" />
