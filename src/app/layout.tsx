@@ -1,6 +1,6 @@
 "use client";
 
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import Script from 'next/script';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -47,12 +47,28 @@ export default function Layout({children}: Readonly<{ children: React.ReactNode 
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const [isDark, setIsDark] = useState(true);
     const [isSearchOpen, setIsSearchOpen] = useState(false);
+    const searchContainerRef = useRef<HTMLDivElement>(null);
 
     // Sync state with the class applied by the anti-FOUC script
     useEffect(() => {
         const saved = localStorage.getItem('theme');
         setIsDark(saved !== 'light');
     }, []);
+
+    useEffect(() => {
+        if (!isSearchOpen) {
+            return;
+        }
+
+        const handlePointerDown = (event: MouseEvent) => {
+            if (!searchContainerRef.current?.contains(event.target as Node)) {
+                setIsSearchOpen(false);
+            }
+        };
+
+        document.addEventListener('mousedown', handlePointerDown);
+        return () => document.removeEventListener('mousedown', handlePointerDown);
+    }, [isSearchOpen]);
 
     const toggleTheme = () => {
         const next = !isDark;
@@ -126,7 +142,16 @@ export default function Layout({children}: Readonly<{ children: React.ReactNode 
                         </Link>
 
                         <div className="flex items-center gap-2">
-                            <div className="hidden md:block">
+                            <div ref={searchContainerRef} className="relative hidden md:block">
+                                {isSearchOpen && (
+                                    <div className="absolute right-0 top-full z-[60] mt-3 w-[min(38rem,calc(100vw-2rem))]">
+                                        <HeaderSearch
+                                            autoFocus
+                                            showAllPostsWhenEmpty
+                                            onResultClick={() => setIsSearchOpen(false)}
+                                        />
+                                    </div>
+                                )}
                                 <button
                                     type="button"
                                     onClick={() => setIsSearchOpen((current) => !current)}
@@ -181,16 +206,6 @@ export default function Layout({children}: Readonly<{ children: React.ReactNode 
                         </div>
                     </div>
                 </div>
-
-                {isSearchOpen && (
-                    <div className="hidden md:block border-t border-borderSubtle">
-                        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-3">
-                            <div className="ml-auto w-full max-w-md">
-                                <HeaderSearch autoFocus onResultClick={() => setIsSearchOpen(false)}/>
-                            </div>
-                        </div>
-                    </div>
-                )}
 
                 {/* Mobile menu */}
                 {isMenuOpen && (

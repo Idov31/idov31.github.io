@@ -8,6 +8,7 @@ import {blogPosts} from "@/data/blogPosts";
 type HeaderSearchProps = {
     onResultClick?: () => void;
     autoFocus?: boolean;
+    showAllPostsWhenEmpty?: boolean;
 };
 
 let cachedFullPostText: Record<string, string> | null = null;
@@ -70,7 +71,11 @@ function SearchIcon() {
     );
 }
 
-export default function HeaderSearch({onResultClick, autoFocus = false}: HeaderSearchProps) {
+export default function HeaderSearch({
+    onResultClick,
+    autoFocus = false,
+    showAllPostsWhenEmpty = false,
+}: HeaderSearchProps) {
     const router = useRouter();
     const inputRef = useRef<HTMLInputElement>(null);
     const [query, setQuery] = useState("");
@@ -107,6 +112,18 @@ export default function HeaderSearch({onResultClick, autoFocus = false}: HeaderS
         }).slice(0, 6);
     }, [fullPostText, trimmedQuery]);
 
+    const visiblePosts = useMemo(() => {
+        if (trimmedQuery.length > 0) {
+            return results;
+        }
+
+        if (!showAllPostsWhenEmpty) {
+            return [];
+        }
+
+        return blogPosts;
+    }, [results, showAllPostsWhenEmpty, trimmedQuery]);
+
     useEffect(() => {
         if (autoFocus) {
             inputRef.current?.focus();
@@ -125,7 +142,7 @@ export default function HeaderSearch({onResultClick, autoFocus = false}: HeaderS
         onResultClick?.();
     };
 
-    const showDropdown = trimmedQuery.length > 0;
+    const showResults = visiblePosts.length > 0;
 
     return (
         <div className="w-full overflow-hidden rounded-2xl border border-borderSubtle bg-bgInsideDiv shadow-[0_16px_48px_rgba(15,23,42,0.16)] backdrop-blur-xl">
@@ -154,9 +171,9 @@ export default function HeaderSearch({onResultClick, autoFocus = false}: HeaderS
                 <div className="px-4 py-4 text-sm text-txtMuted">
                     Searching full post content...
                 </div>
-            ) : showDropdown ? (
+            ) : showResults ? (
                 <div className="max-h-96 overflow-y-auto p-2">
-                    {results.map((post) => (
+                    {visiblePosts.map((post) => (
                         <Link
                             key={post.href}
                             href={post.href}
