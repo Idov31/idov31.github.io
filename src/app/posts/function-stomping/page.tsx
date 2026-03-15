@@ -4,6 +4,7 @@ import SecondaryHeader, {BlogPrologue, BulletList, Code, InlineCode} from "@/com
 import React from "react";
 import StyledLink from "@/components/StyledLink";
 import BlogImageFigure from "@/components/BlogImageFigure";
+import TableOfContents from "@/components/TableOfContents";
 
 export default function FunctionStomping() {
     const getFunctionBase = ` // Getting the module name.
@@ -41,6 +42,7 @@ if (!WriteProcessMemory(procHandle, functionBase, shellcode, sizeof(shellcode), 
                           date="28.01.2022" projectLink="https://github.com/Idov31/FunctionStomping"/>
             <div className="pt-4">
                 <article>
+                    <TableOfContents/>
                     <SecondaryHeader text="Introduction"/>
                     <div className="drop-caps pt-4">
                         When I first heard about <InlineCode text="ModuleStomping"/> I was charmed since it wasn&apos;t like

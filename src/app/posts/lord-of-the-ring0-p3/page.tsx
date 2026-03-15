@@ -3,6 +3,7 @@
 import SecondaryHeader, {BlogPrologue, BulletList, Code, InlineCode} from "@/components/BlogComponents";
 import React from "react";
 import StyledLink from "@/components/StyledLink";
+import TableOfContents from "@/components/TableOfContents";
 
 export default function LordOfTheRing0P3() {
     const increaseIrql = `KIRQL prevIrql = KeGetCurrentIrql();
@@ -52,6 +53,7 @@ export default function LordOfTheRing0P3() {
                           date="30.10.2022" projectLink="https://github.com/Idov31/Nidhogg"/>
             <div className="pt-4">
                 <article>
+                    <TableOfContents/>
                     <SecondaryHeader text="Prologue"/>
                     <div className="drop-caps pt-4">
                         In the <StyledLink href="/posts/lord-of-the-ring0-p2" content="last blog post"

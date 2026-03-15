@@ -3,6 +3,7 @@
 import SecondaryHeader, {BlogPrologue, BulletList, Code, InlineCode} from "@/components/BlogComponents";
 import React from "react";
 import StyledLink from "@/components/StyledLink";
+import TableOfContents from "@/components/TableOfContents";
 
 export default function LordOfTheRing0P1() {
     const basicKernelDriver = `#include <ntddk.h>
@@ -47,6 +48,7 @@ sc start DriverName`;
                           date="14.07.2022" projectLink="https://github.com/Idov31/Nidhogg"/>
             <div className="pt-4">
                 <article>
+                    <TableOfContents/>
                     <SecondaryHeader text="Prologue"/>
                     <div className="drop-caps pt-4">
                         This blog post series isn&apos;t a thing I normally do, this will be more like a journey that I

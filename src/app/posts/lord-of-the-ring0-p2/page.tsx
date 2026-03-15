@@ -3,6 +3,7 @@
 import SecondaryHeader, {BlogPrologue, BulletList, Code, InlineCode} from "@/components/BlogComponents";
 import React from "react";
 import StyledLink from "@/components/StyledLink";
+import TableOfContents from "@/components/TableOfContents";
 
 export default function LordOfTheRing0P2() {
     const myDeviceObject = `NTSTATUS MyDeviceControl(
@@ -213,6 +214,7 @@ int main(int argc, const char* argv[]) {
                           date="04.08.2022" projectLink="https://github.com/Idov31/Nidhogg"/>
             <div className="pt-4">
                 <article>
+                    <TableOfContents/>
                     <SecondaryHeader text="Prologue"/>
                     <div className="drop-caps pt-4">
                         In the <StyledLink href="/posts/lord-of-the-ring0-p1"

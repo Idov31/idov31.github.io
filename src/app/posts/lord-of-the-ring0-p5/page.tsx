@@ -3,6 +3,7 @@
 import React from "react";
 import StyledLink from "@/components/StyledLink";
 import SecondaryHeader, {BlogPrologue, BulletList, Code, InlineCode, ThirdHeader} from "@/components/BlogComponents";
+import TableOfContents from "@/components/TableOfContents";
 
 export default function LordOfTheRing0P5() {
     let ntfsHookCode = `NTSTATUS FileUtils::InstallNtfsHook(int irpMjFunction) {
@@ -236,6 +237,7 @@ export default function LordOfTheRing0P5() {
                           date="19.07.2023" projectLink="https://github.com/Idov31/Nidhogg"/>
             <div className="pt-4">
                 <article>
+                    <TableOfContents/>
                     <SecondaryHeader text="Prologue"/>
                     <div className="drop-caps pt-4">
                         In the <StyledLink href="/posts/lord-of-the-ring0-p4" content="last blog post"

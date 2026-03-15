@@ -4,6 +4,7 @@ import SecondaryHeader, {BlogPrologue, BulletList, Code, InlineCode} from "@/com
 import React from "react";
 import StyledLink from "@/components/StyledLink";
 import BlogImageFigure from "@/components/BlogImageFigure";
+import TableOfContents from "@/components/TableOfContents";
 
 export default function Rust101Rustomware() {
     const createRustProj = `cargo new rustomware
@@ -90,6 +91,7 @@ fs::write(readme_path, ransom_message).unwrap();`;
                           date="07.05.2022" projectLink="https://github.com/Idov31/rustomware"/>
             <div className="pt-4">
                 <article>
+                    <TableOfContents/>
                     <SecondaryHeader text="Introduction"/>
                     <div className="drop-caps pt-4">
                         When I first heard about Rust, my first reaction was &quot;Why?&quot;. The language looked to me as a
