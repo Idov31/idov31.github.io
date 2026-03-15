@@ -45,48 +45,6 @@ export default function Home() {
 
     return (
         <div className="animate-fade-in">
-            {/* ── Hero Section ───────────────────────── */}
-            <section className="flex flex-col md:flex-row items-center md:items-start gap-8 pb-12 mb-12 border-b border-borderSubtle">
-                <div className="flex-shrink-0">
-                    <div className="relative">
-                        <div className="absolute inset-0 rounded-full bg-accentPurple/20 blur-xl scale-110"/>
-                        <Image
-                            src="/avatar-icon.png"
-                            alt="Ido Veltzman"
-                            width={120}
-                            height={120}
-                            className="relative rounded-full ring-2 ring-borderMid"
-                        />
-                    </div>
-                </div>
-                <div className="flex flex-col items-center md:items-start text-center md:text-left">
-                    <div className="badge badge-purple mb-3">Security Researcher</div>
-                    <h1 className="text-4xl lg:text-5xl font-bold text-txtHeader mb-3 leading-tight">
-                        Ido Veltzman
-                    </h1>
-                    <p className="text-txtMuted text-lg max-w-xl leading-relaxed mb-6">
-                        Security researcher specialising in kernel development, OS internals, and offensive tooling.
-                        I build open-source projects and write about what I learn along the way.
-                    </p>
-                    <div className="flex flex-wrap gap-3 justify-center md:justify-start">
-                        <Link
-                            href="/posts"
-                            className="px-5 py-2.5 bg-accentPurple hover:bg-accentPurple/90 text-white rounded-lg
-                                       font-medium text-sm transition-all duration-200 shadow-glow hover:shadow-lg"
-                        >
-                            Read the Blog
-                        </Link>
-                        <Link
-                            href="/about"
-                            className="px-5 py-2.5 border border-borderMid hover:border-accentPurple text-txtMuted
-                                       hover:text-txtRegular rounded-lg font-medium text-sm transition-all duration-200"
-                        >
-                            About Me
-                        </Link>
-                    </div>
-                </div>
-            </section>
-
             {/* ── Latest Post ────────────────────────── */}
             <section className="mb-14">
                 <div className="flex items-center gap-3 mb-6">
