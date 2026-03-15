@@ -22,7 +22,7 @@ export default function HypervisorBasedDefense() {
             />
             <div className="pt-4">
                 <article>
-                    <TableOfContents/>
+                    <TableOfContents />
 
                     <SecondaryHeader text="Prologue" />
                     <div className="drop-caps pt-4">
@@ -91,7 +91,7 @@ export default function HypervisorBasedDefense() {
                     />
                     <div className="pt-2">
                         While Type 1 hypervisors are more commonly used for security purposes (as we will see later on in the VBS section), in this post, I focus mostly on the Type 2 model because that is the
-                         environment I used while building and testing Nova.
+                        environment I used while building and testing Nova.
                     </div>
 
                     <ThirdHeader text="Virtualization Platforms" />
@@ -501,7 +501,7 @@ export default function HypervisorBasedDefense() {
                         alt="Nova architecture overview"
                         caption="Nova architecture overview"
                     />
-                    
+
                     <div className="pt-2">
                         At a high level, Nova manages the guest while delegating lower-level
                         virtualization operations to the underlying hypervisor when needed.
@@ -601,7 +601,7 @@ export default function HypervisorBasedDefense() {
                                     "EPT hooks",
                                     "Communication interface for third-party components",
                                     "Logging via ETW",
-                                    "Event injection",  
+                                    "Event injection",
                                     "Supporting running under VMware",
                                     "Basic support for running under Hyper-V"
                                 ],
@@ -696,14 +696,14 @@ export default function HypervisorBasedDefense() {
                     </div>
                     <div className="pt-2">
                         Finally, I want to thank <StyledLink
-                            href="https://www.linkedin.com/in/matan-kotick/"
-                            content="Matan Kotick"
-                            textSize="text-md"
-                        /> and <StyledLink
                             href="https://github.com/memn0ps"
                             content="memN0ps"
                             textSize="text-md"
-                        /> for proof reading this article, <StyledLink
+                        /> for proof reading this article, to <StyledLink
+                            href="https://www.linkedin.com/in/matan-kotick/"
+                            content="Matan Kotick"
+                            textSize="text-md"
+                        /> for brainstorming with me about hypervisor based defense and its implications, <StyledLink
                             href="https://github.com/SinaKarvandi"
                             content="Sina Karvandi"
                             textSize="text-md"
