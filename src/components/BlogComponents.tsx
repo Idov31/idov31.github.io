@@ -34,7 +34,7 @@ interface NumberedListProps {
 interface BlogPrologueProps {
     title: string;
     date: string;
-    projectLink: string;
+    projectLink?: string;
 }
 
 export default function SecondaryHeader({text}: SecondaryHeaderProps) {
@@ -115,17 +115,19 @@ export function BlogPrologue({title, date, projectLink} : BlogPrologueProps) {
             <div className="flex items-center gap-2 mt-3">
                 <span className="text-txtMuted text-sm">Ido Veltzman</span>
             </div>
-            <div className="flex flex-row gap-4 pt-5 flex-wrap">
-                <ImageLink href={projectLink} imagePath="/post-images/GithubStar.svg" alt="star"/>
-                <ImageLink href={`${projectLink}/fork`} imagePath="/post-images/GithubFork.svg" alt="fork"/>
-                <ImageLink
-                    href="https://github.com/Idov31"
-                    imagePath="/post-images/GithubFollow.svg"
-                    alt="follow"
-                    width={125}
-                    height={150}
-                />
-            </div>
+            {projectLink && (
+                <div className="flex flex-row gap-4 pt-5 flex-wrap">
+                    <ImageLink href={projectLink} imagePath="/post-images/GithubStar.svg" alt="star"/>
+                    <ImageLink href={`${projectLink}/fork`} imagePath="/post-images/GithubFork.svg" alt="fork"/>
+                    <ImageLink
+                        href="https://github.com/Idov31"
+                        imagePath="/post-images/GithubFollow.svg"
+                        alt="follow"
+                        width={125}
+                        height={150}
+                    />
+                </div>
+            )}
         </div>
     );
 }
