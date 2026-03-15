@@ -35,10 +35,6 @@ export default function HypervisorBasedDefense() {
                                         <StyledLink href="#basics-of-virtualization" content="Basics of Virtualization" textSize="text-md" />
                                         <ul className="pl-6 mt-1 space-y-1">
                                             <li><StyledLink href="#hypervisor-role-and-architecture" content="Hypervisor Role and Architecture" textSize="text-md" /></li>
-                                bugfixes: [
-                                    "Fix unstable EPT permission restoration after repeated exits",
-                                    "Resolve initialization edge cases on selected Windows 11 builds",
-                                ],
                                             <li>
                                                 <StyledLink href="#state-management" content="State Management" textSize="text-md" />
                                                 <ul className="pl-6 mt-1 space-y-1">
@@ -625,6 +621,18 @@ export default function HypervisorBasedDefense() {
                         That does not make kernel attacks obsolete, but it does significantly
                         raise the cost of using them to disable telemetry or blind security
                         tooling.
+                    </div>
+                    <div className="pt-4">
+                        To better understand how that works in practice, let's see the following scenario and how Nova helps to mitigate it:
+                    </div>
+                    <BlogImageFigure
+                        src="/post-images/hypervisor-based-defense/nova_example.png"
+                        alt="Attack Scenario"
+                        caption="Scenario: An attacker exploits a vulnerable driver to gain kernel R/W primitives to patch the callbacks list."
+                    />
+                    <div className="pt-2">
+                        In this scenario, the attacker has already achieved kernel R/W primitives through a vulnerable driver. Their next step is to patch the callback list to remove the EPP callbacks.<br />
+                        However, when the user uses Nova to protect the EPP driver address range, Nova monitors the callbacks list and when the attacker tries to patch it, Nova catches the write operation and denies it.
                     </div>
 
                     <ThirdHeader text="What Is Next?" />
