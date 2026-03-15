@@ -85,7 +85,7 @@ export default function Home() {
             </section>
 
             {/* ── Projects ───────────────────────────── */}
-            <section>
+            <section className="pt-16">
                 <div className="flex items-center gap-3 mb-6">
                     <h2 className="text-xl font-semibold text-txtSubHeader">Open Source Projects</h2>
                     <div className="flex-1 h-px bg-borderSubtle"/>
