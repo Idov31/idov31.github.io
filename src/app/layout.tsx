@@ -4,6 +4,7 @@ import React, {useEffect, useState} from 'react';
 import Script from 'next/script';
 import Image from 'next/image';
 import Link from 'next/link';
+import HeaderSearch from '@/components/HeaderSearch';
 import "./globals.css";
 
 function SunIcon() {
@@ -32,9 +33,20 @@ function MoonIcon() {
     );
 }
 
+function SearchIcon() {
+    return (
+        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor"
+             strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+            <circle cx="11" cy="11" r="8"/>
+            <path d="m21 21-4.35-4.35"/>
+        </svg>
+    );
+}
+
 export default function Layout({children}: Readonly<{ children: React.ReactNode }>) {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const [isDark, setIsDark] = useState(true);
+    const [isSearchOpen, setIsSearchOpen] = useState(false);
 
     // Sync state with the class applied by the anti-FOUC script
     useEffect(() => {
@@ -95,7 +107,10 @@ export default function Layout({children}: Readonly<{ children: React.ReactNode 
                 <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div className="flex items-center justify-between h-16">
                         {/* Logo */}
-                        <Link href="/" className="flex items-center gap-3 group" onClick={() => setIsMenuOpen(false)}>
+                        <Link href="/" className="flex items-center gap-3 group" onClick={() => {
+                            setIsMenuOpen(false);
+                            setIsSearchOpen(false);
+                        }}>
                             <div className="relative">
                                 <Image
                                     src="/logo.svg"
@@ -111,12 +126,26 @@ export default function Layout({children}: Readonly<{ children: React.ReactNode 
                         </Link>
 
                         <div className="flex items-center gap-2">
+                            <div className="hidden md:block">
+                                <button
+                                    type="button"
+                                    onClick={() => setIsSearchOpen((current) => !current)}
+                                    className="theme-toggle"
+                                    aria-label="Search posts"
+                                    aria-expanded={isSearchOpen}
+                                    title="Search posts"
+                                >
+                                    <SearchIcon/>
+                                </button>
+                            </div>
+
                             {/* Desktop nav links */}
                             <nav className="hidden md:flex items-center gap-1">
                                 {navLinks.map(link => (
                                     <Link
                                         key={link.href}
                                         href={link.href}
+                                        onClick={() => setIsSearchOpen(false)}
                                         className="px-4 py-2 rounded-lg text-txtMuted hover:text-txtRegular hover:bg-[var(--nav-hover-bg)]
                                                    transition-all duration-200 text-sm font-medium"
                                     >
@@ -153,22 +182,37 @@ export default function Layout({children}: Readonly<{ children: React.ReactNode 
                     </div>
                 </div>
 
+                {isSearchOpen && (
+                    <div className="hidden md:block border-t border-borderSubtle">
+                        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-3">
+                            <div className="ml-auto w-full max-w-md">
+                                <HeaderSearch autoFocus onResultClick={() => setIsSearchOpen(false)}/>
+                            </div>
+                        </div>
+                    </div>
+                )}
+
                 {/* Mobile menu */}
                 {isMenuOpen && (
                     <div className="md:hidden border-t border-borderSubtle bg-bgBar/95 backdrop-blur-md">
-                        <nav className="max-w-6xl mx-auto px-4 py-3 flex flex-col gap-1">
-                            {navLinks.map(link => (
-                                <Link
-                                    key={link.href}
-                                    href={link.href}
-                                    onClick={() => setIsMenuOpen(false)}
-                                    className="px-4 py-3 rounded-lg text-txtMuted hover:text-txtRegular hover:bg-[var(--nav-hover-bg)]
-                                               transition-colors text-base font-medium"
-                                >
-                                    {link.label}
-                                </Link>
-                            ))}
-                        </nav>
+                        <div className="max-w-6xl mx-auto px-4 py-3">
+                            <div className="pb-3">
+                                <HeaderSearch onResultClick={() => setIsMenuOpen(false)}/>
+                            </div>
+                            <nav className="flex flex-col gap-1">
+                                {navLinks.map(link => (
+                                    <Link
+                                        key={link.href}
+                                        href={link.href}
+                                        onClick={() => setIsMenuOpen(false)}
+                                        className="px-4 py-3 rounded-lg text-txtMuted hover:text-txtRegular hover:bg-[var(--nav-hover-bg)]
+                                                   transition-colors text-base font-medium"
+                                    >
+                                        {link.label}
+                                    </Link>
+                                ))}
+                            </nav>
+                        </div>
                     </div>
                 )}
             </header>
