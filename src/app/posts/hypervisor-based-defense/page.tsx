@@ -169,9 +169,8 @@ export default function HypervisorBasedDefense() {
                     <ThirdHeader text="State Management" />
                     <div className="pt-4">
                         State management is one of the hypervisor&apos;s critical jobs. It
-                        involves tracking enough state to start, stop, resume, and switch
-                        virtual machines cleanly and securely. Several structures are central
-                        here, especially the <InlineCode text="VMCS" />, guest page tables,
+                        involves starting and stopping virtual machines as well as handling their vmenter and vmexit operations. 
+                        Several structures are central here, especially the <InlineCode text="VMCS" />, guest page tables,
                         and <InlineCode text="EPT" />.
                     </div>
 
@@ -664,7 +663,7 @@ export default function HypervisorBasedDefense() {
                             {
                                 version: "v3.0 | VBS Compatibility",
                                 description:
-                                    "Reworking Nova&apos;s architecture to be compatible with VBS-enabled environments, which likely requires a significant redesign of the current implementation.",
+                                    "Reworking Nova's architecture to be compatible with VBS-enabled environments, which likely requires a significant redesign of the current implementation.",
                                 features: [
                                     "Full compatibility with VBS-enabled environments",
                                     "Redesign of Nova architecture to work alongside the Windows hypervisor",
