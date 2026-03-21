@@ -1,7 +1,7 @@
 "use client";
 
 import SecondaryHeader, {BlogPrologue, Code, InlineCode} from "@/components/BlogComponents";
-import React from "react";
+import React, { useEffect } from "react";
 import StyledLink from "@/components/StyledLink";
 import TableOfContents from "@/components/TableOfContents";
 
@@ -584,6 +584,7 @@ E8 2A 04 00 00          call    EtwProviderEnabled
 \tExReleasePushLockExclusive((PULONG_PTR)&objectType->TypeLock);
 \treturn status;
 }`;
+    useEffect(() => { document.title = "Lord Of The Ring0 - Part 6 | Conclusion"; }, []);
 
     return (
         <div className="card-surface rounded-xl p-6 lg:p-8 animate-fade-in post-content">

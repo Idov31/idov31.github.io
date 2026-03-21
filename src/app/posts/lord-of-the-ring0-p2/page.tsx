@@ -1,7 +1,7 @@
 "use client";
 
 import SecondaryHeader, {BlogPrologue, BulletList, Code, InlineCode} from "@/components/BlogComponents";
-import React from "react";
+import React, { use, useEffect } from "react";
 import StyledLink from "@/components/StyledLink";
 import TableOfContents from "@/components/TableOfContents";
 
@@ -207,6 +207,7 @@ int main(int argc, const char* argv[]) {
     std::cout << "Protected process with pid: " << pid << std::endl;
     return 0;
 }`;
+    useEffect(() => { document.title = "Lord Of The Ring0 - Part 2 | A tale of routines, IOCTLs and IRPs"; }, []);
 
     return (
         <div className="card-surface rounded-xl p-6 lg:p-8 animate-fade-in post-content">

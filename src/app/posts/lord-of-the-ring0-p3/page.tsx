@@ -1,7 +1,7 @@
 "use client";
 
 import SecondaryHeader, {BlogPrologue, BulletList, Code, InlineCode} from "@/components/BlogComponents";
-import React from "react";
+import React, { useEffect } from "react";
 import StyledLink from "@/components/StyledLink";
 import TableOfContents from "@/components/TableOfContents";
 
@@ -46,6 +46,7 @@ export default function LordOfTheRing0P3() {
         break;
     }
     ...`
+    useEffect(() => { document.title = "Lord Of The Ring0 - Part 3 | Sailing to the land of the user (and debugging the ship)"; }, []);
 
     return (
         <div className="card-surface rounded-xl p-6 lg:p-8 animate-fade-in post-content">

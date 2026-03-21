@@ -1,7 +1,7 @@
 "use client";
 
 import SecondaryHeader, {BlogPrologue, BulletList, Code, InlineCode} from "@/components/BlogComponents";
-import React from "react";
+import React, { use, useEffect } from "react";
 import StyledLink from "@/components/StyledLink";
 import BlogImageFigure from "@/components/BlogImageFigure";
 import TableOfContents from "@/components/TableOfContents";
@@ -84,6 +84,7 @@ libaes = "0.6.2"`;
 let ransom_message = include_str!("../res/README.txt");
 let readme_path = format!("{}/README_Rustsomware.txt", args[2].clone());
 fs::write(readme_path, ransom_message).unwrap();`;
+    useEffect(() => { document.title = "Rust 101 - Let's write Rustomware"; }, []);
 
     return (
         <div className="card-surface rounded-xl p-6 lg:p-8 animate-fade-in post-content">

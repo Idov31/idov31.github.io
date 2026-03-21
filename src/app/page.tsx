@@ -1,6 +1,8 @@
+"use client";
+
 import Image from 'next/image';
 import Link from 'next/link';
-import React from "react";
+import React, { useEffect } from "react";
 import ProjectBox from "@/components/ProjectBox";
 import {blogPosts} from "@/data/blogPosts";
 
@@ -16,13 +18,13 @@ export default function Home() {
             imagePath: "/projects-images/nidhogg.png",
             projectLink: "https://github.com/Idov31/Nidhogg",
             projectName: "Nidhogg",
-            description: "A multi-functional rootkit showcasing the variety of operations that can be done from kernel space.",
+            description: "Windows rootkit for Intel x64 with 25+ features, demonstrating rootkit techniques compatible with all Windows 10 and Windows 11 versions.",
         },
         {
             imagePath: "/projects-images/novahypervisor.png",
             projectLink: "https://github.com/Idov31/NovaHypervisor",
             projectName: "NovaHypervisor",
-            description: "A defensive x64 Intel host-based hypervisor to protect against kernel-based attacks.",
+            description: "Windows hypervisor for Intel x64: defensive host hypervisor for Windows designed to mitigate kernel-level attacks including BYOVD, compatible with VMware and Hyper-V.",
         },
         {
             imagePath: "/projects-images/cronos.png",
@@ -53,6 +55,7 @@ export default function Home() {
             ? post
             : latest;
     }, blogPosts[0]);
+    useEffect(() => { document.title = "Ido Veltzman :: Security Research"; }, []);
 
     return (
         <div className="animate-fade-in">

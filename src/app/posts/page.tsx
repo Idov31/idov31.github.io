@@ -1,5 +1,5 @@
 "use client";
-import {useMemo, useState} from 'react';
+import {useEffect, useMemo, useState} from 'react';
 import BlogPost from "@/components/BlogViewComponents";
 import {blogPosts} from "@/data/blogPosts";
 
@@ -13,6 +13,7 @@ export default function Posts() {
         () => blogPosts.slice((currentPage - 1) * postsPerPage, currentPage * postsPerPage),
         [currentPage, postsPerPage],
     );
+    useEffect(() => { document.title = "Ido Veltzman :: Posts"; }, []);
 
     return (
         <div className="animate-fade-in">

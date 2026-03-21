@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useEffect } from "react";
 import StyledLink from "@/components/StyledLink";
 import SecondaryHeader, {
     BlogPrologue,
@@ -13,6 +13,7 @@ import RoadmapTimeline from "@/components/RoadmapTimeline";
 import TableOfContents from "@/components/TableOfContents";
 
 export default function HypervisorBasedDefense() {
+    useEffect(() => { document.title = "Hypervisor Based Defense"; }, []);
     return (
         <div className="card-surface rounded-xl p-6 lg:p-8 animate-fade-in post-content">
             <BlogPrologue

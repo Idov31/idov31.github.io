@@ -1,6 +1,6 @@
 "use client"
 
-import React from "react";
+import React, { useEffect } from "react";
 import StyledLink from "@/components/StyledLink";
 import SecondaryHeader, {BlogPrologue, BulletList, Code, InlineCode, ThirdHeader} from "@/components/BlogComponents";
 import TableOfContents from "@/components/TableOfContents";
@@ -230,6 +230,7 @@ export default function LordOfTheRing0P5() {
 
     return status;
 }`
+    useEffect(() => { document.title = "Lord Of The Ring0 - Part 5 | Saruman's Manipulation"; }, []);
 
     return (
         <div className="card-surface rounded-xl p-6 lg:p-8 animate-fade-in post-content">

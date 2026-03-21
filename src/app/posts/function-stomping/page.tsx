@@ -1,7 +1,7 @@
 "use client";
 
 import SecondaryHeader, {BlogPrologue, BulletList, Code, InlineCode} from "@/components/BlogComponents";
-import React from "react";
+import React, { useEffect } from "react";
 import StyledLink from "@/components/StyledLink";
 import BlogImageFigure from "@/components/BlogImageFigure";
 import TableOfContents from "@/components/TableOfContents";
@@ -36,6 +36,8 @@ if (!WriteProcessMemory(procHandle, functionBase, shellcode, sizeof(shellcode), 
     CloseHandle(procHandle);
     return -1;
 }`;
+    useEffect(() => { document.title = "The Good, The Bad and The Stomped Function"; }, []);
+    
     return (
         <div className="card-surface rounded-xl p-6 lg:p-8 animate-fade-in post-content">
             <BlogPrologue title="The Good, The Bad and The Stomped Function"

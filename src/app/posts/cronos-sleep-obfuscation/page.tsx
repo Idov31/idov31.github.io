@@ -3,9 +3,11 @@
 import StyledLink from "@/components/StyledLink";
 import SecondaryHeader, {BlogPrologue, InlineCode, NumberedList} from "@/components/BlogComponents";
 import TableOfContents from "@/components/TableOfContents";
-import React from "react";
+import React, { useEffect } from "react";
 
 export default function CronosSleepObfuscation() {
+    useEffect(() => { document.title = "timeout /t 31 && start evil.exe"; }, []);
+
     return (
         <div className="card-surface rounded-xl p-6 lg:p-8 animate-fade-in post-content">
             <BlogPrologue title="timeout /t 31 && start evil.exe"

@@ -1,11 +1,12 @@
 "use client";
 
 import SecondaryHeader, {BlogPrologue, BulletList, Code, InlineCode} from "@/components/BlogComponents";
-import React from "react";
+import React, { useEffect } from "react";
 import StyledLink from "@/components/StyledLink";
 import TableOfContents from "@/components/TableOfContents";
 
 export default function LordOfTheRing0P1() {
+    useEffect(() => { document.title = "Lord Of The Ring0 - Part 1 | Introduction"; }, []);
     const basicKernelDriver = `#include <ntddk.h>
 
 extern "C"
@@ -41,6 +42,7 @@ void MyUnload(PDRIVER_OBJECT DriverObject) {
 
     const loadDrv = `sc create DriverName type= kernel binPath= C:\\Path\\To\\Driver.sys
 sc start DriverName`;
+
 
     return (
         <div className="card-surface rounded-xl p-6 lg:p-8 animate-fade-in post-content">

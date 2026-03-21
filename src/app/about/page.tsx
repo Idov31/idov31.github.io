@@ -1,5 +1,7 @@
+"use client";
+
 import StyledLink from "@/components/StyledLink";
-import React from "react";
+import React, { useEffect } from "react";
 
 const skills = [
     "Reverse Engineering",
@@ -12,6 +14,7 @@ const skills = [
 ];
 
 export default function About() {
+    useEffect(() => { document.title = "Ido Veltzman :: About"; }, []);
     return (
         <div className="animate-fade-in max-w-3xl">
             {/* ── Page header ────────────────────────── */}
@@ -42,8 +45,8 @@ export default function About() {
                 <h2 className="text-xl font-semibold text-txtSubHeader mb-4">Notable Projects</h2>
                 <ul className="space-y-3">
                     {[
-                        { href: "https://github.com/Idov31/Nidhogg", name: "Nidhogg", desc: "A multi-functional rootkit to showcase the variety of operations that can be done from kernel space." },
-                        { href: "https://github.com/Idov31/NovaHypervisor", name: "NovaHypervisor", desc: "A defensive x64 Intel host-based hypervisor to protect against kernel-based attacks." },
+                        { href: "https://github.com/Idov31/Nidhogg", name: "Nidhogg", desc: "Windows rootkit for Intel x64 with 25+ features, demonstrating rootkit techniques compatible with all Windows 10 and Windows 11 versions." },
+                        { href: "https://github.com/Idov31/NovaHypervisor", name: "NovaHypervisor", desc: "Windows hypervisor for Intel x64: defensive host hypervisor for Windows designed to mitigate kernel-level attacks including BYOVD, compatible with VMware and Hyper-V." },
                         { href: "https://github.com/Idov31/Jormungandr", name: "Jormungandr", desc: "A kernel implementation of a COFF loader, allowing kernel developers to load and execute their COFFs in the kernel." },
                         { href: "https://github.com/Idov31/Cronos", name: "Cronos", desc: "A PoC for a sleep obfuscation technique leveraging waitable timers to evade memory scanners (PE-Sieve, Moneta, etc.)" },
                         { href: "https://github.com/Idov31/Venom", name: "Venom", desc: "A library performing evasive communication using a stolen browser socket." },

@@ -1,12 +1,13 @@
 "use client";
 
 import SecondaryHeader, {BlogPrologue, BulletList, InlineCode} from "@/components/BlogComponents";
-import React from "react";
+import React, { useEffect } from "react";
 import StyledLink from "@/components/StyledLink";
 import BlogImageFigure from "@/components/BlogImageFigure";
 import TableOfContents from "@/components/TableOfContents";
 
 export default function ListUdpConnections() {
+    useEffect(() => { document.title = "UdpInspector - Getting active UDP connections without sniffing"; }, []);
     return (
         <div className="card-surface rounded-xl p-6 lg:p-8 animate-fade-in post-content">
             <BlogPrologue title="UdpInspector - Getting active UDP connections without sniffing"
