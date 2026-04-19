@@ -39,27 +39,23 @@ export default function About() {
                     ))}
                 </div>
             </section>
-
-            {/* ── Projects ───────────────────────────── */}
+            {/* ── Courses ───────────────────────── */}
             <section className="mb-10">
-                <h2 className="text-xl font-semibold text-txtSubHeader mb-4">Notable Projects</h2>
+                <h2 className="text-xl font-semibold text-txtSubHeader mb-4">Courses</h2>
                 <ul className="space-y-3">
-                    {[
-                        { href: "https://github.com/Idov31/Nidhogg", name: "Nidhogg", desc: "Windows rootkit for Intel x64 with 25+ features, demonstrating rootkit techniques compatible with all Windows 10 and Windows 11 versions." },
-                        { href: "https://github.com/Idov31/NovaHypervisor", name: "NovaHypervisor", desc: "Windows hypervisor for Intel x64: defensive host hypervisor for Windows designed to mitigate kernel-level attacks including BYOVD, compatible with VMware and Hyper-V." },
-                        { href: "https://github.com/Idov31/Jormungandr", name: "Jormungandr", desc: "A kernel implementation of a COFF loader, allowing kernel developers to load and execute their COFFs in the kernel." },
-                        { href: "https://github.com/Idov31/Cronos", name: "Cronos", desc: "A PoC for a sleep obfuscation technique leveraging waitable timers to evade memory scanners (PE-Sieve, Moneta, etc.)" },
-                        { href: "https://github.com/Idov31/Venom", name: "Venom", desc: "A library performing evasive communication using a stolen browser socket." },
-                        { href: "https://github.com/Idov31/Sandman", name: "Sandman", desc: "An NTP-based backdoor for operations in hardened networks." },
-                    ].map(item => (
-                        <li key={item.name} className="card-surface rounded-xl p-4 flex gap-3 group">
-                            <span className="text-accentPurple mt-0.5 flex-shrink-0">▸</span>
-                            <div>
-                                <StyledLink href={item.href} content={item.name} textSize="text-sm font-semibold" />
-                                <p className="text-txtMuted text-sm mt-0.5">{item.desc}</p>
-                            </div>
-                        </li>
-                    ))}
+                    <li className="card-surface rounded-xl p-4 flex gap-3">
+                        <span className="text-accentPurple mt-0.5 flex-shrink-0">▸</span>
+                        <div>
+                            <StyledLink
+                                href="https://www.xintra.org/courses/11-windows-kernel-offensive-defensive-reverse-engineering"
+                                content="Windows Kernel: Offensive, Defensive & Reverse Engineering (Xintra)"
+                                textSize="text-sm font-semibold"
+                            />
+                            <p className="text-txtMuted text-sm mt-0.5">
+                                Learn Windows kernel internals by building both offensive and defensive tooling from scratch. In this hands-on course, you will create a functional rootkit and a custom endpoint protection platform while gaining a practical understanding of kernel initialization, object management, callbacks, ETW, threads, APCs, kernel APIs, and user-to-kernel transitions. Designed for security researchers, red teamers, blue teamers, and low-level engineers, this course focuses on how and why Windows internals work, not just surface-level techniques.
+                            </p>
+                        </div>
+                    </li>
                 </ul>
             </section>
 
@@ -125,6 +121,29 @@ export default function About() {
                             </p>
                         </div>
                     </li>
+                </ul>
+            </section>
+
+            {/* ── Projects ───────────────────────────── */}
+            <section className="mb-10">
+                <h2 className="text-xl font-semibold text-txtSubHeader mb-4">Notable Projects</h2>
+                <ul className="space-y-3">
+                    {[
+                        { href: "https://github.com/Idov31/Nidhogg", name: "Nidhogg", desc: "Windows rootkit for Intel x64 with 25+ features, demonstrating rootkit techniques compatible with all Windows 10 and Windows 11 versions." },
+                        { href: "https://github.com/Idov31/NovaHypervisor", name: "NovaHypervisor", desc: "Windows hypervisor for Intel x64: defensive host hypervisor for Windows designed to mitigate kernel-level attacks including BYOVD, compatible with VMware and Hyper-V." },
+                        { href: "https://github.com/Idov31/Jormungandr", name: "Jormungandr", desc: "A kernel implementation of a COFF loader, allowing kernel developers to load and execute their COFFs in the kernel." },
+                        { href: "https://github.com/Idov31/Cronos", name: "Cronos", desc: "A PoC for a sleep obfuscation technique leveraging waitable timers to evade memory scanners (PE-Sieve, Moneta, etc.)" },
+                        { href: "https://github.com/Idov31/Venom", name: "Venom", desc: "A library performing evasive communication using a stolen browser socket." },
+                        { href: "https://github.com/Idov31/Sandman", name: "Sandman", desc: "An NTP-based backdoor for operations in hardened networks." },
+                    ].map(item => (
+                        <li key={item.name} className="card-surface rounded-xl p-4 flex gap-3 group">
+                            <span className="text-accentPurple mt-0.5 flex-shrink-0">▸</span>
+                            <div>
+                                <StyledLink href={item.href} content={item.name} textSize="text-sm font-semibold" />
+                                <p className="text-txtMuted text-sm mt-0.5">{item.desc}</p>
+                            </div>
+                        </li>
+                    ))}
                 </ul>
             </section>
 
