@@ -2,6 +2,11 @@
 
 /graveyard
 
+# Local markdown files
+*.md
+.*/
+!README.md
+
 # dependencies
 /node_modules
 /.pnp

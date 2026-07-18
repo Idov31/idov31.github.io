@@ -115,6 +115,7 @@ export default function Layout({children}: Readonly<{ children: React.ReactNode 
                 `}
             </Script>
             <title>Ido Veltzman :: Security Research</title>
+            <link rel="alternate" type="application/rss+xml" title="Ido Veltzman :: Security Research" href="/rss.xml"/>
             <link rel="icon" href="/favicon.ico" sizes="any"/>
         </head>
         <body className="bg-bgRegular font-lato text-txtRegular min-h-screen flex flex-col">
@@ -274,4 +275,3 @@ export default function Layout({children}: Readonly<{ children: React.ReactNode 
         </html>
     );
 }
-

@@ -20,6 +20,7 @@ export const blogPosts: BlogPostSummary[] = [
         imageWidth: 135,
         imageHeight: 51,
         postContent: "Hey there, it has been a \"little\" while since I published my last post. After scrapping and rewriting multiple ideas, I decided to write something a bit different from my previous posts. This post contains technical information, but I also wanted to share my thoughts after working on a hypervisor project for more than a year.",
+        sub: false
     },
     {
         href: "/posts/lord-of-the-ring0-p6",
@@ -29,8 +30,7 @@ export const blogPosts: BlogPostSummary[] = [
         imageAlt: "lotr06",
         imageWidth: 135,
         imageHeight: 51,
-        postContent: "In the last blog post, we learned about two common hooking methods (IRP Hooking and SSDT Hooking) and two different injection techniques from the kernel to the user mode for both shellcode and DLL (APC and CreateThread) with code snippets and examples from Nidhogg. In this blog post, we will write a simple driver that is capable of bypassing AMSI to demonstrate patching usermode memory from the kernel, go through credential dumping process from the kernel and finish with tampering various kernel callbacks as an example for patching kernel mode memory and last but not least - the final words and conclusion of this series. In the last blog post, we learned about process hiding and got into the internals of some of the most dangerous patching methods from the kernel.",
-        sub: false,
+        postContent: "In the last blog post, we learned about two common hooking methods (IRP Hooking and SSDT Hooking) and two different injection techniques from the kernel to the user mode for both shellcode and DLL (APC and CreateThread) with code snippets and examples from Nidhogg. In this blog post, we will write a simple driver that is capable of bypassing AMSI to demonstrate patching usermode memory from the kernel, go through credential dumping process from the kernel and finish with tampering various kernel callbacks as an example for patching kernel mode memory and last but not least - the final words and conclusion of this series. In the last blog post, we learned about process hiding and got into the internals of some of the most dangerous patching methods from the kernel."
     },
     {
         href: "/posts/lord-of-the-ring0-p5",
