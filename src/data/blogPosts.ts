@@ -12,6 +12,17 @@ export type BlogPostSummary = {
 
 export const blogPosts: BlogPostSummary[] = [
     {
+        href: "/posts/inside-etw-with-etwsuite",
+        headerContent: "Inside Event Tracing for Windows with EtwSuite",
+        subHeaderContent: "09 Aug 2026",
+        imagePath: "/post-images/inside-etw-with-etwsuite.jpg",
+        imageAlt: "EtwSuite video thumbnail",
+        imageWidth: 135,
+        imageHeight: 51,
+        postContent: "Event Tracing for Windows is one of Windows' richest telemetry systems. This video introduces the ETW ecosystem and shows how EtwSuite can turn raw provider events into practical security research and UAC-bypass detections.",
+        sub: false
+    },
+    {
         href: "/posts/hypervisor-based-defense",
         headerContent: "Hypervisor Based Defense",
         subHeaderContent: "14 Mar 2026",
