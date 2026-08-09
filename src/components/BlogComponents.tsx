@@ -18,7 +18,7 @@ interface InlineCodeProps {
 }
 
 interface ListItem {
-    content: string;
+    content: React.ReactNode;
     linkContent?: string;
     link?: string;
 }

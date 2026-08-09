@@ -1,9 +1,13 @@
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 
-/graveyard
+# Drafts
+graveyard/
+drafts/
 
 # Local markdown files
 *.md
+# Tracked format documentation and parser fixtures
+!scripts/posts/**/*.md
 .*/
 !README.md
 
