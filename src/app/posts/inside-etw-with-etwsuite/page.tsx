@@ -4,7 +4,6 @@ import { useEffect } from 'react';
 import SecondaryHeader, { BlogPrologue, BulletList } from '@/components/BlogComponents';
 import StyledLink from '@/components/StyledLink';
 import TableOfContents from '@/components/TableOfContents';
-import WistiaVideo from '@/components/WistiaVideo';
 
 export default function InsideEtwWithEtwSuite() {
     useEffect(() => {
@@ -36,10 +35,16 @@ export default function InsideEtwWithEtwSuite() {
                     </div>
 
                     <div className="pt-6">
-                        <WistiaVideo
-                            mediaId="yqsq6q6tli"
-                            title="Inside Event Tracing for Windows with EtwSuite"
-                        />
+                        <div className="aspect-video overflow-hidden rounded-xl border border-borderSubtle bg-bgSurface">
+                            <iframe
+                                className="h-full w-full"
+                                src="https://www.youtube.com/embed/a5hvDNZeRIw?si=waY0h4i9sLe2FCIJ"
+                                title="Inside Event Tracing for Windows with EtwSuite"
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                                referrerPolicy="strict-origin-when-cross-origin"
+                                allowFullScreen
+                            />
+                        </div>
                     </div>
 
                     <SecondaryHeader text="What the Video Covers" />
