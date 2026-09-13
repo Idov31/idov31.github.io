@@ -81,12 +81,25 @@ export default function About() {
                         <span className="text-accentPurple mt-0.5 flex-shrink-0">▸</span>
                         <div>
                             <StyledLink
+                                href="https://www.youtube.com/watch?v=s22wW8I_Jxk"
+                                content="Breaking the Boot Chain: Bootkitting Ubuntu for Fun and Profit [SEC-T 2026]"
+                                textSize="text-sm font-semibold"
+                            />
+                            <p className="text-txtMuted text-sm mt-0.5">
+                                A talk at SEC-T 2026 about researching the Linux boot chain and creating one of the first bootkits for x64 Linux based systems.
+                            </p>
+                        </div>
+                    </li>
+                    <li className="card-surface rounded-xl p-4 flex gap-3">
+                        <span className="text-accentPurple mt-0.5 flex-shrink-0">▸</span>
+                        <div>
+                            <StyledLink
                                 href="https://www.youtube.com/watch?v=edI6tpBO-pY"
                                 content="Kernel Games: The Ballad of Offense & Defense [X33fCon 2024]"
                                 textSize="text-sm font-semibold"
                             />
                             <p className="text-txtMuted text-sm mt-0.5">
-                                A talk in Poland about creating stealthy rootkits to help red teams remain persistent,
+                                A talk at X33fCon about creating stealthy rootkits to help red teams remain persistent,
                                 evade EDRs, and integrate with existing C2 environments.
                             </p>
                         </div>
@@ -131,6 +144,7 @@ export default function About() {
                     {[
                         { href: "https://github.com/Idov31/Nidhogg", name: "Nidhogg", desc: "Windows rootkit for Intel x64 with 25+ features, demonstrating rootkit techniques compatible with all Windows 10 and Windows 11 versions." },
                         { href: "https://github.com/Idov31/NovaHypervisor", name: "NovaHypervisor", desc: "Windows hypervisor for Intel x64: defensive host hypervisor for Windows designed to mitigate kernel-level attacks including BYOVD, compatible with VMware and Hyper-V." },
+                        { href: "https://github.com/Idov31/Silverseal", name: "Silverseal", desc: "A Linux framework containing a bootkit, rootkit loader and a rootkit." },
                         { href: "https://github.com/Idov31/Jormungandr", name: "Jormungandr", desc: "A kernel implementation of a COFF loader, allowing kernel developers to load and execute their COFFs in the kernel." },
                         { href: "https://github.com/Idov31/Cronos", name: "Cronos", desc: "A PoC for a sleep obfuscation technique leveraging waitable timers to evade memory scanners (PE-Sieve, Moneta, etc.)" },
                         { href: "https://github.com/Idov31/Venom", name: "Venom", desc: "A library performing evasive communication using a stolen browser socket." },
