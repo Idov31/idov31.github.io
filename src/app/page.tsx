@@ -9,10 +9,10 @@ import {blogPosts} from "@/data/blogPosts";
 export default function Home() {
     const projects = [
         {
-            imagePath: "/projects-images/jormungandr.png",
-            projectLink: "https://github.com/Idov31/Jormungandr",
-            projectName: "Jormungandr",
-            description: "A kernel implementation of a COFF loader, allowing kernel developers to load and execute their COFFs in the kernel.",
+            imagePath: "/projects-images/silverseal.png",
+            projectLink: "https://github.com/Idov31/Silverseal",
+            projectName: "Silverseal",
+            description: "Silverseal is a Linux framework containing a bootkit, rootkit loader and a rootkit.",
         },
         {
             imagePath: "/projects-images/nidhogg.png",
