@@ -169,7 +169,7 @@ export const NumberedList: React.FC<NumberedListProps> = ({items}) => {
         <ol className="list-none pl-4 pt-4 space-y-2 counter-reset-none">
             {items.map((item, index) => (
                 <li key={index} className="flex gap-3">
-                    <span className="text-accentPurple font-mono text-sm mt-0.5 flex-shrink-0 w-5">
+                    <span className="text-accentPurple mt-0.5 flex-shrink-0 w-5">
                         {index + 1}.
                     </span>
                     <p className="text-txtRegular">

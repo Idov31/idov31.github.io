@@ -135,7 +135,7 @@ function parseFrontmatter(node: MarkdownNode, state: CompilerState): PostFrontma
 function renderBlock(node: MarkdownNode, state: CompilerState): string {
     switch (node.type) {
         case 'text':
-            return expression(node.value ?? '');
+            return `{${expression(node.value ?? '')}}`;
         case 'paragraph':
             if (node.children?.length === 1 && node.children[0].type === 'image') return renderImage(node.children[0], state);
             return `<div className="pt-4">${renderInlineChildren(node, state)}</div>`;
@@ -344,7 +344,7 @@ function renderInlineChildren(node: MarkdownNode, state: CompilerState): string 
 
 function renderInline(node: MarkdownNode, state: CompilerState): string {
     switch (node.type) {
-        case 'text': return expression(node.value ?? '');
+        case 'text': return `{${expression(node.value ?? '')}}`;
         case 'emphasis': return `<em>${renderInlineChildren(node, state)}</em>`;
         case 'strong': return `<strong>${renderInlineChildren(node, state)}</strong>`;
         case 'delete': return `<del>${renderInlineChildren(node, state)}</del>`;

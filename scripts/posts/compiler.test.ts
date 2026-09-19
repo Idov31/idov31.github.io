@@ -89,6 +89,8 @@ test('compiler supports a plain image paragraph and omits unused optional import
 
     const minimal = await compilePost(`${frontmatter()}\nA plain paragraph.`);
     assert.deepEqual(minimal.diagnostics, []);
+    assert.match(minimal.generatedTsx ?? '', /<div className="pt-4">\{"A plain paragraph\."\}<\/div>/);
+    assert.doesNotMatch(minimal.generatedTsx ?? '', /<div className="pt-4">"A plain paragraph\."<\/div>/);
     assert.doesNotMatch(minimal.generatedTsx ?? '', /RoadmapTimeline/);
     assert.doesNotMatch(minimal.generatedTsx ?? '', /BlogImageFigure/);
     assert.doesNotMatch(minimal.generatedTsx ?? '', /\bCode\b/);
@@ -98,6 +100,7 @@ test('compiler validates Mermaid source and table caption directives', async () 
     const valid = await compilePost(`${frontmatter()}\n:::table{caption="Example values"}\n| Name | Value |\n| :--- | ---: |\n| **One** | \`1\` |\n:::\n\n\`\`\`mermaid caption="Request flow"\nflowchart LR\n    A[User application] --> B[Kernel service]\n\`\`\``);
     assert.deepEqual(valid.diagnostics, []);
     assert.match(valid.generatedTsx ?? '', /caption=\{"Example values"\}/);
+    assert.match(valid.generatedTsx ?? '', /headers=\{\[<>\{"Name"\}<\/>, <>\{"Value"\}<\/>\]\}/);
     assert.match(valid.generatedTsx ?? '', /alignments=\{\["left","right"\]\}/);
     assert.match(valid.generatedTsx ?? '', /caption=\{"Request flow"\}/);
 
@@ -117,7 +120,7 @@ test('publisher check is write-free and publish replaces only its synthetic slug
         await mkdir(path.join(temporary, 'src', 'data'), { recursive: true });
         await writeFile(path.join(temporary, 'public', 'post-images', 'test', 'card.png'), 'image');
         indexPath = path.join(temporary, 'src', 'data', 'blogPosts.ts');
-        await writeFile(indexPath, `export const blogPosts = [\n    { href: '/posts/older', headerContent: 'Older', subHeaderContent: '01 Jan 2020', imagePath: '/post-images/test/card.png', imageAlt: 'old', imageWidth: 1, imageHeight: 1, postContent: 'old' },\n];\n`);
+        await writeFile(indexPath, `export const blogPosts = [\n    { href: '/posts/older', headerContent: 'Older', subHeaderContent: '01 Sept 2020', imagePath: '/post-images/test/card.png', imageAlt: 'old', imageWidth: 1, imageHeight: 1, postContent: 'old' },\n];\n`);
         await writeFile(path.join(temporary, 'drafts', 'test.md'), `${frontmatter()}\n## A section`);
         process.chdir(temporary);
         const { checkDraft, publishDraft } = await import(`./publisher?temporary=${Date.now()}`);

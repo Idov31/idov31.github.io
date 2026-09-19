@@ -28,21 +28,27 @@ export default function MermaidDiagram({ definition, caption }: MermaidDiagramPr
             try {
                 const { default: mermaid } = await import('mermaid');
                 const isDark = document.documentElement.classList.contains('dark');
+                const surfaceColor = themeValue('--bg-surface', isDark ? '#161B2E' : '#F5F3FF');
                 mermaid.initialize({
                     startOnLoad: false,
                     securityLevel: 'strict',
-                    secure: ['securityLevel', 'startOnLoad', 'theme', 'themeVariables', 'themeCSS', 'fontFamily'],
+                    secure: ['securityLevel', 'startOnLoad', 'theme', 'themeVariables', 'themeCSS', 'fontFamily', 'fontSize', 'htmlLabels'],
                     theme: 'base',
                     fontFamily: 'Lato, sans-serif',
+                    fontSize: 16,
+                    htmlLabels: false,
                     themeVariables: {
                         darkMode: isDark,
                         background: themeValue('--bg-regular', isDark ? '#0D1117' : '#FFFFFF'),
-                        primaryColor: themeValue('--bg-surface', isDark ? '#161B2E' : '#F5F3FF'),
+                        primaryColor: surfaceColor,
                         primaryTextColor: themeValue('--txt-regular', isDark ? '#E2E8F0' : '#1E1B4B'),
                         primaryBorderColor: themeValue('--txt-subheader', isDark ? '#A78BFA' : '#6D28D9'),
-                        tertiaryColor: themeValue('--bg-surface', isDark ? '#161B2E' : '#F5F3FF'),
+                        tertiaryColor: surfaceColor,
                         lineColor: themeValue('--txt-subheader', isDark ? '#A78BFA' : '#6D28D9'),
                         textColor: themeValue('--txt-regular', isDark ? '#E2E8F0' : '#1E1B4B'),
+                        edgeLabelBackground: surfaceColor,
+                        fontFamily: 'Lato, sans-serif',
+                        fontSize: '16px',
                     },
                 });
                 const result = await mermaid.render(`mermaid-${reactId}`, definition);

@@ -226,9 +226,10 @@ function formatDate(isoDate: string): string {
 }
 
 function parseBlogDate(dateText: string): Date | undefined {
-    const match = /^(\d{2}) (Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec) (\d{4})$/.exec(dateText);
+    const match = /^(\d{2}) (Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep(?:t)?|Oct|Nov|Dec) (\d{4})$/.exec(dateText);
     if (!match) return undefined;
-    const month = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'].indexOf(match[2]);
+    const monthName = match[2] === 'Sept' ? 'Sep' : match[2];
+    const month = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'].indexOf(monthName);
     const date = new Date(Date.UTC(Number(match[3]), month, Number(match[1])));
     return date.getUTCFullYear() === Number(match[3]) && date.getUTCMonth() === month && date.getUTCDate() === Number(match[1]) ? date : undefined;
 }
