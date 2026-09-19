@@ -11,6 +11,17 @@ export type BlogPostSummary = {
 };
 
 export const blogPosts: BlogPostSummary[] = [
+    // {
+    //     href: "/posts/paint-it-blue-reverse-win32k",
+    //     headerContent: "Paint It Blue: Reversing Win32k's Callbacks",
+    //     subHeaderContent: "28 Sept 2026",
+    //     imagePath: "/post-images/paint-it-blue/card.png",
+    //     imageAlt: "Paint It Blue: Reversing Win32k's Callbacks",
+    //     imageWidth: 135,
+    //     imageHeight: 51,
+    //     postContent: "A reverse-engineering tour of modern Win32k architecture, x64 syscall dispatch, GUI-thread conversion, and the session-aware callbacks behind GDI batching and other executive callouts.",
+    //     sub: false
+    // },
     {
         href: "/posts/inside-etw-with-etwsuite",
         headerContent: "Inside Event Tracing for Windows with EtwSuite",
@@ -30,8 +41,7 @@ export const blogPosts: BlogPostSummary[] = [
         imageAlt: "hypervisor-based-defense",
         imageWidth: 135,
         imageHeight: 51,
-        postContent: "Hey there, it has been a \"little\" while since I published my last post. After scrapping and rewriting multiple ideas, I decided to write something a bit different from my previous posts. This post contains technical information, but I also wanted to share my thoughts after working on a hypervisor project for more than a year.",
-        sub: false
+        postContent: "Hey there, it has been a \"little\" while since I published my last post. After scrapping and rewriting multiple ideas, I decided to write something a bit different from my previous posts. This post contains technical information, but I also wanted to share my thoughts after working on a hypervisor project for more than a year."
     },
     {
         href: "/posts/lord-of-the-ring0-p6",
