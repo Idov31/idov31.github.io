@@ -21,8 +21,8 @@ cardImageAlt: "Test card"
 ${overrides}---\n`;
 }
 
-function errors(markdown: string): string[] {
-    return compilePost(markdown).diagnostics.map((entry) => entry.message);
+async function errors(markdown: string): Promise<string[]> {
+    return (await compilePost(markdown)).diagnostics.map((entry) => entry.message);
 }
 
 async function removeTemporaryWorkspace(temporary: string): Promise<void> {
@@ -41,8 +41,8 @@ async function removeTemporaryWorkspace(temporary: string): Promise<void> {
 
 test('compiler maps the complete supported Markdown format deterministically', async () => {
     const source = await readFile(fixturePath, 'utf8');
-    const first = compilePost(source, fixturePath);
-    const second = compilePost(source, fixturePath);
+    const first = await compilePost(source, fixturePath);
+    const second = await compilePost(source, fixturePath);
 
     assert.deepEqual(first.diagnostics, []);
     assert.equal(first.generatedTsx, second.generatedTsx);
@@ -51,47 +51,60 @@ test('compiler maps the complete supported Markdown format deterministically', a
         '<BlogPrologue', '<TableOfContents />', 'drop-caps pt-4', '<SecondaryHeader', '<ThirdHeader',
         '<strong>', '<em>', '<del>', '<InlineCode', '<StyledLink', '<br />', '<BulletList',
         '<NumberedList', '<BlogImageFigure', 'caption={"Caption"}', 'sourceHref={"https://example.com/source"}',
-        '<Code text={codeBlock1}', 'isMessageToggled={true}', '<RoadmapTimeline', 'const codeBlock1',
+        '<Code text={codeBlock2}', 'isMessageToggled={true}', '<RoadmapTimeline', '<BlogTable', '<MermaidDiagram', 'const codeBlock1',
     ]) assert.match(output, new RegExp(expected.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')));
 });
 
-test('compiler rejects malformed or unsafe frontmatter and roadmap YAML', () => {
-    assert.ok(errors(`${frontmatter('unknown: value\n')}Body`).some((value) => value.includes('Unknown frontmatter key')));
-    assert.ok(errors(`${frontmatter('slug: other\n')}Body`).some((value) => value.includes('Map keys must be unique')));
-    assert.ok(errors(`${frontmatter().replace('date: "2026-05-02"', 'date: "2026-02-30"')}Body`).some((value) => value.includes('real ISO calendar date')));
-    assert.ok(errors(`${frontmatter().replace('projectLink: "https://github.com/example/test"', 'projectLink: "javascript:alert(1)"')}Body`).some((value) => value.includes('projectLink')));
-    assert.ok(errors(`${frontmatter().replace('cardImage: "/post-images/test/card.png"', 'cardImage: "/post-images/../escape.png"')}Body`).some((value) => value.includes('cardImage')));
-    assert.ok(errors(`${frontmatter()}:::roadmap\n\`\`\`yaml\nitems:\n  - version: 1\n    description: okay\n\`\`\`\n:::`).some((value) => value.includes('Roadmap YAML')));
+test('compiler rejects malformed or unsafe frontmatter and roadmap YAML', async () => {
+    assert.ok((await errors(`${frontmatter('unknown: value\n')}Body`)).some((value) => value.includes('Unknown frontmatter key')));
+    assert.ok((await errors(`${frontmatter('slug: other\n')}Body`)).some((value) => value.includes('Map keys must be unique')));
+    assert.ok((await errors(`${frontmatter().replace('date: "2026-05-02"', 'date: "2026-02-30"')}Body`)).some((value) => value.includes('real ISO calendar date')));
+    assert.ok((await errors(`${frontmatter().replace('projectLink: "https://github.com/example/test"', 'projectLink: "javascript:alert(1)"')}Body`)).some((value) => value.includes('projectLink')));
+    assert.ok((await errors(`${frontmatter().replace('cardImage: "/post-images/test/card.png"', 'cardImage: "/post-images/../escape.png"')}Body`)).some((value) => value.includes('cardImage')));
+    assert.ok((await errors(`${frontmatter()}:::roadmap\n\`\`\`yaml\nitems:\n  - version: 1\n    description: okay\n\`\`\`\n:::`)).some((value) => value.includes('Roadmap YAML')));
 });
 
-test('compiler rejects raw JSX/HTML and unsupported AST constructs', () => {
+test('compiler rejects raw JSX/HTML and unsupported AST constructs', async () => {
     for (const body of [
-        '<script>alert(1)</script>', '<Component />', '# H1', '#### H4', '> quote', '| a | b |\n| - | - |\n| 1 | 2 |',
+        '<script>alert(1)</script>', '<Component />', '# H1', '#### H4', '> quote',
         '- parent\n  - nested', '- [ ] task', ':::unknown\ntext\n:::', '---',
     ]) {
-        const result = compilePost(`${frontmatter()}\n${body}`);
+        const result = await compilePost(`${frontmatter()}\n${body}`);
         assert.notEqual(result.diagnostics.length, 0, body);
         assert.ok(result.diagnostics.every((entry) => entry.line >= 1 && entry.column >= 1));
     }
 });
 
-test('compiler rejects unsafe block and inline resource paths and URLs', () => {
+test('compiler rejects unsafe block and inline resource paths and URLs', async () => {
     for (const body of [
         '![x](/post-images/../escape.png)', '::image{src="/post-images/a.png" alt="a" sourceHref="javascript:alert(1)"}',
         '[bad](javascript:alert(1))', '[traversal](/posts/../admin)', '```cpp strange=value\ncode\n```',
-    ]) assert.notEqual(compilePost(`${frontmatter()}\n${body}`).diagnostics.length, 0, body);
+    ]) assert.notEqual((await compilePost(`${frontmatter()}\n${body}`)).diagnostics.length, 0, body);
 });
 
-test('compiler supports a plain image paragraph and omits unused optional imports', () => {
-    const imageOnly = compilePost(`${frontmatter()}\n![Image](/post-images/test/card.png)`);
+test('compiler supports a plain image paragraph and omits unused optional imports', async () => {
+    const imageOnly = await compilePost(`${frontmatter()}\n![Image](/post-images/test/card.png)`);
     assert.deepEqual(imageOnly.diagnostics, []);
     assert.match(imageOnly.generatedTsx ?? '', /<BlogImageFigure src=\{"\/post-images\/test\/card\.png"\}/);
 
-    const minimal = compilePost(`${frontmatter()}\nA plain paragraph.`);
+    const minimal = await compilePost(`${frontmatter()}\nA plain paragraph.`);
     assert.deepEqual(minimal.diagnostics, []);
     assert.doesNotMatch(minimal.generatedTsx ?? '', /RoadmapTimeline/);
     assert.doesNotMatch(minimal.generatedTsx ?? '', /BlogImageFigure/);
     assert.doesNotMatch(minimal.generatedTsx ?? '', /\bCode\b/);
+});
+
+test('compiler validates Mermaid source and table caption directives', async () => {
+    const valid = await compilePost(`${frontmatter()}\n:::table{caption="Example values"}\n| Name | Value |\n| :--- | ---: |\n| **One** | \`1\` |\n:::\n\n\`\`\`mermaid caption="Request flow"\nflowchart LR\n    A --> B\n\`\`\``);
+    assert.deepEqual(valid.diagnostics, []);
+    assert.match(valid.generatedTsx ?? '', /caption=\{"Example values"\}/);
+    assert.match(valid.generatedTsx ?? '', /alignments=\{\["left","right"\]\}/);
+    assert.match(valid.generatedTsx ?? '', /caption=\{"Request flow"\}/);
+
+    const invalid = await compilePost(`${frontmatter()}\n\`\`\`mermaid\nnot a diagram\n\`\`\``);
+    assert.ok(invalid.diagnostics.some((entry) => entry.message.includes('Invalid Mermaid diagram')));
+    const malformedTable = await compilePost(`${frontmatter()}\n:::table{caption=""}\n| A |\n| - |\n| B |\n:::`);
+    assert.ok(malformedTable.diagnostics.some((entry) => entry.message.includes('non-empty caption')));
 });
 
 test('publisher check is write-free and publish replaces only its synthetic slug and index entry', async () => {

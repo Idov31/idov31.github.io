@@ -12,6 +12,7 @@
     "test:posts": "tsx --test scripts/posts/*.test.ts"
   },
   "dependencies": {
+    "mermaid": "12.0.0",
     "next": "^16.3.0",
     "react": "^18",
     "react-code-blocks": "^0.1.6",

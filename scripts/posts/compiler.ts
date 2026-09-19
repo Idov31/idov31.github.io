@@ -1,5 +1,6 @@
 import { isMap, parseDocument } from 'yaml';
 import { unified } from 'unified';
+import mermaid from 'mermaid';
 import remarkDirective from 'remark-directive';
 import remarkFrontmatter from 'remark-frontmatter';
 import remarkGfm from 'remark-gfm';
@@ -23,6 +24,7 @@ interface MarkdownNode {
     attributes?: Record<string, string | null | undefined>;
     checked?: boolean | null;
     ordered?: boolean;
+    align?: Array<'left' | 'center' | 'right' | null>;
     children?: MarkdownNode[];
     position?: Position;
 }
@@ -36,7 +38,7 @@ const processor = unified().use(remarkParse).use(remarkGfm).use(remarkFrontmatte
 const requiredFrontmatterKeys = ['formatVersion', 'slug', 'title', 'date', 'projectLink', 'summary', 'cardImage', 'cardImageAlt'] as const;
 const allowedFrontmatterKeys = new Set([...requiredFrontmatterKeys, 'cardImageWidth', 'cardImageHeight', 'sub']);
 
-export function compilePost(markdown: string, sourcePath = '<input>'): CompilePostResult {
+export async function compilePost(markdown: string, sourcePath = '<input>'): Promise<CompilePostResult> {
     const state: CompilerState = { diagnostics: [], codeBlocks: [] };
     let root: MarkdownNode;
 
@@ -56,6 +58,11 @@ export function compilePost(markdown: string, sourcePath = '<input>'): CompilePo
     const frontmatter = parseFrontmatter(frontmatterNodes[0], state);
     if (!frontmatter || state.diagnostics.length > 0) {
         return { diagnostics: state.diagnostics };
+    }
+
+    await validateMermaidBlocks(root, state);
+    if (state.diagnostics.length > 0) {
+        return { frontmatter, diagnostics: state.diagnostics };
     }
 
     const body = (root.children ?? []).slice(1).map((node) => renderBlock(node, state)).filter(Boolean).join('\n');
@@ -151,9 +158,10 @@ function renderBlock(node: MarkdownNode, state: CompilerState): string {
             addDiagnostic(state, node, 'Raw HTML and JSX are not supported.', 'unsupported');
             return '';
         case 'blockquote':
-        case 'table':
-            addDiagnostic(state, node, `${node.type === 'blockquote' ? 'Blockquotes' : 'Tables'} are not supported.`, 'unsupported');
+            addDiagnostic(state, node, 'Blockquotes are not supported.', 'unsupported');
             return '';
+        case 'table':
+            return renderTable(node, state);
         case 'thematicBreak':
             addDiagnostic(state, node, 'Thematic breaks are not supported.', 'unsupported');
             return '';
@@ -181,8 +189,49 @@ function renderContainerDirective(node: MarkdownNode, state: CompilerState): str
         }).join('<br />')}</div>`;
     }
     if (node.name === 'roadmap') return renderRoadmap(node, state);
+    if (node.name === 'table') return renderTableDirective(node, state);
     addDiagnostic(state, node, `Unknown directive ':::${node.name ?? ''}'.`, 'unsupported');
     return '';
+}
+
+function renderTableDirective(node: MarkdownNode, state: CompilerState): string {
+    const attributes = node.attributes ?? {};
+    for (const key of Object.keys(attributes)) {
+        if (key !== 'caption') addDiagnostic(state, node, `Unknown table attribute '${key}'.`, 'validation');
+    }
+    const caption = attributes.caption;
+    if (typeof caption !== 'string' || caption.trim() === '') {
+        addDiagnostic(state, node, 'The table directive requires a non-empty caption attribute.', 'validation');
+    }
+    const children = node.children ?? [];
+    if (children.length !== 1 || children[0].type !== 'table') {
+        addDiagnostic(state, node, 'The table directive must contain exactly one GFM table.', 'validation');
+    }
+    if (state.diagnostics.length > 0 || !caption || children.length !== 1) return '';
+    return renderTable(children[0], state, caption);
+}
+
+function renderTable(node: MarkdownNode, state: CompilerState, caption?: string): string {
+    const rows = node.children ?? [];
+    if (rows.length === 0 || rows.some((row) => row.type !== 'tableRow')) {
+        addDiagnostic(state, node, 'Tables must contain a header row.', 'validation');
+        return '';
+    }
+    const headerCells = rows[0].children ?? [];
+    if (headerCells.length === 0 || headerCells.some((cell) => cell.type !== 'tableCell')) {
+        addDiagnostic(state, rows[0], 'Table headers must contain cells.', 'validation');
+        return '';
+    }
+    const columnCount = headerCells.length;
+    if (rows.slice(1).some((row) => (row.children ?? []).length !== columnCount || row.children?.some((cell) => cell.type !== 'tableCell'))) {
+        addDiagnostic(state, node, 'Every table row must contain the same number of cells as the header.', 'validation');
+        return '';
+    }
+    const renderCell = (cell: MarkdownNode): string => `<>${renderInlineChildren(cell, state)}</>`;
+    const headers = headerCells.map(renderCell).join(', ');
+    const data = rows.slice(1).map((row) => `[${(row.children ?? []).map(renderCell).join(', ')}]`).join(', ');
+    const alignments = jsonExpression(node.align ?? Array(columnCount).fill(null));
+    return `<BlogTable headers={[${headers}]} rows={[${data}]} alignments={${alignments}}${caption ? ` caption={${expression(caption)}}` : ''} />`;
 }
 
 function renderImageDirective(node: MarkdownNode, state: CompilerState): string {
@@ -239,11 +288,32 @@ function renderCode(node: MarkdownNode, state: CompilerState): string {
         addDiagnostic(state, node, 'Code fence language contains unsupported characters.', 'validation');
         return '';
     }
-    const meta = parseCodeMeta(node.meta ?? '', node, state);
-    if (!meta) return '';
     const name = `codeBlock${state.codeBlocks.length + 1}`;
     state.codeBlocks.push({ name, value: node.value ?? '' });
+    if (language === 'mermaid') {
+        const caption = parseMermaidMeta(node.meta ?? '', node, state);
+        if (caption === undefined) return '';
+        return `<MermaidDiagram definition={${name}}${caption ? ` caption={${expression(caption)}}` : ''} />`;
+    }
+    const meta = parseCodeMeta(node.meta ?? '', node, state);
+    if (!meta) return '';
     return `<Code text={${name}} language={${expression(language)}}${meta.collapsible ? ` message={${expression(meta.message)}} isMessageToggled={true}` : ''} />`;
+}
+
+function parseMermaidMeta(meta: string, node: MarkdownNode, state: CompilerState): string | undefined {
+    if (!meta.trim()) return '';
+    const match = /^caption=("(?:[^"\\]|\\.)*"|'(?:[^'\\]|\\.)*')$/.exec(meta.trim());
+    if (!match) {
+        addDiagnostic(state, node, 'Mermaid fence metadata must be: caption="...".', 'validation');
+        return undefined;
+    }
+    const quote = match[1][0];
+    const caption = match[1].slice(1, -1).replace(new RegExp(`\\\\${quote}`, 'g'), quote).replace(/\\\\/g, '\\');
+    if (!caption) {
+        addDiagnostic(state, node, 'Mermaid caption cannot be empty.', 'validation');
+        return undefined;
+    }
+    return caption;
 }
 
 function renderList(node: MarkdownNode, state: CompilerState): string {
@@ -333,7 +403,9 @@ function generatePage(frontmatter: PostFrontmatter, body: string, codeBlocks: Ar
         ? `import SecondaryHeader, { ${blogComponentNames.join(', ')} } from '@/components/BlogComponents';`
         : `import { ${blogComponentNames.join(', ')} } from '@/components/BlogComponents';`;
     const optionalImports = [
+        body.includes('<BlogTable') ? "import BlogTable from '@/components/BlogTable';" : '',
         body.includes('<BlogImageFigure') ? "import BlogImageFigure from '@/components/BlogImageFigure';" : '',
+        body.includes('<MermaidDiagram') ? "import MermaidDiagram from '@/components/MermaidDiagram';" : '',
         body.includes('<RoadmapTimeline') ? "import RoadmapTimeline from '@/components/RoadmapTimeline';" : '',
         body.includes('<RoadmapTimeline') ? 'type RoadmapItem = { version: string; description: string; features?: string[]; bugfixes?: string[]; isCurrentRelease?: boolean; isCompleted?: boolean };' : '',
         body.includes('<StyledLink') ? "import StyledLink from '@/components/StyledLink';" : '',
@@ -386,3 +458,22 @@ function isRoadmapData(value: unknown): value is RoadmapData { if (!isRecord(val
 function isRoadmapItem(value: unknown): value is RoadmapItem { return isRecord(value) && typeof value.version === 'string' && typeof value.description === 'string' && optionalStringArray(value.features) && optionalStringArray(value.bugfixes) && optionalBoolean(value.isCurrentRelease) && optionalBoolean(value.isCompleted); }
 function optionalStringArray(value: unknown): boolean { return value === undefined || (Array.isArray(value) && value.every((item) => typeof item === 'string')); }
 function optionalBoolean(value: unknown): boolean { return value === undefined || typeof value === 'boolean'; }
+
+async function validateMermaidBlocks(root: MarkdownNode, state: CompilerState): Promise<void> {
+    const blocks: MarkdownNode[] = [];
+    const visit = (node: MarkdownNode): void => {
+        if (node.type === 'code' && node.lang === 'mermaid') blocks.push(node);
+        (node.children ?? []).forEach(visit);
+    };
+    visit(root);
+    if (blocks.length === 0) return;
+
+    mermaid.initialize({ startOnLoad: false, securityLevel: 'strict' });
+    for (const block of blocks) {
+        try {
+            await mermaid.parse(block.value ?? '', { suppressErrors: false });
+        } catch (error) {
+            addDiagnostic(state, block, `Invalid Mermaid diagram: ${messageOf(error)}`, 'validation');
+        }
+    }
+}

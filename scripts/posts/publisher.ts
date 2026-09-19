@@ -310,7 +310,7 @@ async function prepare(input: string): Promise<{ compiled: CompiledPost; pagePat
     if (!(await fileExists(draftPath))) return { diagnostics: [diagnostic('Draft file does not exist.', input)], published: false };
 
     const markdown = await readFile(draftPath, 'utf8');
-    const compiled = compilePost(markdown, draftPath) as CompiledPost;
+    const compiled = await compilePost(markdown, draftPath) as CompiledPost;
     if (compiled.diagnostics.length > 0) return { diagnostics: formatCompilerDiagnostics(compiled.diagnostics, draftPath), published: false };
     if (!compiled.frontmatter || typeof compiled.generatedTsx !== 'string') {
         return { diagnostics: [diagnostic('Compiler returned no generated page for an otherwise valid draft.')], published: false };

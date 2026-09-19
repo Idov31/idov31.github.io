@@ -24,6 +24,17 @@ And more text.
 
 1. Numbered with **strong** text
 
+:::table{caption="Example values"}
+| Name | Value |
+| :--- | ---: |
+| **One** | `1` |
+:::
+
+```mermaid caption="Example request flow"
+flowchart LR
+    Request --> Response
+```
+
 ![Plain image](/post-images/fixture/plain.png)
 
 ::image{src="/post-images/fixture/directed.png" alt="Directed image" caption="Caption" sourceHref="https://example.com/source"}
