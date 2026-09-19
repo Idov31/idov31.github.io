@@ -19,6 +19,7 @@ export default function MermaidDiagram({ definition, caption }: MermaidDiagramPr
 
     useEffect(() => {
         let cancelled = false;
+        const container = containerRef.current;
 
         const renderDiagram = async (): Promise<void> => {
             setIsLoading(true);
@@ -45,10 +46,10 @@ export default function MermaidDiagram({ definition, caption }: MermaidDiagramPr
                     },
                 });
                 const result = await mermaid.render(`mermaid-${reactId}`, definition);
-                if (cancelled || !containerRef.current) return;
+                if (cancelled || !container) return;
 
-                containerRef.current.innerHTML = result.svg;
-                result.bindFunctions?.(containerRef.current);
+                container.innerHTML = result.svg;
+                result.bindFunctions?.(container);
                 setHasError(false);
             } catch {
                 if (!cancelled) setHasError(true);
@@ -64,7 +65,7 @@ export default function MermaidDiagram({ definition, caption }: MermaidDiagramPr
         return () => {
             cancelled = true;
             observer.disconnect();
-            if (containerRef.current) containerRef.current.innerHTML = '';
+            if (container) container.innerHTML = '';
         };
     }, [definition, reactId]);
 

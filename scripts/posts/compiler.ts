@@ -1,6 +1,6 @@
 import { isMap, parseDocument } from 'yaml';
 import { unified } from 'unified';
-import mermaid from 'mermaid';
+import { JSDOM } from 'jsdom';
 import remarkDirective from 'remark-directive';
 import remarkFrontmatter from 'remark-frontmatter';
 import remarkGfm from 'remark-gfm';
@@ -192,6 +192,18 @@ function renderContainerDirective(node: MarkdownNode, state: CompilerState): str
     if (node.name === 'table') return renderTableDirective(node, state);
     addDiagnostic(state, node, `Unknown directive ':::${node.name ?? ''}'.`, 'unsupported');
     return '';
+}
+
+let mermaidValidator: Promise<typeof import('mermaid').default> | undefined;
+
+function loadMermaidValidator(): Promise<typeof import('mermaid').default> {
+    if (!mermaidValidator) {
+        const dom = new JSDOM('<!doctype html><html><body></body></html>');
+        Object.defineProperty(globalThis, 'window', { value: dom.window, configurable: true });
+        Object.defineProperty(globalThis, 'document', { value: dom.window.document, configurable: true });
+        mermaidValidator = import('mermaid').then(({ default: mermaid }) => mermaid);
+    }
+    return mermaidValidator;
 }
 
 function renderTableDirective(node: MarkdownNode, state: CompilerState): string {
@@ -468,6 +480,7 @@ async function validateMermaidBlocks(root: MarkdownNode, state: CompilerState): 
     visit(root);
     if (blocks.length === 0) return;
 
+    const mermaid = await loadMermaidValidator();
     mermaid.initialize({ startOnLoad: false, securityLevel: 'strict' });
     for (const block of blocks) {
         try {

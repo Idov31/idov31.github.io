@@ -95,7 +95,7 @@ test('compiler supports a plain image paragraph and omits unused optional import
 });
 
 test('compiler validates Mermaid source and table caption directives', async () => {
-    const valid = await compilePost(`${frontmatter()}\n:::table{caption="Example values"}\n| Name | Value |\n| :--- | ---: |\n| **One** | \`1\` |\n:::\n\n\`\`\`mermaid caption="Request flow"\nflowchart LR\n    A --> B\n\`\`\``);
+    const valid = await compilePost(`${frontmatter()}\n:::table{caption="Example values"}\n| Name | Value |\n| :--- | ---: |\n| **One** | \`1\` |\n:::\n\n\`\`\`mermaid caption="Request flow"\nflowchart LR\n    A[User application] --> B[Kernel service]\n\`\`\``);
     assert.deepEqual(valid.diagnostics, []);
     assert.match(valid.generatedTsx ?? '', /caption=\{"Example values"\}/);
     assert.match(valid.generatedTsx ?? '', /alignments=\{\["left","right"\]\}/);
