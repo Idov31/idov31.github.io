@@ -163,7 +163,7 @@ export default function HeaderSearch({
                     }}
                     placeholder="Search posts"
                     aria-label="Search blog posts"
-                    className="h-11 w-full rounded-xl border border-borderSubtle bg-bgRegular/70 pl-10 pr-4 text-sm text-txtRegular placeholder:text-txtMuted outline-none transition-all duration-200 focus:border-accentPurple/60 focus:ring-2 focus:ring-accentPurple/20"
+                    className="h-11 w-full rounded-xl border border-borderSubtle bg-bgRegular/70 pl-10 pr-4 text-sm text-txtRegular placeholder:text-txtMuted outline-none transition-all duration-200 focus:border-accentPurple/60 focus:ring-2 focus:ring-accentPurple/20 dark:bg-slate-100 dark:text-slate-900 dark:caret-slate-900 dark:placeholder:text-slate-500"
                 />
             </form>
 

@@ -45,15 +45,12 @@ function SearchIcon() {
 
 export default function Layout({children}: Readonly<{ children: React.ReactNode }>) {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
-    const [isDark, setIsDark] = useState(true);
+    const [isDark, setIsDark] = useState(() => {
+        if (typeof window === 'undefined') return true;
+        return localStorage.getItem('theme') !== 'light';
+    });
     const [isSearchOpen, setIsSearchOpen] = useState(false);
     const searchContainerRef = useRef<HTMLDivElement>(null);
-
-    // Sync state with the class applied by the anti-FOUC script
-    useEffect(() => {
-        const saved = localStorage.getItem('theme');
-        setIsDark(saved !== 'light');
-    }, []);
 
     useEffect(() => {
         if (!isSearchOpen) {

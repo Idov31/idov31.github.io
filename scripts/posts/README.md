@@ -40,9 +40,11 @@ The slug must be lowercase and hyphenated. Dates are ISO calendar dates. Project
 - `##` and `###` generate the existing post section headers. The title comes from frontmatter; other heading levels are rejected.
 - Normal paragraphs, bold, italic, strikethrough, hard breaks, inline code, HTTP(S)/`mailto:`/internal links, flat ordered lists, and flat unordered lists are supported.
 - Fenced code uses its language name. Add `collapsible message="Show code"` after the language to generate the existing expandable code block.
+- Standard GFM tables generate responsive themed tables, including column alignment and supported inline formatting. Wrap a table in `:::table{caption="..."}` when it needs a visible caption; that directive must contain exactly one table.
+- A `mermaid` fenced block generates a responsive SVG diagram. Add `caption="..."` after `mermaid` for a visible caption, for example `\`\`\`mermaid caption="Request flow"`. Mermaid syntax is validated by `post:check` and `post:publish`.
 - A standalone Markdown image generates `BlogImageFigure`; its optional Markdown title becomes the caption.
 - Use `::image{src="..." alt="..." caption="..." sourceHref="..."}` for a figure with an explicit source link.
 - Use `:::lead` around opening prose for the site’s drop-cap styling.
 - Use `:::roadmap` containing exactly one fenced YAML object with `title`, optional `description`, and an `items` array. Each item needs `version` and `description`; optional `features`, `bugfixes`, `isCompleted`, and `isCurrentRelease` map to `RoadmapTimeline`.
 
-Raw HTML/JSX, tables, blockquotes, task lists, nested lists, thematic breaks, unknown directives, and unsupported YAML fields fail validation instead of being passed through.
+Raw HTML/JSX, blockquotes, task lists, nested lists, thematic breaks, unknown directives, and unsupported YAML fields fail validation instead of being passed through.

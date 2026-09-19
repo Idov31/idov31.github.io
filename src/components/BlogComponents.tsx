@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useState, useSyncExternalStore} from "react";
 import {CodeBlock, dracula} from "react-code-blocks";
 import StyledLink, {ImageLink} from "@/components/StyledLink";
 
@@ -35,6 +35,28 @@ interface BlogPrologueProps {
     title: string;
     date: string;
     projectLink: string;
+}
+
+const subscribeToHydration = (): (() => void) => () => undefined;
+const getClientHydrationState = (): boolean => true;
+const getServerHydrationState = (): boolean => false;
+
+function CodeRenderer({text, language}: Pick<CodeProps, 'text' | 'language'>) {
+    const isHydrated = useSyncExternalStore(
+        subscribeToHydration,
+        getClientHydrationState,
+        getServerHydrationState,
+    );
+
+    if (!isHydrated) {
+        return (
+            <pre className="overflow-x-auto rounded-lg bg-bgCodeBlock p-4 text-sm text-slate-100">
+                <code>{text}</code>
+            </pre>
+        );
+    }
+
+    return <CodeBlock text={text} language={language} showLineNumbers={true} theme={dracula}/>;
 }
 
 export default function SecondaryHeader({text}: SecondaryHeaderProps) {
@@ -75,12 +97,7 @@ export function Code({text, message = "NaN", language = "cpp", isMessageToggled 
                 </button>
                 {isOpen && (
                     <div className="code-block-wrapper">
-                        <CodeBlock
-                            text={text}
-                            language={language}
-                            showLineNumbers={true}
-                            theme={dracula}
-                        />
+                        <CodeRenderer text={text} language={language}/>
                     </div>
                 )}
             </div>
@@ -90,12 +107,7 @@ export function Code({text, message = "NaN", language = "cpp", isMessageToggled 
     return (
         <div className="pt-4 pb-4 text-sm lg:text-md">
             <div className="code-block-wrapper">
-                <CodeBlock
-                    text={text}
-                    language={language}
-                    showLineNumbers={true}
-                    theme={dracula}
-                />
+                <CodeRenderer text={text} language={language}/>
             </div>
         </div>
     );
