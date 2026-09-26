@@ -11,17 +11,17 @@ export type BlogPostSummary = {
 };
 
 export const blogPosts: BlogPostSummary[] = [
-        {
-        href: "/posts/paint-it-blue-reverse-win32k",
-        headerContent: "Paint It Blue: Reversing Win32k's Callbacks",
-        subHeaderContent: "28 Sept 2026",
-        imagePath: "/post-images/paint-it-blue/card.png",
-        imageAlt: "Paint It Blue: Reversing Win32k's Callbacks",
-        imageWidth: 135,
-        imageHeight: 51,
-        postContent: "A reverse-engineering tour of modern Win32k architecture, x64 syscall dispatch, GUI-thread conversion, and the session-aware callbacks behind GDI batching and other executive callouts.",
-        sub: false
-    },
+    // {
+    //     href: "/posts/paint-it-blue-reverse-win32k",
+    //     headerContent: "Paint It Blue: Reversing Win32k's Callbacks",
+    //     subHeaderContent: "28 Sept 2026",
+    //     imagePath: "/post-images/paint-it-blue/card.png",
+    //     imageAlt: "Paint It Blue: Reversing Win32k's Callbacks",
+    //     imageWidth: 135,
+    //     imageHeight: 51,
+    //     postContent: "A reverse-engineering tour of modern Win32k architecture, x64 syscall dispatch, GUI-thread conversion, and the session-aware callbacks behind GDI batching and other executive callouts.",
+    //     sub: false
+    // },
     {
         href: "/posts/inside-etw-with-etwsuite",
         headerContent: "Inside Event Tracing for Windows with EtwSuite",
