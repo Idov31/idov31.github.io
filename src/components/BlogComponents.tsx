@@ -1,6 +1,7 @@
 import React, {useState, useSyncExternalStore} from "react";
 import {CodeBlock, dracula} from "react-code-blocks";
 import StyledLink, {ImageLink} from "@/components/StyledLink";
+import ArticleTelemetry from '@/components/ArticleTelemetry';
 
 interface SecondaryHeaderProps {
     text: string;
@@ -87,8 +88,10 @@ export function Code({text, message = "NaN", language = "cpp", isMessageToggled 
 
     if (isMessageToggled) {
         return (
-            <div className="pt-4 pb-4 text-sm lg:text-md">
+            <div className="pt-4 pb-4 text-sm lg:text-md" data-code-language={language}>
                 <button
+                    data-article-code-toggle
+                    aria-expanded={isOpen}
                     className="bg-bgSemiTransparent text-txtHeader w-full py-3 text-left pl-4 rounded-t-lg
                                border border-borderSubtle hover:border-borderMid transition-colors"
                     onClick={toggleOpen}
@@ -105,7 +108,7 @@ export function Code({text, message = "NaN", language = "cpp", isMessageToggled 
     }
 
     return (
-        <div className="pt-4 pb-4 text-sm lg:text-md">
+        <div className="pt-4 pb-4 text-sm lg:text-md" data-code-language={language}>
             <div className="code-block-wrapper">
                 <CodeRenderer text={text} language={language}/>
             </div>
@@ -122,6 +125,7 @@ export function InlineCode({text}: InlineCodeProps) {
 export function BlogPrologue({title, date, projectLink} : BlogPrologueProps) {
     return (
         <div className="pb-8 border-b border-borderSubtle">
+            <ArticleTelemetry title={title}/>
             <div className="badge badge-purple mb-3">{date}</div>
             <h1 className="text-3xl lg:text-4xl font-bold text-txtHeader leading-tight">{title}</h1>
             <div className="flex items-center gap-2 mt-3">

@@ -3,9 +3,11 @@
 # Drafts
 graveyard/
 drafts/
+docs/
 
 # Local markdown files
 *.md
+!docs/analytics.md
 # Tracked format documentation and parser fixtures
 !scripts/posts/**/*.md
 .*/
